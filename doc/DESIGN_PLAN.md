@@ -40,7 +40,7 @@ This gives a mock up design of the what the user will encounter when they run ou
 The segment above the dotted line symbolizes data present in every cell automata simulation. Along with the inputted size
 and delay, the cycle number is shown to represent the number of times the simulation has updated. Below the dotted line
 represents information that would only be used in certain situations, such as the threshold required for the **Segregation**
-simulation.
+simulation. 
 
 The three colors (white, red, and green) in this example represent a system that would only need three states to run a
 cellular automata. Each color represents a different state and the color is updated as the status itself changes after
