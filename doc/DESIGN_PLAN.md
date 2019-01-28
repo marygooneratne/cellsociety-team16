@@ -1,7 +1,37 @@
 #I. Introduction
+Because cellular automata is such an integral technique to exploring the world’s functions, our team is simulating
+instances of it with a platform that can be adjusted easily to many different situations. The number of cases with
+different rules and weights make this a daunting task, but our goal is to run different models easily to accurately
+represent different behaviors. This means writing the program in a more universal way so it can later be applied to other
+situations.
+
+The project is designed to be flexible first and foremost in adding different types of cell rules and states. Because
+these are the two factors that go into cellular automata itself, the ability to add these with ease has the utmost
+importance. Once those two properties are set, the rest of the program can consistently be used the same way. This
+flexibility is achieved through making an open “template”, or superclass, of the cells that contains all the rules. By
+updating the rules of this template, the subclasses will inherit these rules as well. The cell state flexibility comes
+from the closed subclasses that define the specific statuses the cell can have. These states should be broader so they
+can be applied to several simulations, such as empty and occupied amongst other specific cases. It is these cells coupled
+with the rules that govern the behavior of the system. Using this architecture, our group should be able to run multiple
+simulations with the same basic code.
+
 #II. Overview
-The simulation program organization/structure can be viewed [HERE](https://imgur.com/a/4gNSoJk). Different model types will be labeled in an enumeration class ModelType. This ModelType is the parameter to a JavaFX application extension SimulationApplication that runs startModel(). The startModel() creates an instance of Model that initializes, starts, and runs a grid to completion. This grid is an instance of the View object which is the JavaFX object representing the CellGrid object. This View object updates the Cell JavaFX Nodes when the Cell states are updated. The CellGrid object is a object representation of the array of Cells. Cell is a abstract superclass with subclasses unique to each type of model. These subclasses will defer mostly in how they update as rules differ for different kinds of models. Cells have a CellView object property that represents the JavaFX node in the View responsible for its representation. Each Cell has a property ArrayList<Cell> of currentNeighbors. With each step of the application, the CellGrid “updates” by calling its updateCellNextStates() method that iterates through the cellList, calling updateNextState() on each cell, saving the next state it should switch to. Finally, CellGrid calls updateCellStates() in which the list is iterated through again changing the currentState to the saved value nextState. This update causes a domino effect that updates the View and then the Model and then the SimulationApplication, effectively creating a continuously updating simulation.
+The simulation program organization/structure can be viewed [HERE](https://imgur.com/a/4gNSoJk). Different model types
+will be labeled in an enumeration class ModelType. This ModelType is the parameter to a JavaFX application extension
+SimulationApplication that runs startModel(). The startModel() creates an instance of Model that initializes, starts, and
+runs a grid to completion. This grid is an instance of the View object which is the JavaFX object representing the CellGrid
+object. This View object updates the Cell JavaFX Nodes when the Cell states are updated. The CellGrid object is a object
+representation of the array of Cells. Cell is a abstract superclass with subclasses unique to each type of model. These
+subclasses will defer mostly in how they update as rules differ for different kinds of models. Cells have a CellView object
+property that represents the JavaFX node in the View responsible for its representation. Each Cell has a property
+ArrayList<Cell> of currentNeighbors. With each step of the application, the CellGrid “updates” by calling its updateCellNextStates()
+method that iterates through the cellList, calling updateNextState() on each cell, saving the next state it should switch
+to. Finally, CellGrid calls updateCellStates() in which the list is iterated through again changing the currentState to
+the saved value nextState. This update causes a domino effect that updates the View and then the Model and then the
+SimulationApplication, effectively creating a continuously updating simulation.
+
 #III. User Interface
+
 #IV. Design Details
 ##CellState
 ####Purpose:
