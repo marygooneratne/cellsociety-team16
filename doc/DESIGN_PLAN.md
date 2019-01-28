@@ -31,6 +31,23 @@ the saved value nextState. This update causes a domino effect that updates the V
 SimulationApplication, effectively creating a continuously updating simulation.
 
 #III. User Interface
+![User Interface Example](img/User_Interface.jpg)
+
+The simulator will initially bring up a window to ask for a size _n_ and a delay _s_, which would create an _n_ x _n_
+array that has an _s_ delay between each cycle. If the simulation requires additional information from the user like a
+threshold then the program would also ask for that here. After this input menu is filled out, the image above would appear.
+This gives a mock up design of the what the user will encounter when they run our cell society program with proper information.
+The segment above the dotted line symbolizes data present in every cell automata simulation. Along with the inputted size
+and delay, the cycle number is shown to represent the number of times the simulation has updated. Below the dotted line
+represents information that would only be used in certain situations, such as the threshold required for the **Segregation**
+simulation.
+
+The three colors (white, red, and green) in this example represent a system that would only need three states to run a
+cellular automata. Each color represents a different state and the color is updated as the status itself changes after
+each cycle. As the simulation runs, with _s_ millisecond pauses between each cycle, some of the cells change and the cycle
+number increases. If the user fails to input a type of data necessary for the situation, the program will return “Error:
+data missing!”. If the user inputs an invalid data type, such as a float or a char/string, the program will return “Error:
+invalid data type!”.
 
 #IV. Design Details
 ##CellState
