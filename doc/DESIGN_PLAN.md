@@ -150,4 +150,26 @@ startModel(): starts the model based on denoted type
 
 
 #V. Design Considerations
+The issue of which 4 (or more) cell grid simulations we will choose to portray in our project must be resolved. We still have yet to choose
+what kind of cellular automata systems we will choose to simulate using our project. We also must resolve the issue of what rules we wish our cells to
+follow in determining whether to update their states or not. Our group discussed for a great amount of time how we would potentially implement the way to update
+all cell states at once rather than one cell or row each pass. We came up with a solution to simply save the new states for every single cell before updating them all at 
+once. We still have yet to find a low level coding based algorithm for this, but this is a high level solution for this design issue. 
+Another issue the team all decided to deliberate at length on was on how to obtain the information for all the surrounding cells in the grid when choosing whether or not to update
+the cells. We debated using Depth first search to recursively check every single cell's neighbor until it reaches an edge in order to obtain every single cell's state information.
+We also debated breadth first search in checking columns or rows at a time. We still need to give this thought consideration when devising our algorithmic solution.
+
+
 #VI. Team Responsibilities
+Hyunjae will be primarily responsible for the configuration of the project, and work on filling in the grid data structure with
+cell objects that are properly initialized. He will also be responsible for making sure that the randomness of the system is implemented
+in determining how other cells are updated. He will take secondary responsibility in the visualization as well, and make sure the grid
+can properly be displayed on the screen.
+Mary will be primarily responsible for the simulation of the project, devising the updating algorithm and how to update all the cell's
+states in one step of the animation. She will also implement the "rule" that all the cells in the grid will follow when updating their states.
+She will finally take secondary responsibility on the configuration and make sure her update algorithms and "rule" she implements is being correctly
+followed by the configuration of cells.
+Amanda will be primarily responsible for the visualization of the project and work on the animation of the grid and placing the cells on the screen.
+She will also implement the ability to switch from one cell display to a different one, and make sure the step function of the animation
+properly steps between states of the grid. She will thus take secondary responsibility for the simulation. She will ensure that her visualization
+and animation of the grid system can work together with the rules and updates of each cell during every single pass. 
