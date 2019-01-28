@@ -158,6 +158,9 @@ once. We still have yet to find a low level coding based algorithm for this, but
 Another issue the team all decided to deliberate at length on was on how to obtain the information for all the surrounding cells in the grid when choosing whether or not to update
 the cells. We debated using Depth first search to recursively check every single cell's neighbor until it reaches an edge in order to obtain every single cell's state information.
 We also debated breadth first search in checking columns or rows at a time. We still need to give this thought consideration when devising our algorithmic solution.
+Finally, we need to consider the design problem of how we will implement keeping track of the multiple cell automata while being able to switch back and forth between displays of the 
+automata we choose to use. While the one on the screen is running and being visualized, the other automata must still be taken care of and the states of all cells need to be
+saved somehow. We will figure out all the design choices as we move forward with coding.
 
 
 #VI. Team Responsibilities
