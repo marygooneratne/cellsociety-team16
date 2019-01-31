@@ -31,6 +31,7 @@ the saved value nextState. This update causes a domino effect that updates the V
 SimulationApplication, effectively creating a continuously updating simulation.
 
 #III. User Interface
+
 ![User Interface Example](img/doc/User_Interface.jpg)
 
 The simulator will initially bring up a window to ask for a size _n_ and a delay _s_, which would create an _n_ x _n_
