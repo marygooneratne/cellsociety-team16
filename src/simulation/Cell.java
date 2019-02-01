@@ -46,4 +46,9 @@ public abstract class Cell(){
     public int getColumn(){
         return this.column;
     }
+
+    public void updateState(){
+        this.currentState = this.nextState;
+        this.nextState = null;
+    }
 }
