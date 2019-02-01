@@ -32,7 +32,7 @@ SimulationApplication, effectively creating a continuously updating simulation.
 
 #III. User Interface
 
-![User Interface Example](img/doc/User_Interface.jpg)
+![User Interface Example](img/resources/User_Interface.jpg)
 
 The simulator will initially bring up a window to ask for a size _n_ and a delay _s_, which would create an _n_ x _n_
 array that has an _s_ delay between each cycle. If the simulation requires additional information from the user like a
