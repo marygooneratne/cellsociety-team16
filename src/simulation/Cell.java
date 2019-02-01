@@ -8,7 +8,10 @@ public abstract class Cell(){
     private int column;
 
     public Cell(){
+    }
 
+    public Cell(CellState initialState){
+        this.currentState = initialState;
     }
 
     public void setCurrentState(CellState newState){
