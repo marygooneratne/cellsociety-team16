@@ -8,7 +8,7 @@ public class GameOfLifeCell extends Cell {
    }
 
    public GameOfLifeCell(CellState initialState) {
-      super();
+      super(initialState);
    }
 
    public void updateNextState() {
@@ -21,6 +21,9 @@ public class GameOfLifeCell extends Cell {
       if (this.getCurrentState() == CellState.UNPOPULATED) {
          if (populated >= 3) {
             this.setNextState(CellState.POPULATED);
+         }
+         else{
+            this.setNextState(this.getCurrentState());
          }
       } else {
          if (populated <= 1) {

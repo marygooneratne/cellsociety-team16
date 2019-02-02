@@ -8,16 +8,19 @@ public class GameOfLifeTester {
       GameOfLifeCell cell3 = new GameOfLifeCell(CellState.POPULATED);
       GameOfLifeCell cell4 = new GameOfLifeCell(CellState.POPULATED);
       GameOfLifeCell cell5 = new GameOfLifeCell(CellState.POPULATED);
+
       testGrid.setCell(3,2,cell1);
       testGrid.setCell(3,3,cell2);
       testGrid.setCell(1,2,cell3);
       testGrid.setCell(1,1,cell4);
       testGrid.setCell(3,4,cell5);
+      testGrid.updateCellNeighbors();
 
       for(int i = 0; i < 5; i++){
+         printGrid(testGrid);
          testGrid.updateCellNextStates();
          testGrid.updateCellStates();
-         printGrid(testGrid);
+         System.out.println("***************");
       }
    }
 

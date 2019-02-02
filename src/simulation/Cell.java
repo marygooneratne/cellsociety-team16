@@ -10,9 +10,11 @@ public abstract class Cell {
    private int column;
 
    public Cell() {
+      this.currentNeighbors = new ArrayList<Cell>();
    }
 
    public Cell(CellState initialState) {
+      this.currentNeighbors = new ArrayList<Cell>();
       this.currentState = initialState;
    }
 
