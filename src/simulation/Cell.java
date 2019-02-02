@@ -1,57 +1,67 @@
 package simulation;
 
-public abstract class Cell(){
-    private CellState currentState;
-    private CellState nextState;
-    private ArrayList<Cell> currentNeighbors;
-    private int row;
-    private int column;
+import java.util.ArrayList;
 
-    public Cell(){
-    }
+public abstract class Cell {
+   private CellState currentState;
+   private CellState nextState;
+   private ArrayList<Cell> currentNeighbors;
+   private int row;
+   private int column;
 
-    public Cell(CellState initialState){
-        this.currentState = initialState;
-    }
+   public Cell() {
+   }
 
-    public void setCurrentState(CellState newState){
-        this.currentState = newState;
-    }
+   public Cell(CellState initialState) {
+      this.currentState = initialState;
+   }
 
-    public void setNextState(CellState newState){
-        this.nextState = newState;
-    }
+   public void setCurrentState(CellState newState) {
+      this.currentState = newState;
+   }
 
-    public void setCurrentNeighbors(ArrayList<Cell> newNeighbors){
-        this.currentNeighbors = newNeighbors;
-    }
+   public void setNextState(CellState newState) {
+      this.nextState = newState;
+   }
 
-    public void setRow(int newRow){
-        this.row = newRow;
-    }
+   public void setCurrentNeighbors(ArrayList<Cell> newNeighbors) {
+      this.currentNeighbors = newNeighbors;
+   }
 
-    public void setColumn(int newColumn){
-        this.column = newColumn;
-    }
+   public void setRow(int newRow) {
+      this.row = newRow;
+   }
 
-    public CellState getCurrentState(){
-        return this.currentState;
-    }
+   public void setColumn(int newColumn) {
+      this.column = newColumn;
+   }
 
-    public ArrayList<Cell> getCurrentNeighbors(){
-        return this.currentNeighbors;
-    }
+   public CellState getCurrentState() {
+      return this.currentState;
+   }
 
-    public int getRow(){
-        return this.row;
-    }
+   public ArrayList<Cell> getCurrentNeighbors() {
+      return this.currentNeighbors;
+   }
 
-    public int getColumn(){
-        return this.column;
-    }
+   public void addNeighbor(Cell newNeighbor) {
+      this.currentNeighbors.add(newNeighbor);
+   }
 
-    public void updateState(){
-        this.currentState = this.nextState;
-        this.nextState = null;
-    }
+   public int getRow() {
+      return this.row;
+   }
+
+   public int getColumn() {
+      return this.column;
+   }
+
+   public void updateState() {
+      this.currentState = this.nextState;
+      this.nextState = null;
+   }
+
+   public void updateNextState() {
+
+   }
 }
