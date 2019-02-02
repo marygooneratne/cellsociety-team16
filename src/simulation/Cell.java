@@ -18,6 +18,13 @@ public abstract class Cell {
       this.currentState = initialState;
    }
 
+   public Cell(CellState initialState, int r, int c){
+      this.currentNeighbors = new ArrayList<Cell>();
+      this.currentState = initialState;
+      this.row = r;
+      this.column = c;
+   }
+
    public void setCurrentState(CellState newState) {
       this.currentState = newState;
    }

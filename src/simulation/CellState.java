@@ -1,5 +1,6 @@
 package simulation;
 
 public enum CellState{
-    POPULATED, UNPOPULATED
+    POPULATED, UNPOPULATED,
+    EMPTY, TREE, BURNING
 }

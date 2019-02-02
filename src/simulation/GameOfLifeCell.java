@@ -11,6 +11,10 @@ public class GameOfLifeCell extends Cell {
       super(initialState);
    }
 
+   public GameOfLifeCell(CellState initialState, int r, int c){
+      super(initialState, r, c);
+   }
+
    public void updateNextState() {
       int populated = 0;
       for (Cell neighbor : this.getCurrentNeighbors()) {

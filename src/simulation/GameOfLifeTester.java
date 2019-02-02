@@ -1,20 +1,23 @@
 package simulation;
 
+import java.util.ArrayList;
+
 public class GameOfLifeTester {
    public static void main(String[] args){
       GameOfLifeGrid testGrid = new GameOfLifeGrid(10, 10);
-      GameOfLifeCell cell1 = new GameOfLifeCell(CellState.POPULATED);
-      GameOfLifeCell cell2 = new GameOfLifeCell(CellState.POPULATED);
-      GameOfLifeCell cell3 = new GameOfLifeCell(CellState.POPULATED);
-      GameOfLifeCell cell4 = new GameOfLifeCell(CellState.POPULATED);
-      GameOfLifeCell cell5 = new GameOfLifeCell(CellState.POPULATED);
+      GameOfLifeCell cell1 = new GameOfLifeCell(CellState.POPULATED, 0, 2);
+      GameOfLifeCell cell2 = new GameOfLifeCell(CellState.POPULATED, 0, 3);
+      GameOfLifeCell cell3 = new GameOfLifeCell(CellState.POPULATED, 1, 2);
+      GameOfLifeCell cell4 = new GameOfLifeCell(CellState.POPULATED, 1, 0);
+      GameOfLifeCell cell5 = new GameOfLifeCell(CellState.POPULATED, 3, 4);
 
-      testGrid.setCell(3,2,cell1);
-      testGrid.setCell(3,3,cell2);
-      testGrid.setCell(1,2,cell3);
-      testGrid.setCell(1,1,cell4);
-      testGrid.setCell(3,4,cell5);
-      testGrid.updateCellNeighbors();
+      ArrayList<Cell> addCells = new ArrayList<>();
+      addCells.add(cell1);
+      addCells.add(cell2);
+      addCells.add(cell3);
+      addCells.add(cell4);
+      addCells.add(cell5);
+      testGrid.addCells(addCells);
 
       for(int i = 0; i < 5; i++){
          printGrid(testGrid);

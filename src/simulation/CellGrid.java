@@ -15,16 +15,32 @@ public abstract class CellGrid {
       this.updateCellNeighbors();
    }
 
+   public void setRows(int r){
+      this.rows = r;
+   }
+
+   public void setColumns(int c){
+      this.columns = c;
+   }
+
    public ArrayList<ArrayList<Cell>> getCellList(){
       return this.cellList;
    }
 
-   public void addToCellList(ArrayList<Cell> row){
+   public void addRowToCellList(ArrayList<Cell> row){
       this.cellList.add(row);
    }
 
    public void setCell(int row, int col, Cell cell){
       this.cellList.get(row).set(col, cell);
+      this.updateCellNeighbors();
+   }
+
+   public void addCells(ArrayList<Cell> newCells){
+      for(Cell c: newCells){
+         this.setCell(c.getRow(), c.getColumn(), c);
+      }
+      this.updateCellNeighbors();
    }
 
    public int getRows(){
