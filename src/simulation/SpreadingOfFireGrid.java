@@ -15,6 +15,24 @@ public class SpreadingOfFireGrid extends CellGrid{
       this.probCatch = initProbCatch;
    }
 
+   public void addCells(ArrayList<Cell> newCells){
+      for(Cell c: newCells){
+         ((SpreadingOfFireCell)c).setProbCatch(this.probCatch);
+         this.setCell(c.getRow(), c.getColumn(), c);
+      }
+      this.updateCellNeighbors();
+   }
+   public void addType(CellState state, int num){
+      ArrayList<Cell> addCells = new ArrayList<>();
+      for(int i = 0; i < num; i++){
+         int r = this.getRow();
+         int c = this.getCol();
+         SpreadingOfFireCell newC = new SpreadingOfFireCell(state, r, c);
+         addCells.add(newC);
+      }
+      this.addCells(addCells);
+   }
+
    public void initialize() {
       for (int r = 0; r < this.getRows(); r++){
          ArrayList<Cell> row = new ArrayList<Cell>();
@@ -27,6 +45,14 @@ public class SpreadingOfFireGrid extends CellGrid{
          }
          this.addRowToCellList(row);
       }
+   }
+
+   public int getRow(){
+      return (int)(this.getRows() * Math.random());
+   }
+
+   public int getCol(){
+      return (int)(this.getColumns() * Math.random());
    }
 
 }

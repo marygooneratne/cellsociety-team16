@@ -19,7 +19,7 @@ public class SpreadingOfFireCell extends Cell{
       this.probCatch = newProb;
    }
 
-   public void SpreadingOfFireCell() {
+   public void updateNextState() {
       int onFire = 0;
       for (Cell neighbor : this.getCurrentNeighbors()) {
          if (neighbor.getCurrentState() == CellState.BURNING) {
@@ -33,7 +33,7 @@ public class SpreadingOfFireCell extends Cell{
          this.setNextState(CellState.EMPTY);
       }
       else{
-         if(this.getBurning()){
+         if(onFire > 0 && this.getBurning()){
             this.setNextState(CellState.BURNING);
          }
          else{

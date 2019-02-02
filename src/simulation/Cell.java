@@ -49,6 +49,10 @@ public abstract class Cell {
       return this.currentState;
    }
 
+   public CellState getNextState() {
+      return this.nextState;
+   }
+
    public ArrayList<Cell> getCurrentNeighbors() {
       return this.currentNeighbors;
    }
