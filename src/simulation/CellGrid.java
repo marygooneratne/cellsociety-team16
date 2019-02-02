@@ -12,6 +12,7 @@ public abstract class CellGrid {
       this.rows = initRows;
       this.columns = initCols;
       this.initialize();
+      this.updateCellNeighbors();
    }
 
    public ArrayList<ArrayList<Cell>> getCellList(){
@@ -20,6 +21,10 @@ public abstract class CellGrid {
 
    public void addToCellList(ArrayList<Cell> row){
       this.cellList.add(row);
+   }
+
+   public void setCell(int row, int col, Cell cell){
+      this.cellList.get(row).set(col, cell);
    }
 
    public int getRows(){
@@ -36,6 +41,15 @@ public abstract class CellGrid {
             c.updateNextState();
          }
       }
+   }
+
+   public void updateCellStates() {
+      for(ArrayList<Cell> row : this.cellList){
+         for(Cell c: row){
+            c.updateState();
+         }
+      }
+      this.updateCellNeighbors();
    }
 
    public void initialize() {
