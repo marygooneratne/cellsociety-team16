@@ -117,4 +117,14 @@ public abstract class CellGrid {
          }
       }
    }
+
+
+   public int randRowIndex(){
+      return (int)(this.getRows()*Math.random());
+   }
+
+   public int randColIndex(){
+      return (int)(this.getColumns()*Math.random());
+   }
+
 }

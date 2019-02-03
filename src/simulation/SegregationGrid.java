@@ -10,25 +10,26 @@ public class SegregationGrid extends CellGrid{
 
    SegregationGrid(int initRows, int initCols){
       super(initRows, initCols);
-      this.emptyCells = new ArrayList<>();
       this.threshold = .3;
       this.probRed = .5;
       this.probEmpty = .1;
-      this.changeThresholds();
-      this.addRed();
-      this.addBlue();
-      this.findEmptyStates();
+      this.setUp();
    }
    SegregationGrid(int initRows, int initCols, double initThreshold, double initProbEmpty, double initProbRed){
       super(initRows, initCols);
       this.threshold = initThreshold;
       this.probEmpty = initProbEmpty;
       this.probRed = initProbRed;
+      this.setUp();
+   }
+
+   public void setUp(){
       this.emptyCells = new ArrayList<>();
       this.changeThresholds();
       this.addRed();
       this.addBlue();
       this.findEmptyStates();
+      this.updateCellNeighbors();
    }
 
    public void initialize(){
@@ -70,7 +71,7 @@ public class SegregationGrid extends CellGrid{
       int emptyIndex = 0;
       for(ArrayList<Cell> row: this.getCellList()){
          for(Cell c: row){
-            if(((SegregationCell)(c)).toMove() && emptyIndex < this.emptyCells.size()){
+            if(c.getNextState() == null & ((SegregationCell)(c)).toMove() && emptyIndex < this.emptyCells.size()){
 
                this.emptyCells.get(emptyIndex).setNextState(c.getCurrentState());
                c.setNextState(CellState.EMPTY);
@@ -93,14 +94,6 @@ public class SegregationGrid extends CellGrid{
             }
          }
       }
-   }
-
-   public int randRowIndex(){
-      return (int)(this.getRows()*Math.random());
-   }
-
-   public int randColIndex(){
-      return (int)(this.getColumns()*Math.random());
    }
 
    public void changeThresholds(){
