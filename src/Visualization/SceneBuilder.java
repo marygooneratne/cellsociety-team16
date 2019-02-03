@@ -14,17 +14,23 @@ import javafx.stage.Stage;
 //import javafx.util.Duration;
 
 public class SceneBuilder extends Application {
-    private static String TITLE = "Simulation Startup";
+    private static String TITLE = "Cellular Automata";
     private static int WIDTH = 400;
     private static int HEIGHT = 600;
     private static int GRID_DIM = 400;
+    private static int UPDATE_HEIGHT = HEIGHT - GRID_DIM;
     private static Paint BACKGROUND = Color.LIGHTSLATEGRAY;
     private static Paint BORDER_COLOR = Color.BLACK;
 
+    //things that will be read in
+    private int myGridSize = 40;
+    private int delay = 100; // ms
+
+
     //important for our simulation
-    private int myGridSize = 40; // will need to taken in later
     private Scene myScene;
-    private Rectangle[][] myGrid = new Rectangle[GRID_DIM][GRID_DIM];;
+    private Rectangle[][] myGrid = new Rectangle[GRID_DIM][GRID_DIM];
+    private int myCycle = 0;
 
     @Override
     public void start(Stage stage) {
@@ -37,33 +43,35 @@ public class SceneBuilder extends Application {
     }
 
     private Scene setupSim(int width, int height, Paint bg) {
+        // BorderPane Layout
         BorderPane window = new BorderPane();
         // create group for grid and add to window
-        Group grid = new Group();
-        Group test = new Group();
-        window.setTop(grid);
+
 
         // grid calculations
-        int myCellSize = width/myGridSize;
+        int cellSize = width/myGridSize;
+        window.setTop(makeGrid(cellSize));
+        Group updates = new Group();
+        window.setBottom(updates);
 
-        // initialize gridS
-        Rectangle newCell;
-        for (int i = 0; i < myGridSize; i++) {
-            for (int j = 0; j < myGridSize; j++) {
-                newCell = cellPlacement(myCellSize, i * myCellSize, j * myCellSize);
-                myGrid[i][j] = newCell;
-                grid.getChildren().add(newCell);
-            }
-        }
+
         Scene scn = new Scene(window, width, height, bg);
         return scn;
     }
 
-    public Rectangle cellPlacement(int cellSize, double x, double y) {
-        Rectangle rect = new Rectangle(x, y, cellSize, cellSize);
-        rect.setStroke(BORDER_COLOR);
-        rect.setFill(Color.GRAY);
-        return rect;
+    private Group makeGrid (int cellSize){
+        Group gridRoot = new Group();
+        //build grid
+        for (int i = 0; i < myGridSize; i++) {
+            for (int j = 0; j < myGridSize; j++) {
+                Rectangle newCell = new Rectangle(i * cellSize, j * cellSize, cellSize, cellSize);
+                newCell.setStroke(BORDER_COLOR);
+                newCell.setFill(BACKGROUND); // ---> CHANGE THIS WHEN YOU FIGURE OUT INHERITANCE OF RECTANGLE CLASS
+                myGrid[i][j] = newCell;
+                gridRoot.getChildren().add(newCell);
+            }
+        }
+        return gridRoot;
     }
 
     /**
