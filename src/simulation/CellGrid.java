@@ -1,6 +1,5 @@
 package simulation;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public abstract class CellGrid {
@@ -26,6 +25,12 @@ public abstract class CellGrid {
 
    public void setCellList(ArrayList<ArrayList<Cell>> list){
       this.cellList = list;
+   }
+
+   public void step(){
+      this.updateCellNextStates();
+      this.updateCellStates();
+      this.updateCellNeighbors();
    }
 
 
@@ -66,12 +71,11 @@ public abstract class CellGrid {
    }
 
    public void updateCellStates() {
-      for(ArrayList<Cell> row : this.cellList){
-         for(Cell c: row){
+      for(ArrayList<Cell> row : this.cellList) {
+         for (Cell c : row) {
             c.updateState();
          }
       }
-      this.updateCellNeighbors();
    }
 
    public void initialize() {

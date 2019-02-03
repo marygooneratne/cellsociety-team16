@@ -21,9 +21,8 @@ public class GameOfLifeTester {
 
       for(int i = 0; i < 5; i++){
          printGrid(testGrid);
-         testGrid.updateCellNextStates();
-         testGrid.updateCellStates();
-         System.out.println("***************");
+         testGrid.step();
+         System.out.println();
       }
    }
 

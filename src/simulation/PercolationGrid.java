@@ -8,6 +8,7 @@ public class PercolationGrid extends CellGrid{
    public PercolationGrid(int initRows, int initColumns) {
       super(initRows, initColumns);
       this.probBlocked = .5;
+      this.setBlocked();
    }
 
    public PercolationGrid(int initRows, int initColumns, double initProbBlocked){

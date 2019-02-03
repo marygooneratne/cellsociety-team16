@@ -7,9 +7,7 @@ public class PercolationTester {
 
       for(int i = 0; i < 20; i++){
          printGrid(grid);
-         grid.updateCellNextStates();
-         grid.updateCellStates();
-         System.out.println();
+         grid.step();
          System.out.println();
       }
 
