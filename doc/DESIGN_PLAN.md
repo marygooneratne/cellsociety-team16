@@ -22,7 +22,7 @@ SimulationApplication that runs startModel(). The startModel() creates an instan
 runs a grid to completion. This grid is an instance of the View object which is the JavaFX object representing the CellGrid
 object. This View object updates the Cell JavaFX Nodes when the Cell states are updated. The CellGrid object is a object
 representation of the array of Cells. Cell is a abstract superclass with subclasses unique to each type of model. These
-subclasses will defer mostly in how they update as rules differ for different kinds of models. Cells have a CellView object
+subclasses will defer mostly in how they update as rules differ for different kinds of models. Cells have a Visualization.Cell object
 property that represents the JavaFX node in the View responsible for its representation. Each Cell has a property
 ArrayList<Cell> of currentNeighbors. With each step of the application, the CellGrid “updates” by calling its updateCellNextStates()
 method that iterates through the cellList, calling updateNextState() on each cell, saving the next state it should switch
@@ -63,7 +63,7 @@ Cell is an abstract superclass that will have subclasses unique to each type of 
 * currentNeighbors: an ArrayList<Cell> updated with every grid step to make it easier to identify the rule to apply to the cell
 * row: this integer identifies this Cell’s row in the CellGrid
 * column: this integer identifies this Cell’s row in the CellGrid
-* CellView: the visual representation object of the cell
+* Visualization.Cell: the visual representation object of the cell
 
 ####Classes:
 * updateState(): This method changes the cell’s currentState to its next state. This method is called upon after all cell’s nextStates have been identified. This method changes the visual representation of the cell
@@ -79,9 +79,9 @@ Cell is an abstract superclass that will have subclasses unique to each type of 
 * getRow(): getter method for row
 * getColumn(): getter method for row
 
-##CellView
+##Visualization.Cell
 ####Purpose:
-CellView
+Visualization.Cell
 is the visual representation of a Cell and is an instance variable of a Cell object
 ####Instance Variables:
 * currentImage: the JavaFX node associated with this Cell
@@ -116,7 +116,7 @@ The CellGrid superclass is an object responsible for holding and updating the li
 The View object is responsible for the visual representation of the CellGrid and integrating the appropriate cellView objects into it.
 ####Instance Variables:
 * gridView: the JavaFX node responsible for the visual representation of the grid
-* cellViewList: an 2D arraylist of JavaFX nodes of CellView objects corresponding to cells
+* cellViewList: an 2D arraylist of JavaFX nodes of Visualization.Cell objects corresponding to cells
 ####Classes:
 * updateGridView(): updates the nodes of the grid representing the cells by calling updateCellViewList()
 * updateCellViewList(): iterates through list and changes image node for changed Cells
