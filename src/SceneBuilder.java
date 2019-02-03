@@ -17,8 +17,6 @@ public class SceneBuilder extends Application {
     //important for our simulation
     private int myGridSize = 40; // will need to taken in later
     private Scene myScene;
-    private int myCellSize = WIDTH/myGridSize;
-//    private int[][] myGrid = new int[]
 
     @Override
     public void start(Stage stage) {
@@ -34,7 +32,7 @@ public class SceneBuilder extends Application {
         Group root = new Group();
         Scene scn = new Scene(root, width, height, bg);
         // grid calculations
-
+        int myCellSize = width/myGridSize;
         // initialize grid
 
         Rectangle newCell;
