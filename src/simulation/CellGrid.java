@@ -1,5 +1,6 @@
 package simulation;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public abstract class CellGrid {
@@ -22,6 +23,11 @@ public abstract class CellGrid {
    public void setColumns(int c){
       this.columns = c;
    }
+
+   public void setCellList(ArrayList<ArrayList<Cell>> list){
+      this.cellList = list;
+   }
+
 
    public ArrayList<ArrayList<Cell>> getCellList(){
       return this.cellList;

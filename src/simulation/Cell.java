@@ -24,7 +24,6 @@ public abstract class Cell {
       this.row = r;
       this.column = c;
    }
-
    public void setCurrentState(CellState newState) {
       this.currentState = newState;
    }

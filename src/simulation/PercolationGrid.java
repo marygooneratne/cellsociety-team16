@@ -13,6 +13,11 @@ public class PercolationGrid extends CellGrid{
    public PercolationGrid(int initRows, int initColumns, double initProbBlocked){
       super(initRows, initColumns);
       this.probBlocked = initProbBlocked;
+      this.setBlocked();
+   }
+
+   public double getProbBlocked(){
+      return this.probBlocked;
    }
 
    public void addCells(ArrayList<Cell> newCells){
@@ -38,15 +43,22 @@ public class PercolationGrid extends CellGrid{
          ArrayList<Cell> row = new ArrayList<Cell>();
          for (int c = 0; c < this.getColumns(); c++) {
             PercolationCell newCell = new PercolationCell(CellState.OPEN);
-            if(getIfBlocked()){
-               newCell.setCurrentState(CellState.BLOCKED);
-            }
             newCell.setColumn(c);
             newCell.setRow(r);
-            newCell.setProbBlocked(this.probBlocked);
             row.add(newCell);
          }
          this.addRowToCellList(row);
+      }
+   }
+
+   public void setBlocked() {
+      for(ArrayList<Cell> row: this.getCellList()){
+         for(Cell c: row){
+            ((PercolationCell)(c)).setProbBlocked(this.probBlocked);
+            if(getIfBlocked()){
+               c.setCurrentState(CellState.BLOCKED);
+            }
+         }
       }
    }
 
@@ -59,6 +71,7 @@ public class PercolationGrid extends CellGrid{
    }
 
    public boolean getIfBlocked(){
-      return Math.random() < this.probBlocked;
+      double prob = Math.random();
+      return (prob < this.probBlocked);
    }
 }
