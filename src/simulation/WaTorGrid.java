@@ -159,5 +159,37 @@ public class WaTorGrid extends CellGrid {
             }
          }
       }
+   public void updateCellNeighbors() {
+      for (int r = 0; r < this.getCellList().size(); r++) {
+         ArrayList<Cell> row = this.getCellList().get(r);
+         for (int c = 0; c < row.size(); c++) {
+            Cell cell = this.getCellList().get(r).get(c);
+            if (c > 0) {
+               cell.addNeighbor(row.get(c - 1));
+            }
+            else{
+               cell.addNeighbor(row.get(this.getColumns()-1));
+            }
+            if (c < row.size() - 1) {
+               cell.addNeighbor(row.get(c+1));
+            }
+            else{
+               cell.addNeighbor(row.get(0));
+            }
+            if (r > 0) {
+               cell.addNeighbor(this.getCellList().get(r - 1).get(c));
+            }
+            else{
+               cell.addNeighbor(this.getCellList().get(this.getRows()-1).get(c));
+            }
+            if (r < this.getCellList().size() - 1) {
+               cell.addNeighbor(this.getCellList().get(r + 1).get(c));
+            }
+            else{
+               cell.addNeighbor(this.getCellList().get(0).get(c));
+            }
+         }
+      }
+   }
 
 }
