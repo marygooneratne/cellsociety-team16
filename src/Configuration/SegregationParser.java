@@ -18,8 +18,8 @@ public class SegregationParser extends XMLparser{
     double probRed;
     double thresh;
 
-    public void segParse(String filename){
-        Node segNode = list.item(1);
+    public void segParse(String filename, NodeList nlist){
+        Node segNode = nlist.item(1);
         if(segNode.getNodeType()==Node.ELEMENT_NODE){
             Element myEl= (Element) segNode;
             probEmpty=Integer.parseInt(myEl.getElementsByTagName("probEmpty").item(0).getTextContent());

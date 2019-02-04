@@ -1,5 +1,5 @@
 <?xml version= "1.0" encoding = "UTF-8"?>
-<config>
+<Configuration>
     <Simulation>
         <type>GameOfLife</type>
         <title>GameOfLife</title>
@@ -12,6 +12,4 @@
     <probability>
         <prob>0.45</prob>
     </probability>
-
-
-</config>
+</Configuration>

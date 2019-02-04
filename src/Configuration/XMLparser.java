@@ -27,7 +27,9 @@ public class XMLparser {
     private int probLife;
     private int numDead;
     private int numAlive;
-    public NodeList list;
+    private NodeList list;
+
+
 
     public void parse(String filename) {
         try {
@@ -37,7 +39,7 @@ public class XMLparser {
                 Document document = builder.parse(new File(filename + ".xml"));
                 document.getDocumentElement().normalize();
 
-                list = document.getDocumentElement().getChildNodes();
+                list = document.getDocumentElement().getElementsByTagName("Simulation");
             }
             catch(SAXException e){
                 e.printStackTrace();
@@ -47,7 +49,7 @@ public class XMLparser {
                 i.printStackTrace();
             }
 
-            System.out.println(list);
+            System.out.println(list.item(0).getChildNodes());
             Node gennode = list.item(0);
             if (gennode.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) gennode;
@@ -76,6 +78,9 @@ public class XMLparser {
     }
     public String getTitle() {
         return title;
+    }
+    public NodeList getList(){
+        return list;
     }
 
 }

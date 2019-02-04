@@ -18,14 +18,14 @@ public class WatorWorldParser extends XMLparser{
     int fishTime;
     int sharkTime;
     int starveTime;
-    public void parseWator(String filename) {
-        Node watorNode = list.item(1);
+    public void parseWator(String filename,NodeList nlist) {
+        Node watorNode = nlist.item(1);
         if(watorNode.getNodeType()==Node.ELEMENT_NODE){
             Element myEl=(Element) watorNode;
             probFish=Integer.parseInt(myEl.getElementsByTagName("probFish").item(0).getTextContent());
             probEmpty=Integer.parseInt(myEl.getElementsByTagName("probEmpty").item(0).getTextContent());
         }
-        Node watorNode1 = list.item(2);
+        Node watorNode1 = nlist.item(2);
         if(watorNode1.getNodeType()==Node.ELEMENT_NODE){
             Element elem = (Element) watorNode1;
             fishTime=Integer.parseInt(elem.getElementsByTagName("fishTime").item(0).getTextContent());
