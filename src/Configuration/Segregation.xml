@@ -12,9 +12,10 @@
     <probability>
         <probEmpty>0.45</probEmpty>
         <probRed>0.5</probRed>
+        <threshold>0.3</threshold>
     </probability>
 
-    <threshold>0.3</threshold>
+
 
 
 </config>
