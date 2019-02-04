@@ -1,5 +1,7 @@
 package Configuration;
 import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+
 import javax.xml.parsers.*;
 import java.io.*;
 
@@ -31,11 +33,20 @@ public class XMLparser {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
+            try {
+                Document document = builder.parse(new File(filename + ".xml"));
+                document.getDocumentElement().normalize();
 
-            Document document = builder.parse(new File(filename + ".xml"));
-            document.getDocumentElement().normalize();
+                list = document.getDocumentElement().getChildNodes();
+            }
+            catch(SAXException e){
+                e.printStackTrace();
 
-            list = document.getDocumentElement().getChildNodes();
+            }
+            catch(IOException i){
+                i.printStackTrace();
+            }
+
             System.out.println(list);
             Node gennode = list.item(0);
             if (gennode.getNodeType() == Node.ELEMENT_NODE) {
