@@ -7,8 +7,8 @@ public enum CellState{
     EMPTY, TREE, BURNING,
     //Percolation
     OPEN, BLOCKED, PERCOLATED,
-    //Segregation
+    //Segregation, also uses EMPTY
     RED, BLUE,
-    //WaTor
+    //WaTor, also uses EMPTY
     SHARK, FISH
 }
