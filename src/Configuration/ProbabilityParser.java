@@ -14,7 +14,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-public class GameOfLifeParser extends XMLparser{
+public class ProbabilityParser extends XMLparser{
     private double probPop;
     public void parseGame(String filename) {
         Node gameNode = list.item(1);
