@@ -1,0 +1,20 @@
+<?xml version= "1.0" encoding = "UTF-8"?>
+<config>
+    <Simulation>
+        <type>Segregation</type>
+        <title>Segregation</title>
+        <author>Hyunjae Lee</author>
+        <rows>50</rows>
+        <columns>50</columns>
+    </Simulation>
+
+
+    <probability>
+        <probEmpty>0.45</probEmpty>
+        <probRed>0.5</probRed>
+    </probability>
+
+    <threshold>0.3</threshold>
+
+
+</config>

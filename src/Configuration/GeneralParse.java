@@ -29,8 +29,10 @@ public class GeneralParse {
         }
 
         else if(typeSimulation.equals("Segregation")){
-            
+
         }
 
     }
+
+
 }
