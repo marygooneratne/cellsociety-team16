@@ -11,4 +11,9 @@ public abstract class SquareCell extends Rectangle {
         this.setFill(myColor);
         this.setStroke(Color.BLACK);
     }
+
+    public SquareCell(){
+        this.setFill(myColor);
+        this.setStroke(Color.BLACK);
+    }
 }
