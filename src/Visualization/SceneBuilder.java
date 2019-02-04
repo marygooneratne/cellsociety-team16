@@ -4,10 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -25,7 +22,6 @@ public class SceneBuilder extends Application {
     private static int GRID_DIM = 400;
     private static int UPDATE_HEIGHT = HEIGHT - GRID_DIM;
     private static Paint BACKGROUND = Color.LIGHTSLATEGRAY;
-    private static Paint BORDER_COLOR = Color.BLACK;
 
     //things that will be read in
     private int myGridSize = 20;
@@ -87,6 +83,7 @@ public class SceneBuilder extends Application {
         return scn;
     }
 
+    /**Construct the myGridSize x myGridSize grid for the cells to inhabit*/
     private Group makeGrid (int cellSize){
         Group gridRoot = new Group();
         //build grid
