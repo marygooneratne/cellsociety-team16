@@ -41,8 +41,8 @@ public class XMLparser {
                 type=eElement.getElementsByTagName("type").item(0).getTextContent();
                 title=eElement.getElementsByTagName("title").item(0).getTextContent();
                 author=eElement.getElementsByTagName("author").item(0).getTextContent();
-                rows=Integer.parseInt(eElement.getAttribute("rows"));
-                columns=Integer.parseInt(eElement.getAttribute("columns"));
+                rows=Integer.parseInt(eElement.getElementsByTagName("rows").item(0).getTextContent());
+                columns=Integer.parseInt(eElement.getElementsByTagName("columns").item(0).getTextContent());
             }
     }
     public int getRows(){
