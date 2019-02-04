@@ -1,0 +1,23 @@
+<?xml version= "1.0" encoding = "UTF-8"?>
+<config>
+    <Simulation>
+        <type>GameOfLife</type>
+        <title>GameOfLife</title>
+        <author>Hyunjae Lee</author>
+        <rows>50</rows>
+        <columns>50</columns>
+    </Simulation>
+
+    <Cells>
+        <probability>
+            <prob>0.45</prob>
+            <prob>0.55</prob>
+        </probability>
+        <State>
+            <numAlive>20</numAlive>
+            <numDead>30</numDead>
+        </State>
+    </Cells>
+
+
+</config>
