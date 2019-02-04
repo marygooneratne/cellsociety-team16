@@ -3,18 +3,48 @@ package simulation;
 import java.util.ArrayList;
 
 public class SpreadingOfFireGrid extends CellGrid{
+   private static double INIT_PROB_CATCH = 0.5;
    private double probCatch;
 
    public SpreadingOfFireGrid(int initRows, int initColumns) {
       super(initRows, initColumns);
-      this.probCatch = .5;
+      this.setProbCatch(INIT_PROB_CATCH);
    }
 
    public SpreadingOfFireGrid(int initRows, int initColumns, double initProbCatch){
       super(initRows, initColumns);
-      this.probCatch = initProbCatch;
+      this.setProbCatch(initProbCatch);
    }
 
+   public SpreadingOfFireGrid(int initRows, int initColumns, double initProbCatch, int trees, int onFire){
+      super(initRows, initColumns);
+      this.setProbCatch(initProbCatch);
+      this.addTreesRandom(trees);
+      this.addOnFireRandom(onFire);
+   }
+
+   public SpreadingOfFireGrid(int initRows, int initColumns, double initProbCatch, ArrayList<Cell> cellsToAdd){
+      super(initRows, initColumns);
+      this.setProbCatch(initProbCatch);
+      this.addCells(cellsToAdd);
+   }
+
+   public void addTreesRandom(int trees){
+      for(int i = 0; i < trees; i++){
+         this.getCellList().get(this.randRowIndex()).get(this.randColIndex()).setCurrentState(CellState.TREE);
+      }
+   }
+
+   public void addOnFireRandom(int onFire){
+      for(int i = 0; i < onFire; i++){
+         this.getCellList().get(this.randRowIndex()).get(this.randColIndex()).setCurrentState(CellState.BURNING);
+      }
+   }
+
+
+   public void setProbCatch(double initProbCatch){
+      this.probCatch = initProbCatch;
+   }
    public void addCells(ArrayList<Cell> newCells){
       for(Cell c: newCells){
          ((SpreadingOfFireCell)c).setProbCatch(this.probCatch);

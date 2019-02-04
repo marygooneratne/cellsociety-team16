@@ -3,18 +3,23 @@ package simulation;
 import java.util.ArrayList;
 
 public class PercolationGrid extends CellGrid{
+   private static double INITIAL_PROB_BLOCKED = 0.5;
    private double probBlocked;
 
    public PercolationGrid(int initRows, int initColumns) {
       super(initRows, initColumns);
-      this.probBlocked = .5;
+      this.setProbBlocked(INITIAL_PROB_BLOCKED);
       this.setBlocked();
    }
 
    public PercolationGrid(int initRows, int initColumns, double initProbBlocked){
       super(initRows, initColumns);
-      this.probBlocked = initProbBlocked;
+      this.setProbBlocked(INITIAL_PROB_BLOCKED);
       this.setBlocked();
+   }
+
+   public void setProbBlocked(double probBlocked){
+      this.probBlocked = probBlocked;
    }
 
    public double getProbBlocked(){

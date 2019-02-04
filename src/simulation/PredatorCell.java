@@ -3,6 +3,8 @@ package simulation;
 import java.util.ArrayList;
 
 public class PredatorCell extends Cell{
+   private static int INITIAL_BREED_TIME = 10;
+
    private int untilBreed;
    private int breedTime;
    private ArrayList<Cell> availableEmpty;
@@ -10,7 +12,7 @@ public class PredatorCell extends Cell{
 
    public PredatorCell(){
       super();
-      this.setBreedTime(10);
+      this.setBreedTime(INITIAL_BREED_TIME);
       this.resetUntilBreed();
    }
 

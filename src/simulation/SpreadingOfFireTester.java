@@ -2,7 +2,7 @@ package simulation;
 
 public class SpreadingOfFireTester {
    public static void main(String[] args){
-      SpreadingOfFireGrid grid = new SpreadingOfFireGrid(50, 50, .9);
+      SpreadingOfFireGrid grid = new SpreadingOfFireGrid(10, 10, .9);
       grid.addType(CellState.BURNING, 20);
       grid.addType(CellState.TREE, 200);
 

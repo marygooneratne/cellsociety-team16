@@ -3,6 +3,7 @@ package simulation;
 import java.util.ArrayList;
 
 public class SharkCell extends PredatorCell{
+   private static int INIT_STARVE_TIME = 5;
 
    private int untilStarve;
    private int starveTime;
@@ -11,19 +12,19 @@ public class SharkCell extends PredatorCell{
 
    public SharkCell(){
       super();
-      this.setStarveTime(5);
+      this.setStarveTime(INIT_STARVE_TIME);
       this.resetUntilStarve();
    }
 
    public SharkCell(CellState initState){
       super(initState);
-      this.setStarveTime(5);
+      this.setStarveTime(INIT_STARVE_TIME);
       this.resetUntilStarve();
    }
 
    public SharkCell(CellState initState, int r, int c){
       super(initState, r, c);
-      this.setStarveTime(5);
+      this.setStarveTime(INIT_STARVE_TIME);
       this.resetUntilStarve();
    }
 

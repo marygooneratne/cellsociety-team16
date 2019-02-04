@@ -1,23 +1,8 @@
 package simulation;
 
-import java.util.ArrayList;
-
 public class GameOfLifeTester {
    public static void main(String[] args){
-      GameOfLifeGrid testGrid = new GameOfLifeGrid(10, 10);
-      GameOfLifeCell cell1 = new GameOfLifeCell(CellState.POPULATED, 0, 2);
-      GameOfLifeCell cell2 = new GameOfLifeCell(CellState.POPULATED, 0, 3);
-      GameOfLifeCell cell3 = new GameOfLifeCell(CellState.POPULATED, 1, 2);
-      GameOfLifeCell cell4 = new GameOfLifeCell(CellState.POPULATED, 1, 0);
-      GameOfLifeCell cell5 = new GameOfLifeCell(CellState.POPULATED, 3, 4);
-
-      ArrayList<Cell> addCells = new ArrayList<>();
-      addCells.add(cell1);
-      addCells.add(cell2);
-      addCells.add(cell3);
-      addCells.add(cell4);
-      addCells.add(cell5);
-      testGrid.addCells(addCells);
+      GameOfLifeGrid testGrid = new GameOfLifeGrid(10, 10, .4);
 
       for(int i = 0; i < 5; i++){
          printGrid(testGrid);

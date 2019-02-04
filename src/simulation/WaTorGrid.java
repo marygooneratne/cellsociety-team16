@@ -3,6 +3,14 @@ package simulation;
 import java.util.ArrayList;
 
 public class WaTorGrid extends CellGrid {
+   private static double INIT_PROB_EMPTY = 0.2;
+   private static double INIT_PROB_FISH = 0.7;
+   private static double INIT_PROB_SHARK = 0.3;
+
+   private static int INIT_FISH_TIME = 5;
+   private static int INIT_SHARK_TIME = 5;
+   private static int INIT_STARVE_TIME = 3;
+
    private double probEmpty;
    private double probFish;
    private double probShark;
@@ -13,8 +21,8 @@ public class WaTorGrid extends CellGrid {
 
    public WaTorGrid(int initRows, int initCols){
       super(initRows, initCols);
-      this.setInitProbs(.2,.7,.3);
-      this.setInitTimes(5, 5, 3);
+      this.setInitProbs(INIT_PROB_EMPTY,INIT_PROB_FISH,INIT_PROB_SHARK);
+      this.setInitTimes(INIT_FISH_TIME, INIT_SHARK_TIME, INIT_STARVE_TIME);
       this.addPredators();
    }
 

@@ -2,6 +2,9 @@ package simulation;
 
 
 public class GameOfLifeCell extends Cell {
+   private static int UNDERPOPULATED = 2;
+   private static int OVERPOPULATION = 4;
+   private static int REPRODUCTION = 3;
 
    public GameOfLifeCell() {
       super();
@@ -23,16 +26,16 @@ public class GameOfLifeCell extends Cell {
          }
       }
       if (this.getCurrentState() == CellState.UNPOPULATED) {
-         if (populated >= 3) {
+         if (populated == REPRODUCTION) {
             this.setNextState(CellState.POPULATED);
          }
          else{
             this.setNextState(this.getCurrentState());
          }
       } else {
-         if (populated <= 1) {
+         if (populated < UNDERPOPULATED) {
             this.setNextState(CellState.UNPOPULATED);
-         } else if (populated < 4) {
+         } else if (populated < OVERPOPULATION) {
             this.setNextState(CellState.POPULATED);
          } else {
             this.setNextState(CellState.UNPOPULATED);

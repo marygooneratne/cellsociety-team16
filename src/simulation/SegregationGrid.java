@@ -3,6 +3,10 @@ package simulation;
 import java.util.ArrayList;
 
 public class SegregationGrid extends CellGrid{
+   private static double INIT_THRESHOLD = 0.3;
+   private static double INIT_PROB_EMPTY = 0.1;
+   private static double INIT_PROB_RED = 0.5;
+
    private double threshold;
    private double probEmpty;
    private double probRed;
@@ -10,18 +14,22 @@ public class SegregationGrid extends CellGrid{
 
    SegregationGrid(int initRows, int initCols){
       super(initRows, initCols);
-      this.threshold = .3;
-      this.probRed = .5;
-      this.probEmpty = .1;
+      this.setParams(INIT_THRESHOLD, INIT_PROB_RED, INIT_PROB_EMPTY);
       this.setUp();
    }
    SegregationGrid(int initRows, int initCols, double initThreshold, double initProbEmpty, double initProbRed){
       super(initRows, initCols);
-      this.threshold = initThreshold;
-      this.probEmpty = initProbEmpty;
-      this.probRed = initProbRed;
+      this.setParams(initThreshold, initProbRed, initProbEmpty);
       this.setUp();
    }
+
+   public void setParams(double threshold, double probRed, double probEmpty){
+      this.threshold = threshold;
+      this.probRed = probRed;
+      this.probEmpty = probEmpty;
+   }
+
+
 
    public void setUp(){
       this.emptyCells = new ArrayList<>();
