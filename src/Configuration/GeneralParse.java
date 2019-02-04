@@ -7,12 +7,12 @@ public class GeneralParse {
         myParser.parse(filename);
         String typeSimulation = myParser.getType();
         if(typeSimulation.equals("GameOfLife")||typeSimulation.equals("Percolation")||typeSimulation.equals("SpreadingFire")){
-            ProbabilityParser gofParse = new GameOfLifeParser();
+            ProbabilityParser gofParse = new ProbabilityParser();
             gofParse.parseGame(filename+".xml");
             GOFPercFireprob=gofParse.getProbPop();
         }
 
-        else if(typeSimulation.equals("WaterWorld")){
+        else if(typeSimulation.equals("WatorWorld")){
 
         }
 

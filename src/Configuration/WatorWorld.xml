@@ -1,0 +1,24 @@
+<?xml version= "1.0" encoding = "UTF-8"?>
+<config>
+    <Simulation>
+        <type>WatorWorld</type>
+        <title>WatorWorld</title>
+        <author>Hyunjae Lee</author>
+        <rows>50</rows>
+        <columns>50</columns>
+    </Simulation>
+
+
+    <probability>
+        <probEmpty>0.45</probEmpty>
+        <probFish>0.5</probFish>
+    </probability>
+
+    <time>
+        <fishTime>5</fishTime>
+        <sharkTime>5</sharkTime>
+        <starveTime>3</starveTime>
+    </time>
+
+
+</config>
