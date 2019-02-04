@@ -8,16 +8,10 @@
         <columns>50</columns>
     </Simulation>
 
-    <Cells>
-        <probability>
-            <prob>0.45</prob>
-            <prob>0.55</prob>
-        </probability>
-        <State>
-            <numAlive>20</numAlive>
-            <numDead>30</numDead>
-        </State>
-    </Cells>
+
+    <probability>
+        <prob>0.45</prob>
+    </probability>
 
 
 </config>

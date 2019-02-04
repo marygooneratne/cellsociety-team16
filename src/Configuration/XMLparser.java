@@ -25,6 +25,7 @@ public class XMLparser {
     private int probLife;
     private int numDead;
     private int numAlive;
+    public NodeList list;
 
     public void parse(String filename) {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -33,10 +34,10 @@ public class XMLparser {
         Document document = builder.parse(new File(filename+".xml"));
         document.getDocumentElement().normalize();
 
-        NodeList list = document.getDocumentElement().getChildNodes();
-            Node node = list.item(0);
-            if(node.getNodeType()==Node.ELEMENT_NODE){
-                Element eElement = (Element) node;
+        list = document.getDocumentElement().getChildNodes();
+            Node gennode = list.item(0);
+            if(gennode.getNodeType()==Node.ELEMENT_NODE){
+                Element eElement = (Element) gennode;
                 type=eElement.getElementsByTagName("type").item(0).getTextContent();
                 title=eElement.getElementsByTagName("title").item(0).getTextContent();
                 author=eElement.getElementsByTagName("author").item(0).getTextContent();
