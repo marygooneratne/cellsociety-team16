@@ -9,7 +9,7 @@ public class GeneralParse {
     private int starveTime;
 
     public void startParse(String filename){
-        XMLparser myParser = new XMLparser;
+        XMLparser myParser = new XMLparser();
         myParser.parse(filename);
         String typeSimulation = myParser.getType();
         if(typeSimulation.equals("GameOfLife")||typeSimulation.equals("Percolation")||typeSimulation.equals("SpreadingFire")){
@@ -29,7 +29,7 @@ public class GeneralParse {
         }
 
         else if(typeSimulation.equals("Segregation")){
-            
+
         }
 
     }
