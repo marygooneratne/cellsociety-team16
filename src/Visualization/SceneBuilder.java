@@ -1,20 +1,25 @@
 package Visualization;
 
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
+import javafx.scene.control.Button;
 
 //import javafx.animation.KeyFrame;
 //import javafx.animation.Timeline;
 //import javafx.util.Duration;
 
 public class SceneBuilder extends Application {
-    private static String TITLE = "Cellular Automata";
     private static int WIDTH = 400;
     private static int HEIGHT = 600;
     private static int GRID_DIM = 400;
@@ -23,13 +28,14 @@ public class SceneBuilder extends Application {
     private static Paint BORDER_COLOR = Color.BLACK;
 
     //things that will be read in
-    private int myGridSize = 40;
+    private int myGridSize = 20;
     private int delay = 100; // ms
+    private static String TITLE = "Cellular Automata";
 
 
     //important for our simulation
     private Scene myScene;
-    private Rectangle[][] myGrid = new Rectangle[GRID_DIM][GRID_DIM];
+    private Shape[][] myGrid = new Shape[GRID_DIM][GRID_DIM];
     private int myCycle = 0;
 
     @Override
@@ -51,9 +57,31 @@ public class SceneBuilder extends Application {
         // grid calculations
         int cellSize = width/myGridSize;
         window.setTop(makeGrid(cellSize));
-        Group updates = new Group();
-        window.setBottom(updates);
 
+        // updates segment of the window
+        Group updates = new Group();
+
+//        Button pause = new Button("pause");
+//        Button play = new Button("play");
+//        Button delay = new Button("delay");
+//        Button cycle = new Button("cycle");
+
+        Rectangle pause = new Rectangle(0, 0, 100, 20);
+        Rectangle play = new Rectangle(0, 100, 20, 100);
+        Rectangle delay = new Rectangle(300,0, 100, 20);
+        Rectangle cycle = new Rectangle(300, 100, 20, 100);
+
+        updates.getChildren().add(pause);
+        updates.getChildren().add(play);
+        updates.getChildren().add(delay);
+        updates.getChildren().add(cycle);
+
+//        updates.setAlignment(pause, Pos.TOP_LEFT);
+//        updates.setAlignment(play, Pos.BOTTOM_LEFT);
+//        updates.setAlignment(delay, Pos.TOP_RIGHT);
+//        updates.setAlignment(cycle, Pos.BOTTOM_RIGHT);
+
+        window.setBottom(updates);
 
         Scene scn = new Scene(window, width, height, bg);
         return scn;
@@ -64,9 +92,7 @@ public class SceneBuilder extends Application {
         //build grid
         for (int i = 0; i < myGridSize; i++) {
             for (int j = 0; j < myGridSize; j++) {
-                Rectangle newCell = new Rectangle(i * cellSize, j * cellSize, cellSize, cellSize);
-                newCell.setStroke(BORDER_COLOR);
-                newCell.setFill(BACKGROUND); // ---> CHANGE THIS WHEN YOU FIGURE OUT INHERITANCE OF RECTANGLE CLASS
+                SquareCell newCell = new FireCell(i * cellSize, j * cellSize, cellSize, cellSize);
                 myGrid[i][j] = newCell;
                 gridRoot.getChildren().add(newCell);
             }
