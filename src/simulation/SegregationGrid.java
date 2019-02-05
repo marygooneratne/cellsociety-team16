@@ -80,16 +80,19 @@ public class SegregationGrid extends CellGrid{
       for(ArrayList<Cell> row: this.getCellList()){
          for(Cell c: row){
             if(c.getNextState() == null & ((SegregationCell)(c)).toMove() && this.emptyCells.size()>0){
-
-               this.emptyCells.get(0).setNextState(c.getCurrentState());
+               int index = this.getRandEmpty();
+               this.emptyCells.get(index).setNextState(c.getCurrentState());
+               emptyCells.remove(index);
                c.setNextState(CellState.EMPTY);
-               this.updateEmptyStates();
             }
             else{
-               if(c.getNextState() == null){
+               if(c.getNextState() == null && c.getCurrentState() != CellState.EMPTY){
                   c.setNextState(c.getCurrentState());
                }
             }
+         }
+         for(Cell c: emptyCells){
+               c.setNextState(CellState.EMPTY);
          }
       }
    }
@@ -98,7 +101,7 @@ public class SegregationGrid extends CellGrid{
       this.emptyCells.removeAll(this.emptyCells);
       for(ArrayList<Cell> row: this.getCellList()){
          for(Cell c: row){
-            if(c.getCurrentState() == CellState.EMPTY){
+            if(c.getNextState() == null && c.getCurrentState() == CellState.EMPTY){
                this.emptyCells.add(c);
             }
          }
@@ -113,13 +116,8 @@ public class SegregationGrid extends CellGrid{
       }
    }
 
-   public String neighbors(Cell cell){
-      String n = "";
-      for(Cell c: cell.getCurrentNeighbors()){
-         n += c.getCurrentState();
-         n+= " '";
-      }
-      return n;
+   public int getRandEmpty(){
+      return (int)(this.emptyCells.size() * Math.random());
    }
 
 }
