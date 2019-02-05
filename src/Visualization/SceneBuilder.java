@@ -33,7 +33,7 @@ import java.util.ArrayList;
 
 
 public class SceneBuilder extends Application {
-    private static String UPLOAD_FILE = "WatorWorld";
+    private static String UPLOAD_FILE = "SpreadingFire";
 
     private static int WIDTH = 400;
     private static int HEIGHT = 600;

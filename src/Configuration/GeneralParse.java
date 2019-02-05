@@ -38,6 +38,7 @@ public class GeneralParse {
             fireProb=myFireParse.getProb();
             numTree=myFireParse.getNumTree();
             numBurn=myFireParse.getNumBurn();
+            System.out.println(fireProb);
         }
         else if(this.typeSimulation.equals("Percolation")){
             PercolationParser percParse = new PercolationParser();
