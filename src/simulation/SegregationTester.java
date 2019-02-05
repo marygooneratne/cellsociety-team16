@@ -5,7 +5,7 @@ public class SegregationTester {
       SegregationGrid grid = new SegregationGrid(10, 10);
 
 
-      for (int i = 0; i < 10; i++) {
+      for (int i = 0; i < 5; i++) {
          printGrid(grid);
          grid.step();
          System.out.println();

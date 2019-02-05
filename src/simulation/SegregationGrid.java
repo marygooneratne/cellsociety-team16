@@ -37,7 +37,7 @@ public class SegregationGrid extends CellGrid{
       this.changeThresholds();
       this.addRed();
       this.addBlue();
-      this.findEmptyStates();
+      this.updateEmptyStates();
       this.updateCellNeighbors();
    }
 
@@ -73,31 +73,35 @@ public class SegregationGrid extends CellGrid{
    public void step(){
       this.updateCellNextStates();
       this.updateCellStates();
-      this.findEmptyStates();
+      this.updateEmptyStates();
    }
 
    public void updateCellNextStates(){
-      int emptyIndex = 0;
       for(ArrayList<Cell> row: this.getCellList()){
          for(Cell c: row){
-            if(c.getNextState() == null & ((SegregationCell)(c)).toMove() && emptyIndex < this.emptyCells.size()){
-               this.emptyCells.get(emptyIndex).setNextState(c.getCurrentState());
+            if(c.getNextState() == null & ((SegregationCell)(c)).toMove() && this.emptyCells.size()>0){
+               int index = this.getRandEmpty();
+               this.emptyCells.get(index).setNextState(c.getCurrentState());
+               emptyCells.remove(index);
                c.setNextState(CellState.EMPTY);
-               emptyIndex++;
             }
             else{
-               if(c.getNextState() == null){
+               if(c.getNextState() == null && c.getCurrentState() != CellState.EMPTY){
                   c.setNextState(c.getCurrentState());
                }
             }
          }
+         for(Cell c: emptyCells){
+               c.setNextState(CellState.EMPTY);
+         }
       }
    }
 
-   public void findEmptyStates(){
+   public void updateEmptyStates(){
+      this.emptyCells.removeAll(this.emptyCells);
       for(ArrayList<Cell> row: this.getCellList()){
          for(Cell c: row){
-            if(c.getCurrentState() == CellState.EMPTY){
+            if(c.getNextState() == null && c.getCurrentState() == CellState.EMPTY){
                this.emptyCells.add(c);
             }
          }
@@ -110,6 +114,10 @@ public class SegregationGrid extends CellGrid{
             ((SegregationCell)(c)).setThreshold(this.threshold);
          }
       }
+   }
+
+   public int getRandEmpty(){
+      return (int)(this.emptyCells.size() * Math.random());
    }
 
 }

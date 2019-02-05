@@ -4,15 +4,15 @@
         <type>Segregation</type>
         <title>Segregation</title>
         <author>Hyunjae Lee</author>
-        <rows>50</rows>
-        <columns>50</columns>
+        <rows>10</rows>
+        <columns>10</columns>
     </Simulation>
 
 
     <probability>
         <probEmpty>0.1</probEmpty>
         <probRed>0.5</probRed>
-        <threshold>0.3</threshold>
+        <threshold>0.7</threshold>
     </probability>
 
 
