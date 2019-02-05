@@ -14,9 +14,9 @@ import javafx.scene.text.Text;
 /** set up the bottom portion of the UI that includes pause, play, speed, and cycle interval */
 
 public class BuildOptions {
-    private static int MIN_FRAMES = 20;
-    private static int MAX_FRAMES = 100;
-    private static int TICK_MARKS = 20;
+    private static int MIN_FRAMES = 1;
+    private static int MAX_FRAMES = 10;
+    private static int TICK_MARKS = 1;
     private static String PAUSE_LABEL = "pause";
     private static String PLAY_LABEL = "play";
     private static String SPEED_LABEL = "speed: frames/sec";
