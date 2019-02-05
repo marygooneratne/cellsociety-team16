@@ -5,6 +5,6 @@ module cellsociety.team16 {
     requires javafx.graphics;
     requires javafx.media;
     requires javafx.web;
-    
+
     exports Visualization;
 }

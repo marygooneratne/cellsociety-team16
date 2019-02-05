@@ -35,7 +35,7 @@ import java.util.ArrayList;
 //import javafx.util.Duration;
 
 public class SceneBuilder extends Application {
-    private static String UPLOAD_FILE = "Segregation";
+    private static String UPLOAD_FILE = "WatorWorld";
 
     private static int WIDTH = 400;
     private static int HEIGHT = 600;
