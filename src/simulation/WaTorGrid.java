@@ -172,6 +172,7 @@ public class WaTorGrid extends CellGrid {
          ArrayList<Cell> row = this.getCellList().get(r);
          for (int c = 0; c < row.size(); c++) {
             Cell cell = this.getCellList().get(r).get(c);
+            cell.emptyNeighbors();
             if (c > 0) {
                cell.addNeighbor(row.get(c - 1));
             }

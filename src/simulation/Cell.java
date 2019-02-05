@@ -24,6 +24,9 @@ public abstract class Cell {
       this.row = r;
       this.column = c;
    }
+   public void emptyNeighbors(){
+      this.currentNeighbors.removeAll(this.currentNeighbors);
+   }
    public void setCurrentState(CellState newState) {
       this.currentState = newState;
    }
