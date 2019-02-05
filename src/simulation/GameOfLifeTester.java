@@ -1,8 +1,14 @@
 package simulation;
 
+import Configuration.GeneralParse;
+
 public class GameOfLifeTester {
    public static void main(String[] args){
-      GameOfLifeGrid testGrid = new GameOfLifeGrid(10, 10, .4);
+
+      GeneralParse myParse = new GeneralParse();
+      myParse.startParse("GameOfLife");
+
+      GameOfLifeGrid testGrid = new GameOfLifeGrid(myParse.getRows(), myParse.getColumns(), myParse.getGOFPercFireprob());
 
       for(int i = 0; i < 5; i++){
          printGrid(testGrid);

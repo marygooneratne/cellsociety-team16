@@ -1,8 +1,8 @@
 <?xml version= "1.0" encoding = "UTF-8"?>
 <config>
     <Simulation>
-        <type>GameOfLife</type>
-        <title>GameOfLife</title>
+        <type>Segregation</type>
+        <title>Segregation</title>
         <author>Hyunjae Lee</author>
         <rows>50</rows>
         <columns>50</columns>
@@ -10,8 +10,12 @@
 
 
     <probability>
-        <prob>0.45</prob>
+        <probEmpty>0.45</probEmpty>
+        <probRed>0.5</probRed>
+        <threshold>0.3</threshold>
     </probability>
+
+
 
 
 </config>

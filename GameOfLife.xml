@@ -1,0 +1,15 @@
+<?xml version= "1.0" encoding = "UTF-8"?>
+<Configuration>
+    <Simulation>
+        <type>GameOfLife</type>
+        <title>GameOfLife</title>
+        <author>Hyunjae Lee</author>
+        <rows>50</rows>
+        <columns>50</columns>
+    </Simulation>
+
+
+    <probability>
+        <prob>0.45</prob>
+    </probability>
+</Configuration>

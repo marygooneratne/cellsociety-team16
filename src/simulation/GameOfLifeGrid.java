@@ -36,7 +36,7 @@ public class GameOfLifeGrid extends CellGrid {
    }
 
    public void addPopulated(){
-      int cellsLeft = this.getColumns()*this.getRows();
+      double cellsLeft = this.getColumns()*this.getRows();
       int numPop= (int)(cellsLeft*this.probPopulated);
       for(int i = 0; i < numPop; i++){
          this.getCellList().get(this.randRowIndex()).get(this.randColIndex()).setCurrentState(CellState.POPULATED);

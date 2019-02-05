@@ -1,5 +1,7 @@
 package Configuration;
 import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+
 import javax.xml.parsers.*;
 import java.io.*;
 
@@ -25,25 +27,42 @@ public class XMLparser {
     private int probLife;
     private int numDead;
     private int numAlive;
-    public NodeList list;
+    private NodeList list;
+
+
 
     public void parse(String filename) {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            try {
+                Document document = builder.parse(new File(filename + ".xml"));
+                document.getDocumentElement().normalize();
 
-        Document document = builder.parse(new File(filename+".xml"));
-        document.getDocumentElement().normalize();
-
-        list = document.getDocumentElement().getChildNodes();
-            Node gennode = list.item(0);
-            if(gennode.getNodeType()==Node.ELEMENT_NODE){
-                Element eElement = (Element) gennode;
-                type=eElement.getElementsByTagName("type").item(0).getTextContent();
-                title=eElement.getElementsByTagName("title").item(0).getTextContent();
-                author=eElement.getElementsByTagName("author").item(0).getTextContent();
-                rows=Integer.parseInt(eElement.getElementsByTagName("rows").item(0).getTextContent());
-                columns=Integer.parseInt(eElement.getElementsByTagName("columns").item(0).getTextContent());
+                list = document.getDocumentElement().getElementsByTagName("Simulation");
             }
+            catch(SAXException e){
+                e.printStackTrace();
+
+            }
+            catch(IOException i){
+                i.printStackTrace();
+            }
+
+            System.out.println(list.item(0).getChildNodes());
+            Node gennode = list.item(0);
+            if (gennode.getNodeType() == Node.ELEMENT_NODE) {
+                Element eElement = (Element) gennode;
+                type = eElement.getElementsByTagName("type").item(0).getTextContent();
+                title = eElement.getElementsByTagName("title").item(0).getTextContent();
+                author = eElement.getElementsByTagName("author").item(0).getTextContent();
+                rows = Integer.parseInt(eElement.getElementsByTagName("rows").item(0).getTextContent());
+                columns = Integer.parseInt(eElement.getElementsByTagName("columns").item(0).getTextContent());
+            }
+        }
+        catch(ParserConfigurationException e){
+            e.printStackTrace();
+        }
     }
     public int getRows(){
         return rows;
@@ -60,4 +79,8 @@ public class XMLparser {
     public String getTitle() {
         return title;
     }
+    public NodeList getList(){
+        return list;
+    }
+
 }
