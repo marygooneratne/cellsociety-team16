@@ -29,17 +29,27 @@ public class GeneralParse {
 
         else if(typeSimulation.equals("WatorWorld")) {
             WatorWorldParser watorParse = new WatorWorldParser();
+<<<<<<< HEAD
+            watorParse.parseWator(filename, myParser.getList());
+            probFish=watorParse.getProbFish();
+            probEmpty=watorParse.getProbEmpty();
+            fishTime=watorParse.getFishTime();
+            sharkTime=watorParse.getSharkTime();
+            starveTime=watorParse.getStarveTime();
+
+=======
             watorParse.parseWator(filename + ".xml", myParser.getList());
             probFish = watorParse.getProbFish();
             probEmpty = watorParse.getProbEmpty();
             fishTime = watorParse.getFishTime();
             sharkTime = watorParse.getSharkTime();
             starveTime = watorParse.getStarveTime();
+>>>>>>> 9fded229ceafbb0f909ca3b9a2ea8f1bb99c2bf4
         }
 
         else if(typeSimulation.equals("Segregation")) {
             SegregationParser segParse = new SegregationParser();
-            segParse.segParse(filename + ".xml",myParser.getList());
+            segParse.segParse(filename,myParser.getList());
             thresh = segParse.getThresh();
             probRed = segParse.getProbRed();
             probEmptSeg = segParse.getProbEmpty();
@@ -55,7 +65,30 @@ public class GeneralParse {
     public double getGOFPercFireprob(){
         return GOFPercFireprob;
     }
-
+    public double getProbFish(){
+        return probFish;
+    }
+    public double getProbEmpty(){
+        return probEmpty;
+    }
+    public int getFishTime(){
+        return fishTime;
+    }
+    public int getSharkTime(){
+        return sharkTime;
+    }
+    public int getStarveTime(){
+        return starveTime;
+    }
+    public double getProbEmptSeg(){
+        return probEmptSeg;
+    }
+    public double getProbRed(){
+        return probRed;
+    }
+    public double getThresh(){
+        return thresh;
+    }
 
 
 
