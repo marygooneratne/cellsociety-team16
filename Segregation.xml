@@ -4,8 +4,8 @@
         <type>Segregation</type>
         <title>Segregation</title>
         <author>Hyunjae Lee</author>
-        <rows>10</rows>
-        <columns>10</columns>
+        <rows>50</rows>
+        <columns>50</columns>
     </Simulation>
 
 
