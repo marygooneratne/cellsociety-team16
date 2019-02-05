@@ -44,7 +44,12 @@ public class SpreadingOfFireCell extends Cell{
 
    public boolean getBurning(){
       double random = Math.random();
-      return random < probCatch;
+      boolean ifBurn = false;
+      if(random< probCatch){
+         ifBurn = true;
+      }
+
+      return ifBurn;
    }
 
 

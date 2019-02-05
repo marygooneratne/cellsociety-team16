@@ -4,15 +4,15 @@
         <type>SpreadingFire</type>
         <title>SpreadingFire</title>
         <author>Hyunjae Lee</author>
-        <rows>10</rows>
-        <columns>10</columns>
+        <rows>50</rows>
+        <columns>50</columns>
     </Simulation>
 
 
     <probability>
-        <prob>0.45</prob>
-        <numTree>4</numTree>
-        <numBurn>10</numBurn>
+        <prob>0.8</prob>
+        <numTree>2000</numTree>
+        <numBurn>500</numBurn>
     </probability>
 
 

@@ -52,6 +52,11 @@ public class SpreadingOfFireGrid extends CellGrid{
 
    public void setProbCatch(double initProbCatch){
       this.probCatch = initProbCatch;
+      for(ArrayList<Cell> row: this.getCellList()){
+         for(Cell c: row){
+            ((SpreadingOfFireCell)(c)).setProbCatch(this.probCatch);
+         }
+      }
    }
    public void addCells(ArrayList<Cell> newCells){
       for(Cell c: newCells){
@@ -78,7 +83,6 @@ public class SpreadingOfFireGrid extends CellGrid{
             SpreadingOfFireCell newCell = new SpreadingOfFireCell(CellState.EMPTY);
             newCell.setColumn(c);
             newCell.setRow(r);
-            newCell.setProbCatch(this.probCatch);
             row.add(newCell);
          }
          this.addRowToCellList(row);
