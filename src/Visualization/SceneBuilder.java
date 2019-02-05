@@ -158,11 +158,29 @@ public class SceneBuilder extends Application {
         else if(myParser.getTypeSimulation().equals("Segregation")){
             this.setSegregation();
         }
+        else if(myParser.getTypeSimulation().equals("SpreadingFire")){
+            this.setFire();
+        }
+        else{
+            this.setWaTor();
+        }
 
     }
-
+    private void setWaTor(){
+        WaTorGrid grid = new WaTorGrid(myParser.getRows(), myParser.getColumns(), myParser.getProbEmpty(),myParser.getProbFish(), myParser.getFishTime(), myParser.getSharkTime(), myParser.getStarveTime());
+        this.cellGrid = grid;
+        this.myCells = grid.getCellList();
+    }
     private void setSegregation(){
         SegregationGrid grid = new SegregationGrid(myParser.getRows(), myParser.getColumns(), myParser.getThresh(), myParser.getProbEmptSeg(), myParser.getProbRed());
+        System.out.println(grid.getCellList());
+        this.cellGrid = grid;
+        this.myCells = grid.getCellList();
+    }
+
+    private void setFire(){
+        SpreadingOfFireGrid grid = new SpreadingOfFireGrid(myParser.getRows(), myParser.getColumns(), myParser.getGOFPercFireprob(), 20, 20);
+        System.out.println(grid.getprobCatch());
         this.cellGrid = grid;
         this.myCells = grid.getCellList();
     }

@@ -29,15 +29,23 @@ public class SpreadingOfFireGrid extends CellGrid{
       this.addCells(cellsToAdd);
    }
 
+   public double getprobCatch(){
+      return this.probCatch;
+   }
+
    public void addTreesRandom(int trees){
       for(int i = 0; i < trees; i++){
-         this.getCellList().get(this.randRowIndex()).get(this.randColIndex()).setCurrentState(CellState.TREE);
+         int row = this.getRow();
+         int col = this.getCol();
+         this.getCellList().get(row).get(col).setCurrentState(CellState.TREE);
       }
    }
 
    public void addOnFireRandom(int onFire){
       for(int i = 0; i < onFire; i++){
-         this.getCellList().get(this.randRowIndex()).get(this.randColIndex()).setCurrentState(CellState.BURNING);
+         int row = this.getRow();
+         int col = this.getCol();
+         this.getCellList().get(row).get(col).setCurrentState(CellState.BURNING);
       }
    }
 
