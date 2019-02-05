@@ -16,6 +16,7 @@ import Visualization.WaTorWorld.SharkCell;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.scene.Group;
@@ -24,15 +25,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import simulation.*;
-
 import java.util.ArrayList;
 
-//import javafx.animation.KeyFrame;
-//import javafx.animation.Timeline;
-//import javafx.util.Duration;
 
 public class SceneBuilder extends Application {
     private static String UPLOAD_FILE = "SpreadingFire";
@@ -40,11 +38,10 @@ public class SceneBuilder extends Application {
     private static int WIDTH = 400;
     private static int HEIGHT = 600;
     private static int GRID_DIM = 400;
-    private static int UPDATE_HEIGHT = HEIGHT - GRID_DIM;
     private static Paint BACKGROUND = Color.LIGHTSLATEGRAY;
 
     //things that will be read in
-    private int myGridSize = 10;
+    private int myGridSize;
     private int myFramesPerS = 1; // --> as this increases, the sim runs faster
     private int myDelayMS =  1000/myFramesPerS ; // seconds --> *1000 for ms
     private int myDelayS = 1/myFramesPerS;
@@ -54,10 +51,11 @@ public class SceneBuilder extends Application {
     private Scene myScene;
     private Shape[][] myGrid = new Shape[GRID_DIM][GRID_DIM];
     private LongProperty myCycle = new SimpleLongProperty(0);
+    private static String CYCLE_LABEL = "CYCLE: ";
     private Group myGridRoot;
+    private Text myCycleInfo;
 
     private int cellSize;
-    private String fileSize;
 
     private CellGrid cellGrid;
     private ArrayList<ArrayList<Cell>> myCells;
@@ -73,7 +71,7 @@ public class SceneBuilder extends Application {
         stage.show();
 
         //add animation for simulation loop timeline
-        var frame = new KeyFrame(Duration.millis(myDelayMS), e -> step(myDelayS));
+        var frame = new KeyFrame(Duration.millis(myDelayMS), e -> step(myDelayS, myCycleInfo));
         myAnimation.setCycleCount(Timeline.INDEFINITE);
         myAnimation.getKeyFrames().add(frame);
         myAnimation.play();
@@ -81,19 +79,23 @@ public class SceneBuilder extends Application {
 
     /** initial simulation with grid and buttons*/
     private Scene setupSim(int width, int height, Paint bg) {
-
+        this.modelFromFile();
+        myGridSize = cellGrid.getRows();
         // BorderPane Layout
         BorderPane window = new BorderPane();
         // create group for grid and add to window
-
-
-        // grid calculations
         this.cellSize = width/myGridSize;
         myGridRoot = makeGrid(cellSize);
         window.setTop(myGridRoot);
 
         // options region of the UI
-        Group options = new BuildOptions(new Group(), myAnimation, myFramesPerS, myCycle).getRoot();
+        Group options = new BuildOptions(new Group(), myAnimation, myFramesPerS).getRoot();
+
+        myCycleInfo = new Text();
+        myCycleInfo.textProperty().bind(Bindings.createStringBinding(() -> (CYCLE_LABEL + myCycle.get())));
+        myCycleInfo.setX(200);
+        myCycleInfo.setY(0);
+        options.getChildren().add(myCycleInfo);
 
         window.setBottom(options);
 
@@ -101,15 +103,21 @@ public class SceneBuilder extends Application {
         return scn;
     }
 
+    private void step (double elapsedTime, Text cycle){
+        // cross reference the grid positions
+        this.cellGrid.step();
+        this.myCells = this.cellGrid.getCellList();
+        this.updateGrid();
+        myCycle.set(myCycle.get() + 1);
+        cycle.textProperty().bind(Bindings.createStringBinding(() -> (CYCLE_LABEL + myCycle.get())));
+    }
+
     /**Construct the myGridSize x myGridSize grid for the cells to inhabit*/
     private Group makeGrid (int cellSize){
-        this.modelFromFile();
         Group newGroup = new Group();
         //build grid
         for (int i = 0; i < myGridSize; i++) {
             for (int j = 0; j < myGridSize; j++) {
-                //SquareCell newCell = new PopulatedCell(i * cellSize, j * cellSize, cellSize, cellSize);
-                // feed in the cell types here
                 SquareCell newCell = this.getCellShape(i,j);
                 newCell.setX(i*this.cellSize);
                 newCell.setY(j*this.cellSize);
@@ -120,15 +128,6 @@ public class SceneBuilder extends Application {
             }
         }
         return newGroup;
-    }
-
-
-    private void step (double elapsedTime){
-        // cross reference the grid positions
-        this.cellGrid.step();
-        this.myCells = this.cellGrid.getCellList();
-        this.updateGrid();
-        myCycle.set(myCycle.get() + 1);
     }
 
     private void updateGrid(){
@@ -237,7 +236,6 @@ public class SceneBuilder extends Application {
 
 
     }
-
 
 
     /**
