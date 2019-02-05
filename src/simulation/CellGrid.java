@@ -28,9 +28,9 @@ public abstract class CellGrid {
    }
 
    public void step(){
+      this.updateCellNeighbors();
       this.updateCellNextStates();
       this.updateCellStates();
-      this.updateCellNeighbors();
    }
 
 
@@ -90,6 +90,7 @@ public abstract class CellGrid {
          ArrayList<Cell> row = cellList.get(r);
          for (int c = 0; c < row.size(); c++) {
             Cell cell = cellList.get(r).get(c);
+            cell.emptyNeighbors();
             if (c > 0) {
                cell.addNeighbor(row.get(c - 1));
             }

@@ -1,6 +1,8 @@
 package Visualization;
 
+import Configuration.GeneralParse;
 import Visualization.GameOfLife.PopulatedCell;
+import Visualization.GameOfLife.UnpopulatedCell;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -14,6 +16,12 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import simulation.Cell;
+import simulation.CellGrid;
+import simulation.CellState;
+import simulation.GameOfLifeGrid;
+
+import java.util.ArrayList;
 
 //import javafx.animation.KeyFrame;
 //import javafx.animation.Timeline;
@@ -27,7 +35,7 @@ public class SceneBuilder extends Application {
     private static Paint BACKGROUND = Color.LIGHTSLATEGRAY;
 
     //things that will be read in
-    private int myGridSize = 20;
+    private int myGridSize = 10;
     private int myFramesPerS = 60; // --> as this increases, the sim runs faster
     private int myDelay = 1/myFramesPerS; // seconds --> *1000 for ms
     private static String TITLE = "Cellular Automata";
@@ -37,6 +45,9 @@ public class SceneBuilder extends Application {
     private Shape[][] myGrid = new Shape[GRID_DIM][GRID_DIM];
     private LongProperty myCycle = new SimpleLongProperty(0);
     private Timeline myAnimation;
+
+    private CellGrid cellGrid;
+    private ArrayList<ArrayList<Cell>> myCells;
 
     @Override
     public void start(Stage stage) {
@@ -55,6 +66,7 @@ public class SceneBuilder extends Application {
 
     /** initial simulation with grid and buttons*/
     private Scene setupSim(int width, int height, Paint bg) {
+
         // BorderPane Layout
         BorderPane window = new BorderPane();
         // create group for grid and add to window
@@ -76,17 +88,18 @@ public class SceneBuilder extends Application {
 
     /**Construct the myGridSize x myGridSize grid for the cells to inhabit*/
     private Group makeGrid (int cellSize){
+        this.startGOL();
         Group gridRoot = new Group();
         //build grid
         for (int i = 0; i < myGridSize; i++) {
             for (int j = 0; j < myGridSize; j++) {
-                SquareCell newCell = new PopulatedCell(i * cellSize, j * cellSize, cellSize, cellSize);
+                //SquareCell newCell = new PopulatedCell(i * cellSize, j * cellSize, cellSize, cellSize);
                 // feed in the cell types here
-//                SquareCell newCell = inputGrid[i][j];
-//                newCell.setX(i*cellSize);
-//                newCell.setY(j*cellSize);
-//                newCell.setWidth(cellSize);
-//                newCell.setHeight(cellSize);
+                SquareCell newCell = this.getCellShape(i,j);
+                newCell.setX(i*cellSize);
+                newCell.setY(j*cellSize);
+                newCell.setWidth(cellSize);
+                newCell.setHeight(cellSize);
                 myGrid[i][j] = newCell;
                 gridRoot.getChildren().add(newCell);
             }
@@ -105,6 +118,27 @@ public class SceneBuilder extends Application {
         }
 
         myCycle.set(myCycle.get() + 1);
+    }
+
+    private void startGOL(){
+        GeneralParse myParse = new GeneralParse();
+        myParse.startParse("GameOfLife");
+        System.out.println(myParse.getGOFPercFireprob());
+        GameOfLifeGrid testGrid = new GameOfLifeGrid(myParse.getRows(), myParse.getColumns(), myParse.getGOFPercFireprob());
+        this.cellGrid = testGrid;
+        this.myCells = testGrid.getCellList();
+    }
+
+    public SquareCell getCellShape(int r, int c){
+        Cell cell = this.myCells.get(r).get(c);
+        if(cell.getCurrentState() == CellState.POPULATED){
+            return new PopulatedCell();
+        }
+        else{
+            return new UnpopulatedCell();
+        }
+
+
     }
 
     /**

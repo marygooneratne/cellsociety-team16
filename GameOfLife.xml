@@ -4,12 +4,12 @@
         <type>GameOfLife</type>
         <title>GameOfLife</title>
         <author>Hyunjae Lee</author>
-        <rows>50</rows>
-        <columns>50</columns>
+        <rows>10</rows>
+        <columns>10</columns>
     </Simulation>
 
 
     <probability>
-        <prob>0.45</prob>
+        <prob>0.5</prob>
     </probability>
 </Configuration>

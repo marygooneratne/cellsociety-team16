@@ -21,7 +21,7 @@ public class GeneralParse {
         String typeSimulation = myParser.getType();
         if(typeSimulation.equals("GameOfLife")||typeSimulation.equals("Percolation")||typeSimulation.equals("SpreadingFire")){
             ProbabilityParser gofParse = new ProbabilityParser();
-            gofParse.parseGame(filename+".xml", myParser.getList());
+            gofParse.parseGame(filename, myParser.getList());
             //double[] ret = new double[3];
             GOFPercFireprob=gofParse.getProbPop();
 
