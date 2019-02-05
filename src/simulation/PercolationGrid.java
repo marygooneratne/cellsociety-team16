@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class PercolationGrid extends CellGrid{
    private static double INITIAL_PROB_BLOCKED = 0.5;
    private double probBlocked;
+   private int numPercolated;
 
    public PercolationGrid(int initRows, int initColumns) {
       super(initRows, initColumns);
@@ -12,10 +13,12 @@ public class PercolationGrid extends CellGrid{
       this.setBlocked();
    }
 
-   public PercolationGrid(int initRows, int initColumns, double initProbBlocked){
+   public PercolationGrid(int initRows, int initColumns, double initProbBlocked, int numPercolated){
       super(initRows, initColumns);
+      this.numPercolated = numPercolated;
       this.setProbBlocked(INITIAL_PROB_BLOCKED);
       this.setBlocked();
+      this.addType(CellState.PERCOLATED, numPercolated);
    }
 
    public void setProbBlocked(double probBlocked){

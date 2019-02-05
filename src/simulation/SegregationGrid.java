@@ -12,12 +12,13 @@ public class SegregationGrid extends CellGrid{
    private double probRed;
    private ArrayList<Cell> emptyCells;
 
-   SegregationGrid(int initRows, int initCols){
+   public SegregationGrid(int initRows, int initCols){
       super(initRows, initCols);
       this.setParams(INIT_THRESHOLD, INIT_PROB_RED, INIT_PROB_EMPTY);
       this.setUp();
    }
-   SegregationGrid(int initRows, int initCols, double initThreshold, double initProbEmpty, double initProbRed){
+
+   public SegregationGrid(int initRows, int initCols, double initThreshold, double initProbEmpty, double initProbRed){
       super(initRows, initCols);
       this.setParams(initThreshold, initProbRed, initProbEmpty);
       this.setUp();

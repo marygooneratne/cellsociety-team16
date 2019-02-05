@@ -4,15 +4,15 @@ import Visualization.SquareCell;
 
 import javafx.scene.paint.*;
 
-public class TreeClass extends SquareCell {
+public class TreeCell extends SquareCell {
     Paint myColor = Color.BROWN;
 
-    public TreeClass(double x, double y, double width, double height){
+    public TreeCell(double x, double y, double width, double height){
         super(x,y,width,height);
         this.setFill(myColor);
     }
 
-    public TreeClass(){
+    public TreeCell(){
         this.setFill(myColor);
     }
 }
