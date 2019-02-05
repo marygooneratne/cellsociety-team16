@@ -23,7 +23,7 @@ public class BuildOptions {
     private static String CYCLE_LABEL = "CYCLE: ";
     private static Group myRoot;
 
-    public BuildOptions(Group optionsRoot, /**Timeline anim,*/ double framesPerS, LongProperty cycleNum){
+    public BuildOptions(Group optionsRoot, Timeline anim, double framesPerS, LongProperty cycleNum){
         myRoot = optionsRoot;
         //make buttons
         Button pause = new Button(PAUSE_LABEL);
@@ -32,14 +32,14 @@ public class BuildOptions {
         pause.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent ae) {
-//                anim.pause();
+                anim.pause();
             }
         });
 
         play.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent ae) {
-//                anim.play();
+                anim.play();
             }
         });
 

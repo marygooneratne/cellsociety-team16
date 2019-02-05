@@ -37,7 +37,7 @@ public class SegregationGrid extends CellGrid{
       this.changeThresholds();
       this.addRed();
       this.addBlue();
-      this.findEmptyStates();
+      this.updateEmptyStates();
       this.updateCellNeighbors();
    }
 
@@ -73,17 +73,17 @@ public class SegregationGrid extends CellGrid{
    public void step(){
       this.updateCellNextStates();
       this.updateCellStates();
-      this.findEmptyStates();
+      this.updateEmptyStates();
    }
 
    public void updateCellNextStates(){
-      int emptyIndex = 0;
       for(ArrayList<Cell> row: this.getCellList()){
          for(Cell c: row){
-            if(c.getNextState() == null & ((SegregationCell)(c)).toMove() && emptyIndex < this.emptyCells.size()){
-               this.emptyCells.get(emptyIndex).setNextState(c.getCurrentState());
+            if(c.getNextState() == null & ((SegregationCell)(c)).toMove() && this.emptyCells.size()>0){
+
+               this.emptyCells.get(0).setNextState(c.getCurrentState());
                c.setNextState(CellState.EMPTY);
-               emptyIndex++;
+               this.updateEmptyStates();
             }
             else{
                if(c.getNextState() == null){
@@ -94,7 +94,8 @@ public class SegregationGrid extends CellGrid{
       }
    }
 
-   public void findEmptyStates(){
+   public void updateEmptyStates(){
+      this.emptyCells.removeAll(this.emptyCells);
       for(ArrayList<Cell> row: this.getCellList()){
          for(Cell c: row){
             if(c.getCurrentState() == CellState.EMPTY){
@@ -110,6 +111,15 @@ public class SegregationGrid extends CellGrid{
             ((SegregationCell)(c)).setThreshold(this.threshold);
          }
       }
+   }
+
+   public String neighbors(Cell cell){
+      String n = "";
+      for(Cell c: cell.getCurrentNeighbors()){
+         n += c.getCurrentState();
+         n+= " '";
+      }
+      return n;
    }
 
 }

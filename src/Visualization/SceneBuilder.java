@@ -35,7 +35,7 @@ import java.util.ArrayList;
 //import javafx.util.Duration;
 
 public class SceneBuilder extends Application {
-    private static String UPLOAD_FILE = "GameOfLife";
+    private static String UPLOAD_FILE = "Segregation";
 
     private static int WIDTH = 400;
     private static int HEIGHT = 600;
@@ -93,7 +93,7 @@ public class SceneBuilder extends Application {
         window.setTop(myGridRoot);
 
         // options region of the UI
-        Group options = new BuildOptions(new Group(), /**myAnimation,*/ myFramesPerS, myCycle).getRoot();
+        Group options = new BuildOptions(new Group(), myAnimation, myFramesPerS, myCycle).getRoot();
 
         window.setBottom(options);
 
@@ -164,6 +164,7 @@ public class SceneBuilder extends Application {
         else{
             this.setWaTor();
         }
+
 
     }
     private void setWaTor(){
