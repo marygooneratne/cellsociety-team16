@@ -2,6 +2,9 @@ package Configuration;
 
 public class GeneralParse {
     private double GOFPercFireprob;
+    private double fireProb;
+    private int numTree;
+    private int numBurn;
     private double probFish;
     private double probEmpty;
     private int fishTime;
@@ -21,18 +24,25 @@ public class GeneralParse {
         rows=myParser.getRows();
         columns=myParser.getCols();
         this.typeSimulation = myParser.getType();
-        if(this.typeSimulation.equals("GameOfLife")||this.typeSimulation.equals("SpreadingFire")){
+        if(this.typeSimulation.equals("GameOfLife")){
             ProbabilityParser gofParse = new ProbabilityParser();
             gofParse.parseGame(filename, myParser.getList());
             //double[] ret = new double[3];
             GOFPercFireprob=gofParse.getProbPop();
 
         }
+        else if(this.typeSimulation.equals("SpreadingFire")){
+            FireParser myFireParse = new FireParser();
+            myFireParse.fireParse(filename);
+            fireProb=myFireParse.getProb();
+            numTree=myFireParse.getNumTree();
+            numBurn=myFireParse.getNumBurn();
+        }
         else if(this.typeSimulation.equals("Percolation")){
             PercolationParser percParse = new PercolationParser();
             percParse.percParse(filename);
             numPerc=percParse.getNumPerc();
-            
+
         }
 
         else if(this.typeSimulation.equals("WatorWorld")) {

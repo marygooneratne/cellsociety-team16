@@ -11,6 +11,8 @@
 
     <probability>
         <prob>0.45</prob>
+        <numTree>4</numTree>
+        <numBurn>10</numBurn>
     </probability>
 
 
