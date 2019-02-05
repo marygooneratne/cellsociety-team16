@@ -2,7 +2,7 @@ package simulation;
 
 public class PercolationTester {
    public static void main(String[] args){
-      PercolationGrid grid = new PercolationGrid(10, 10, .7);
+      PercolationGrid grid = new PercolationGrid(10, 10, .7, 2);
       grid.addType(CellState.PERCOLATED, 5);
 
       for(int i = 0; i < 20; i++){

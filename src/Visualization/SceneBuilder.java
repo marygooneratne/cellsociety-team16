@@ -3,6 +3,16 @@ package Visualization;
 import Configuration.GeneralParse;
 import Visualization.GameOfLife.PopulatedCell;
 import Visualization.GameOfLife.UnpopulatedCell;
+import Visualization.Percolation.BlockedCell;
+import Visualization.Percolation.OpenCell;
+import Visualization.Percolation.PercolatedCell;
+import Visualization.Segregation.BlueCell;
+import Visualization.Segregation.RedCell;
+import Visualization.SpreadingFire.BurningCell;
+import Visualization.SpreadingFire.EmptyCell;
+import Visualization.SpreadingFire.TreeCell;
+import Visualization.WaTorWorld.FishCell;
+import Visualization.WaTorWorld.SharkCell;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -16,10 +26,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import simulation.Cell;
-import simulation.CellGrid;
-import simulation.CellState;
-import simulation.GameOfLifeGrid;
+import simulation.*;
 
 import java.util.ArrayList;
 
@@ -28,7 +35,7 @@ import java.util.ArrayList;
 //import javafx.util.Duration;
 
 public class SceneBuilder extends Application {
-    private static String UPLOAD_FILE = "GameOfLife";
+    private static String UPLOAD_FILE = "Segregation";
 
     private static int WIDTH = 400;
     private static int HEIGHT = 600;
@@ -121,7 +128,6 @@ public class SceneBuilder extends Application {
         this.cellGrid.step();
         this.myCells = this.cellGrid.getCellList();
         this.updateGrid();
-
         myCycle.set(myCycle.get() + 1);
     }
 
@@ -146,13 +152,31 @@ public class SceneBuilder extends Application {
         if(myParser.getTypeSimulation().equals("GameOfLife")){
             this.setGOL();
         }
+        else if(myParser.getTypeSimulation().equals("Percolation")){
+            this.setPercolation();
+        }
+        else if(myParser.getTypeSimulation().equals("Segregation")){
+            this.setSegregation();
+        }
 
     }
 
+    private void setSegregation(){
+        SegregationGrid grid = new SegregationGrid(myParser.getRows(), myParser.getColumns(), myParser.getThresh(), myParser.getProbEmptSeg(), myParser.getProbRed());
+        this.cellGrid = grid;
+        this.myCells = grid.getCellList();
+    }
+
     private void setGOL(){
-        GameOfLifeGrid testGrid = new GameOfLifeGrid(myParser.getRows(), myParser.getColumns(), myParser.getGOFPercFireprob());
-        this.cellGrid = testGrid;
-        this.myCells = testGrid.getCellList();
+        GameOfLifeGrid grid = new GameOfLifeGrid(myParser.getRows(), myParser.getColumns(), myParser.getGOFPercFireprob());
+        this.cellGrid = grid;
+        this.myCells = grid.getCellList();
+    }
+
+    private void setPercolation(){
+        PercolationGrid grid = new PercolationGrid(myParser.getRows(), myParser.getColumns(), myParser.getGOFPercFireprob(), 2);
+        this.cellGrid = grid;
+        this.myCells = grid.getCellList();
     }
 
     public SquareCell getCellShape(int r, int c){
@@ -160,8 +184,38 @@ public class SceneBuilder extends Application {
         if(cell.getCurrentState() == CellState.POPULATED){
             return new PopulatedCell();
         }
-        else{
+        else if(cell.getCurrentState() == CellState.UNPOPULATED){
             return new UnpopulatedCell();
+        }
+        else if(cell.getCurrentState() == CellState.PERCOLATED){
+            return new PercolatedCell();
+        }
+        else if(cell.getCurrentState() == CellState.OPEN){
+            return new OpenCell();
+        }
+        else if(cell.getCurrentState() == CellState.BLOCKED){
+            return new BlockedCell();
+        }
+        else if(cell.getCurrentState() == CellState.BLUE){
+            return new BlueCell();
+        }
+        else if(cell.getCurrentState() == CellState.RED){
+            return new RedCell();
+        }
+        else if(cell.getCurrentState() == CellState.BURNING){
+            return new BurningCell();
+        }
+        else if(cell.getCurrentState() == CellState.TREE){
+            return new TreeCell();
+        }
+        else if(cell.getCurrentState() == CellState.FISH){
+            return new FishCell();
+        }
+        else if(cell.getCurrentState() == CellState.SHARK){
+            return new SharkCell();
+        }
+        else{
+            return new EmptyCell();
         }
 
 
