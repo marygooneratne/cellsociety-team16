@@ -85,6 +85,8 @@ public class SpreadingOfFireGrid extends CellGrid{
       }
    }
 
+
+
    public int getRow(){
       return (int)(this.getRows() * Math.random());
    }
