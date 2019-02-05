@@ -1,8 +1,15 @@
 package simulation;
 
+import Configuration.GeneralParse;
+
 public class SegregationTester {
    public static void main(String[] args) {
-      SegregationGrid grid = new SegregationGrid(5, 5);
+      GeneralParse myParser = new GeneralParse();
+      myParser.startParse("Segregation");
+      System.out.println(myParser.getThresh());
+      System.out.println(myParser.getProbRed());
+      System.out.println(myParser.getProbEmptSeg());
+      SegregationGrid grid = new SegregationGrid(myParser.getRows(), myParser.getColumns(), myParser.getThresh(),myParser.getProbEmptSeg(),myParser.getProbRed());
 
 
       for (int i = 0; i < 100; i++) {

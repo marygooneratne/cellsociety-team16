@@ -25,10 +25,10 @@ public class ProbabilityParser extends XMLparser{
             Document document = builder.parse(new File(filename + ".xml"));
             document.getDocumentElement().normalize();
             NodeList myList=document.getElementsByTagName("probability");
-            NodeList gameNode=myList.item(0).getChildNodes();
-            if(gameNode.item(0).getNodeType()==Node.ELEMENT_NODE) {
-                Element eElement = (Element) gameNode.item(0);
-                probPop = Integer.parseInt(eElement.getElementsByTagName("prob").item(0).getTextContent());
+            Node gameNode=myList.item(0);
+            if(gameNode.getNodeType()==Node.ELEMENT_NODE) {
+                Element eElement = (Element) gameNode;
+                probPop =Double.parseDouble(eElement.getElementsByTagName("prob").item(0).getTextContent());
 
             }
         }

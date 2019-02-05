@@ -9,7 +9,7 @@ public class GameOfLifeTester {
       myParse.startParse("GameOfLife");
 
       GameOfLifeGrid testGrid = new GameOfLifeGrid(myParse.getRows(), myParse.getColumns(), myParse.getGOFPercFireprob());
-
+      System.out.println(myParse.getGOFPercFireprob());
       for(int i = 0; i < 5; i++){
          printGrid(testGrid);
          testGrid.step();
