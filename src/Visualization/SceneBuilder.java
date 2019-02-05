@@ -55,6 +55,8 @@ public class SceneBuilder extends Application {
     private CellGrid cellGrid;
     private ArrayList<ArrayList<Cell>> myCells;
 
+    private GeneralParse myParser;
+
     @Override
     public void start(Stage stage) {
         myScene = setupSim(WIDTH, HEIGHT, BACKGROUND);
@@ -94,7 +96,7 @@ public class SceneBuilder extends Application {
 
     /**Construct the myGridSize x myGridSize grid for the cells to inhabit*/
     private Group makeGrid (int cellSize){
-        this.startGOL();
+        this.modelFromFile();
         Group newGroup = new Group();
         //build grid
         for (int i = 0; i < myGridSize; i++) {
@@ -116,7 +118,6 @@ public class SceneBuilder extends Application {
 
     private void step (double elapsedTime){
         // cross reference the grid positions
-        System.out.println("STEP CALLED");
         this.cellGrid.step();
         this.myCells = this.cellGrid.getCellList();
         this.updateGrid();
@@ -139,10 +140,17 @@ public class SceneBuilder extends Application {
         }
     }
 
-    private void startGOL(){
-        GeneralParse myParse = new GeneralParse();
-        myParse.startParse("GameOfLife");
-        GameOfLifeGrid testGrid = new GameOfLifeGrid(myParse.getRows(), myParse.getColumns(), myParse.getGOFPercFireprob());
+    private void modelFromFile(){
+        this.myParser = new GeneralParse();
+        myParser.startParse(UPLOAD_FILE);
+        if(myParser.getTypeSimulation().equals("GameOfLife")){
+            this.setGOL();
+        }
+
+    }
+
+    private void setGOL(){
+        GameOfLifeGrid testGrid = new GameOfLifeGrid(myParser.getRows(), myParser.getColumns(), myParser.getGOFPercFireprob());
         this.cellGrid = testGrid;
         this.myCells = testGrid.getCellList();
     }
@@ -158,6 +166,8 @@ public class SceneBuilder extends Application {
 
 
     }
+
+
 
     /**
      * Start the program

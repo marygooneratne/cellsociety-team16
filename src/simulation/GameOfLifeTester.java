@@ -10,13 +10,13 @@ public class GameOfLifeTester {
 
       GameOfLifeGrid testGrid = new GameOfLifeGrid(myParse.getRows(), myParse.getColumns(), myParse.getGOFPercFireprob());
 
-<<<<<<< HEAD
-      for(int i = 0; i < 5; i++){
-         printGrid(testGrid);
-=======
+//<<<<<<< HEAD
+//      for(int i = 0; i < 5; i++){
+//         printGrid(testGrid);
+//=======
 
       for(int i =0; i < 5; i++){
->>>>>>> bbe89059bf677b74e06b604e6d50e17bbceae613
+
          testGrid.step();
          System.out.println();
       }
