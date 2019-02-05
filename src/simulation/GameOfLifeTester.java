@@ -2,20 +2,22 @@ package simulation;
 
 import Configuration.GeneralParse;
 
-import java.util.ArrayList;
-
 public class GameOfLifeTester {
-   public static void main(String[] args) {
+   public static void main(String[] args){
 
       GeneralParse myParse = new GeneralParse();
       myParse.startParse("GameOfLife");
-      System.out.println(myParse.getGOFPercFireprob());
+
       GameOfLifeGrid testGrid = new GameOfLifeGrid(myParse.getRows(), myParse.getColumns(), myParse.getGOFPercFireprob());
 
+//<<<<<<< HEAD
+//      for(int i = 0; i < 5; i++){
+//         printGrid(testGrid);
+//=======
 
       for(int i =0; i < 5; i++){
+
          testGrid.step();
-         printGrid(testGrid);
          System.out.println();
       }
    }
@@ -30,13 +32,4 @@ public class GameOfLifeTester {
          System.out.println(row);
       }
    }
-
-   public static String printList(ArrayList<Cell> list){
-      String row = "";
-         for(Cell c: list){
-            if(c.getCurrentState() == CellState.UNPOPULATED) row += "U ";
-            if(c.getCurrentState() == CellState.POPULATED) row += "P ";
-         }
-         return row;
-      }
 }

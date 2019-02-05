@@ -49,7 +49,7 @@ public class XMLparser {
                 i.printStackTrace();
             }
 
-            //System.out.println(list.item(0).getChildNodes());
+            System.out.println(list.item(0).getChildNodes());
             Node gennode = list.item(0);
             if (gennode.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) gennode;

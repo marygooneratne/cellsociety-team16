@@ -1,16 +1,20 @@
 package Configuration;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 import org.xml.sax.SAXException;
+
+import javax.xml.parsers.*;
+import java.io.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
-import java.io.IOException;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 public class ProbabilityParser extends XMLparser{
     private double probPop;
@@ -21,6 +25,7 @@ public class ProbabilityParser extends XMLparser{
             Document document = builder.parse(new File(filename + ".xml"));
             document.getDocumentElement().normalize();
             NodeList myList=document.getElementsByTagName("probability");
+
             Node gameNode=myList.item(0);
             if(gameNode.getNodeType()==Node.ELEMENT_NODE) {
                 Element eElement = (Element) gameNode;
