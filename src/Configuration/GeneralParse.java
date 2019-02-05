@@ -29,7 +29,7 @@ public class GeneralParse {
 
         else if(typeSimulation.equals("WatorWorld")) {
             WatorWorldParser watorParse = new WatorWorldParser();
-<<<<<<< HEAD
+
             watorParse.parseWator(filename, myParser.getList());
             probFish=watorParse.getProbFish();
             probEmpty=watorParse.getProbEmpty();
@@ -37,15 +37,15 @@ public class GeneralParse {
             sharkTime=watorParse.getSharkTime();
             starveTime=watorParse.getStarveTime();
 
-=======
-            watorParse.parseWator(filename + ".xml", myParser.getList());
-            probFish = watorParse.getProbFish();
-            probEmpty = watorParse.getProbEmpty();
-            fishTime = watorParse.getFishTime();
-            sharkTime = watorParse.getSharkTime();
-            starveTime = watorParse.getStarveTime();
->>>>>>> 9fded229ceafbb0f909ca3b9a2ea8f1bb99c2bf4
-        }
+
+//            watorParse.parseWator(filename + ".xml", myParser.getList());
+//            probFish = watorParse.getProbFish();
+//            probEmpty = watorParse.getProbEmpty();
+//            fishTime = watorParse.getFishTime();
+//            sharkTime = watorParse.getSharkTime();
+//            starveTime = watorParse.getStarveTime();
+
+//        }
 
         else if(typeSimulation.equals("Segregation")) {
             SegregationParser segParse = new SegregationParser();
