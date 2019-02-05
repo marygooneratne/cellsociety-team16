@@ -28,6 +28,8 @@ import java.util.ArrayList;
 //import javafx.util.Duration;
 
 public class SceneBuilder extends Application {
+    private static String UPLOAD_FILE = "GameOfLife";
+
     private static int WIDTH = 400;
     private static int HEIGHT = 600;
     private static int GRID_DIM = 400;
@@ -48,6 +50,7 @@ public class SceneBuilder extends Application {
     private Group myGridRoot;
 
     private int cellSize;
+    private String fileSize;
 
     private CellGrid cellGrid;
     private ArrayList<ArrayList<Cell>> myCells;
@@ -61,13 +64,9 @@ public class SceneBuilder extends Application {
 
         //add animation for simulation loop timeline
         var frame = new KeyFrame(Duration.millis(myDelayMS), e -> step(myDelayS));
-        System.out.println("here");
         var myAnimation = new Timeline();
-        System.out.println("here 2");
         myAnimation.setCycleCount(Timeline.INDEFINITE);
-        System.out.println("here 3");
         myAnimation.getKeyFrames().add(frame);
-        System.out.println("here 4x");
         myAnimation.play();
     }
 
@@ -143,7 +142,6 @@ public class SceneBuilder extends Application {
     private void startGOL(){
         GeneralParse myParse = new GeneralParse();
         myParse.startParse("GameOfLife");
-        System.out.println(myParse.getGOFPercFireprob());
         GameOfLifeGrid testGrid = new GameOfLifeGrid(myParse.getRows(), myParse.getColumns(), myParse.getGOFPercFireprob());
         this.cellGrid = testGrid;
         this.myCells = testGrid.getCellList();
