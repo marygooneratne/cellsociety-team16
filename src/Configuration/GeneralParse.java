@@ -17,6 +17,7 @@ public class GeneralParse {
     private int columns;
     private String typeSimulation;
     private int numPerc;
+    private double percProb;
 
     public void startParse(String filename){
         XMLparser myParser = new XMLparser();
@@ -42,6 +43,7 @@ public class GeneralParse {
             PercolationParser percParse = new PercolationParser();
             percParse.percParse(filename);
             numPerc=percParse.getNumPerc();
+            percProb=percParse.getProb();
 
         }
 
@@ -82,9 +84,28 @@ public class GeneralParse {
     public int getColumns(){
         return columns;
     }
+    //for Percolation
+    public int getNumPerc(){
+        return numPerc;
+    }
+    public double getPercProb(){
+        return percProb;
+    }
+    //for SpreadingFire
+    public double getFireProb(){
+        return fireProb;
+    }
+    public int getNumTree(){
+        return numTree;
+    }
+    public int getNumBurn(){
+        return numBurn;
+    }
+    //for GameOfLife
     public double getGOFPercFireprob(){
         return GOFPercFireprob;
     }
+    //for WatorWorld
     public double getProbFish(){
         return probFish;
     }
@@ -100,6 +121,7 @@ public class GeneralParse {
     public int getStarveTime(){
         return starveTime;
     }
+    //for Segregation
     public double getProbEmptSeg(){
         return probEmptSeg;
     }

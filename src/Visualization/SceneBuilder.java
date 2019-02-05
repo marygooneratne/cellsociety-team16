@@ -179,7 +179,7 @@ public class SceneBuilder extends Application {
     }
 
     private void setFire(){
-        SpreadingOfFireGrid grid = new SpreadingOfFireGrid(myParser.getRows(), myParser.getColumns(), myParser.getGOFPercFireprob(), 20, 20);
+        SpreadingOfFireGrid grid = new SpreadingOfFireGrid(myParser.getRows(), myParser.getColumns(), myParser.getFireProb(), myParser.getNumTree(), myParser.getNumBurn());
         this.cellGrid = grid;
         this.myCells = grid.getCellList();
     }
@@ -191,7 +191,7 @@ public class SceneBuilder extends Application {
     }
 
     private void setPercolation(){
-        PercolationGrid grid = new PercolationGrid(myParser.getRows(), myParser.getColumns(), myParser.getGOFPercFireprob(), 2);
+        PercolationGrid grid = new PercolationGrid(myParser.getRows(), myParser.getColumns(), myParser.getPercProb(), myParser.getNumPerc());
         this.cellGrid = grid;
         this.myCells = grid.getCellList();
     }
