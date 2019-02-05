@@ -35,7 +35,7 @@ import java.util.ArrayList;
 //import javafx.util.Duration;
 
 public class SceneBuilder extends Application {
-    private static String UPLOAD_FILE = "Segregation";
+    private static String UPLOAD_FILE = "GameOfLife";
 
     private static int WIDTH = 400;
     private static int HEIGHT = 600;
@@ -61,11 +61,12 @@ public class SceneBuilder extends Application {
 
     private CellGrid cellGrid;
     private ArrayList<ArrayList<Cell>> myCells;
-
+    private Timeline myAnimation;
     private GeneralParse myParser;
 
     @Override
     public void start(Stage stage) {
+        myAnimation = new Timeline();
         myScene = setupSim(WIDTH, HEIGHT, BACKGROUND);
         stage.setScene(myScene);
         stage.setTitle(TITLE);
@@ -73,7 +74,6 @@ public class SceneBuilder extends Application {
 
         //add animation for simulation loop timeline
         var frame = new KeyFrame(Duration.millis(myDelayMS), e -> step(myDelayS));
-        var myAnimation = new Timeline();
         myAnimation.setCycleCount(Timeline.INDEFINITE);
         myAnimation.getKeyFrames().add(frame);
         myAnimation.play();

@@ -2,10 +2,10 @@ package simulation;
 
 public class SegregationTester {
    public static void main(String[] args) {
-      SegregationGrid grid = new SegregationGrid(5, 5);
+      SegregationGrid grid = new SegregationGrid(10, 10);
 
 
-      for (int i = 0; i < 100; i++) {
+      for (int i = 0; i < 10; i++) {
          printGrid(grid);
          grid.step();
          System.out.println();

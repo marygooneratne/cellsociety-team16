@@ -81,7 +81,6 @@ public class SegregationGrid extends CellGrid{
       for(ArrayList<Cell> row: this.getCellList()){
          for(Cell c: row){
             if(c.getNextState() == null & ((SegregationCell)(c)).toMove() && emptyIndex < this.emptyCells.size()){
-
                this.emptyCells.get(emptyIndex).setNextState(c.getCurrentState());
                c.setNextState(CellState.EMPTY);
                emptyIndex++;
