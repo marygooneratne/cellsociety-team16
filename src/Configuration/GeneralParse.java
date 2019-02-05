@@ -13,6 +13,7 @@ public class GeneralParse {
     private int rows;
     private int columns;
     private String typeSimulation;
+    private int numPerc;
 
     public void startParse(String filename){
         XMLparser myParser = new XMLparser();
@@ -20,12 +21,18 @@ public class GeneralParse {
         rows=myParser.getRows();
         columns=myParser.getCols();
         this.typeSimulation = myParser.getType();
-        if(this.typeSimulation.equals("GameOfLife")||this.typeSimulation.equals("Percolation")||this.typeSimulation.equals("SpreadingFire")){
+        if(this.typeSimulation.equals("GameOfLife")||this.typeSimulation.equals("SpreadingFire")){
             ProbabilityParser gofParse = new ProbabilityParser();
             gofParse.parseGame(filename, myParser.getList());
             //double[] ret = new double[3];
             GOFPercFireprob=gofParse.getProbPop();
 
+        }
+        else if(this.typeSimulation.equals("Percolation")){
+            PercolationParser percParse = new PercolationParser();
+            percParse.percParse(filename);
+            numPerc=percParse.getNumPerc();
+            
         }
 
         else if(this.typeSimulation.equals("WatorWorld")) {
