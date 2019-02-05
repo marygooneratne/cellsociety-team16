@@ -12,14 +12,15 @@ public class GeneralParse {
     private double probEmptSeg;
     private int rows;
     private int columns;
+    private String typeSimulation;
 
     public void startParse(String filename){
         XMLparser myParser = new XMLparser();
         myParser.parse(filename);
         rows=myParser.getRows();
         columns=myParser.getCols();
-        String typeSimulation = myParser.getType();
-        if(typeSimulation.equals("GameOfLife")||typeSimulation.equals("Percolation")||typeSimulation.equals("SpreadingFire")){
+        this.typeSimulation = myParser.getType();
+        if(this.typeSimulation.equals("GameOfLife")||this.typeSimulation.equals("Percolation")||this.typeSimulation.equals("SpreadingFire")){
             ProbabilityParser gofParse = new ProbabilityParser();
             gofParse.parseGame(filename, myParser.getList());
             //double[] ret = new double[3];
@@ -27,7 +28,7 @@ public class GeneralParse {
 
         }
 
-        else if(typeSimulation.equals("WatorWorld")) {
+        else if(this.typeSimulation.equals("WatorWorld")) {
             WatorWorldParser watorParse = new WatorWorldParser();
             watorParse.parseWator(filename, myParser.getList());
             probFish=watorParse.getProbFish();
@@ -38,7 +39,7 @@ public class GeneralParse {
 
         }
 
-        else if(typeSimulation.equals("Segregation")) {
+        else if(this.typeSimulation.equals("Segregation")) {
             SegregationParser segParse = new SegregationParser();
             segParse.segParse(filename,myParser.getList());
             thresh = segParse.getThresh();
@@ -79,6 +80,10 @@ public class GeneralParse {
     }
     public double getThresh(){
         return thresh;
+    }
+
+    public String getTypeSimulation(){
+        return this.typeSimulation;
     }
 
 
