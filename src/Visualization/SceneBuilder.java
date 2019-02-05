@@ -36,15 +36,18 @@ public class SceneBuilder extends Application {
 
     //things that will be read in
     private int myGridSize = 10;
-    private int myFramesPerS = 60; // --> as this increases, the sim runs faster
-    private int myDelay = 1/myFramesPerS; // seconds --> *1000 for ms
+    private int myFramesPerS = 1; // --> as this increases, the sim runs faster
+    private int myDelayMS =  1000/myFramesPerS ; // seconds --> *1000 for ms
+    private int myDelayS = 1/myFramesPerS;
     private static String TITLE = "Cellular Automata";
 
     //important for our simulation
     private Scene myScene;
     private Shape[][] myGrid = new Shape[GRID_DIM][GRID_DIM];
     private LongProperty myCycle = new SimpleLongProperty(0);
-    private Timeline myAnimation;
+    private Group myGridRoot;
+
+    private int cellSize;
 
     private CellGrid cellGrid;
     private ArrayList<ArrayList<Cell>> myCells;
@@ -57,10 +60,14 @@ public class SceneBuilder extends Application {
         stage.show();
 
         //add animation for simulation loop timeline
-        var frame = new KeyFrame(Duration.millis(myDelay*1000), e -> step(myDelay, myGrid));
+        var frame = new KeyFrame(Duration.millis(myDelayMS), e -> step(myDelayS));
+        System.out.println("here");
         var myAnimation = new Timeline();
+        System.out.println("here 2");
         myAnimation.setCycleCount(Timeline.INDEFINITE);
+        System.out.println("here 3");
         myAnimation.getKeyFrames().add(frame);
+        System.out.println("here 4x");
         myAnimation.play();
     }
 
@@ -73,9 +80,9 @@ public class SceneBuilder extends Application {
 
 
         // grid calculations
-        int cellSize = width/myGridSize;
-        Group grid = makeGrid(cellSize);
-        window.setTop(grid);
+        this.cellSize = width/myGridSize;
+        myGridRoot = makeGrid(cellSize);
+        window.setTop(myGridRoot);
 
         // options region of the UI
         Group options = new BuildOptions(new Group(), /**myAnimation,*/ myFramesPerS, myCycle).getRoot();
@@ -89,35 +96,48 @@ public class SceneBuilder extends Application {
     /**Construct the myGridSize x myGridSize grid for the cells to inhabit*/
     private Group makeGrid (int cellSize){
         this.startGOL();
-        Group gridRoot = new Group();
+        Group newGroup = new Group();
         //build grid
         for (int i = 0; i < myGridSize; i++) {
             for (int j = 0; j < myGridSize; j++) {
                 //SquareCell newCell = new PopulatedCell(i * cellSize, j * cellSize, cellSize, cellSize);
                 // feed in the cell types here
                 SquareCell newCell = this.getCellShape(i,j);
-                newCell.setX(i*cellSize);
-                newCell.setY(j*cellSize);
-                newCell.setWidth(cellSize);
-                newCell.setHeight(cellSize);
+                newCell.setX(i*this.cellSize);
+                newCell.setY(j*this.cellSize);
+                newCell.setWidth(this.cellSize);
+                newCell.setHeight(this.cellSize);
                 myGrid[i][j] = newCell;
-                gridRoot.getChildren().add(newCell);
+                newGroup.getChildren().add(newCell);
             }
         }
-        return gridRoot;
+        return newGroup;
     }
 
-    private void step (double elapsedTime, Shape[][] updatedGrid){
+
+    private void step (double elapsedTime){
         // cross reference the grid positions
-        for (int i=0; i< myGridSize; i++){
-            for (int j=0; j<myGridSize; j++){
-                if (myGrid[i][j] != updatedGrid[i][j]){
-                    //remove from scene
-                }
-            }
-        }
+        System.out.println("STEP CALLED");
+        this.cellGrid.step();
+        this.myCells = this.cellGrid.getCellList();
+        this.updateGrid();
 
         myCycle.set(myCycle.get() + 1);
+    }
+
+    private void updateGrid(){
+        this.myGridRoot.getChildren().removeAll();
+        for (int i=0; i< myGridSize; i++){
+            for (int j=0; j<myGridSize; j++){
+                    SquareCell newCell = this.getCellShape(i,j);
+                    newCell.setX(i*this.cellSize);
+                    newCell.setY(j*this.cellSize);
+                    newCell.setWidth(this.cellSize);
+                    newCell.setHeight(this.cellSize);
+                    myGrid[i][j] = newCell;
+                    this.myGridRoot.getChildren().add(newCell);
+            }
+        }
     }
 
     private void startGOL(){
