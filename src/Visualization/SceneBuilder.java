@@ -43,10 +43,11 @@ public class SceneBuilder extends Application {
     //things that will be read in
     private int myGridSize;
     private int myFramesPerS = 1; // --> as this increases, the sim runs faster
-    private int myDelayMS =  1000/myFramesPerS ; // seconds --> *1000 for ms
+    private int myDelayMS =  MILLI_TO_SEC_CONVERT/myFramesPerS ; // seconds --> *1000 for ms
     private int myDelayS = 1/myFramesPerS;
     private static String TITLE = "Cellular Automata";
-
+    private static final int CYCLE_SETX = 200;
+    private static final int MILLI_TO_SEC_CONVERT=1000;
     //important for our simulation
     private Scene myScene;
     private Shape[][] myGrid = new Shape[GRID_DIM][GRID_DIM];
@@ -61,6 +62,8 @@ public class SceneBuilder extends Application {
     private ArrayList<ArrayList<Cell>> myCells;
     private Timeline myAnimation;
     private GeneralParse myParser;
+
+
 
     @Override
     public void start(Stage stage) {
@@ -93,7 +96,7 @@ public class SceneBuilder extends Application {
 
         myCycleInfo = new Text();
         myCycleInfo.textProperty().bind(Bindings.createStringBinding(() -> (CYCLE_LABEL + myCycle.get())));
-        myCycleInfo.setX(200);
+        myCycleInfo.setX(CYCLE_SETX);
         myCycleInfo.setY(0);
         options.getChildren().add(myCycleInfo);
 
