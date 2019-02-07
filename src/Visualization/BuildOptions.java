@@ -19,6 +19,8 @@ public class BuildOptions {
     private static int MIN_FRAMES = 1;
     private static int MAX_FRAMES = 10;
     private static int TICK_MARKS = 1;
+    private static int SLIDER_SETX=200;
+    private static int SLIDER_SETY=75;
     private static String PAUSE_LABEL = "pause";
     private static String PLAY_LABEL = "play";
     private static String SPEED_LABEL = "speed: frames/sec";
@@ -50,8 +52,8 @@ public class BuildOptions {
         speed.setShowTickMarks(true);
         speed.setShowTickLabels(true);
         Label sliderLabel = new Label(SPEED_LABEL);
-        sliderLabel.setLayoutX(200);
-        sliderLabel.setLayoutY(75);
+        sliderLabel.setLayoutX(SLIDER_SETX);
+        sliderLabel.setLayoutY(SLIDER_SETY);
         myRoot.getChildren().add(sliderLabel);
         sliderLabel.setLabelFor(speed);
 
