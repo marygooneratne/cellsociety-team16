@@ -10,14 +10,6 @@ public class GameOfLifeCell extends Cell {
       super();
    }
 
-   public GameOfLifeCell(CellState initialState) {
-      super(initialState);
-   }
-
-   public GameOfLifeCell(CellState initialState, int r, int c){
-      super(initialState, r, c);
-   }
-
 
    public void updateNextState() {
       int populated = 0;
