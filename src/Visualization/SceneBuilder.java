@@ -125,14 +125,14 @@ public class SceneBuilder extends Application {
     private Group makeGrid (int cellSize){
         Group newGroup = new Group();
         //build grid
-        for (int i = 0; i < myGridSize; i++) {
-            for (int j = 0; j < myGridSize; j++) {
-                SquareCell newCell = this.getCellShape(i,j);
+        for (int r = 0; r < myGridSize; r++) {
+            for (int c = 0; c < myGridSize; c++) {
+                SquareCell newCell = ImageBuilder.getImage(this.myCells.get(r).get(c));
 //                newCell.setX(i*this.cellSize);
 //                newCell.setY(j*this.cellSize);
 //                newCell.setWidth(this.cellSize);
 //                newCell.setHeight(this.cellSize);
-                myGrid[i][j] = makeCell(newCell,i,j);
+                myGrid[r][c] = makeCell(newCell,r,c);
 
                 newGroup.getChildren().add(newCell);
             }
@@ -142,14 +142,14 @@ public class SceneBuilder extends Application {
 
     private void updateGrid(){
         this.myGridRoot.getChildren().removeAll();
-        for (int i=0; i< myGridSize; i++){
-            for (int j=0; j<myGridSize; j++){
-                    SquareCell newCell = this.getCellShape(i,j);
+        for (int r=0; r< myGridSize; r++){
+            for (int c=0; c<myGridSize; c++){
+                    SquareCell newCell = ImageBuilder.getImage(this.myCells.get(r).get(c));
 //                    newCell.setX(i*this.cellSize);
 //                    newCell.setY(j*this.cellSize);
 //                    newCell.setWidth(this.cellSize);
 //                    newCell.setHeight(this.cellSize);
-                    myGrid[i][j] = makeCell(newCell,i,j);
+                    myGrid[r][c] = makeCell(newCell,r,c);
                     this.myGridRoot.getChildren().add(newCell);
             }
         }
@@ -205,47 +205,6 @@ public class SceneBuilder extends Application {
         this.myCells = grid.getCellList();
     }
 
-    public SquareCell getCellShape(int r, int c){
-        Cell cell = this.myCells.get(r).get(c);
-        if(cell.getCurrentState() == CellState.POPULATED){
-            return new PopulatedCell();
-        }
-        else if(cell.getCurrentState() == CellState.UNPOPULATED){
-            return new UnpopulatedCell();
-        }
-        else if(cell.getCurrentState() == CellState.PERCOLATED){
-            return new PercolatedCell();
-        }
-        else if(cell.getCurrentState() == CellState.OPEN){
-            return new OpenCell();
-        }
-        else if(cell.getCurrentState() == CellState.BLOCKED){
-            return new BlockedCell();
-        }
-        else if(cell.getCurrentState() == CellState.BLUE){
-            return new BlueCell();
-        }
-        else if(cell.getCurrentState() == CellState.RED){
-            return new RedCell();
-        }
-        else if(cell.getCurrentState() == CellState.BURNING){
-            return new BurningCell();
-        }
-        else if(cell.getCurrentState() == CellState.TREE){
-            return new TreeCell();
-        }
-        else if(cell.getCurrentState() == CellState.FISH){
-            return new FishCell();
-        }
-        else if(cell.getCurrentState() == CellState.SHARK){
-            return new SharkCell();
-        }
-        else{
-            return new EmptyCell();
-        }
-
-
-    }
 
 
     /**
