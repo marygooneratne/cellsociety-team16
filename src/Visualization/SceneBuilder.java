@@ -35,11 +35,6 @@ import java.util.ArrayList;
 public class SceneBuilder extends Application {
     private static String UPLOAD_FILE = "./resources/WatorWorld";
 
-    private static int WIDTH = 400;
-    private static int HEIGHT = 600;
-    private static int GRID_DIM = 400;
-    private static Paint BACKGROUND = Color.LIGHTSLATEGRAY;
-
     //things that will be read in
     private int myGridSize;
     private int myFramesPerS = 1; // --> as this increases, the sim runs faster
@@ -58,6 +53,7 @@ public class SceneBuilder extends Application {
 
     private int cellSize;
 
+    private ModelBuilder model;
     private CellGrid cellGrid;
     private ArrayList<ArrayList<Cell>> myCells;
     private Timeline myAnimation;
@@ -82,12 +78,10 @@ public class SceneBuilder extends Application {
 
     /** initial simulation with grid and buttons*/
     private Scene setupSim(int width, int height, Paint bg) {
-        this.modelFromFile();
-        myGridSize = cellGrid.getRows();
+        this.model = new ModelBuilder(UPLOAD_FILE);
         // BorderPane Layout
         BorderPane window = new BorderPane();
         // create group for grid and add to window
-        this.cellSize = width/myGridSize;
         myGridRoot = makeGrid(cellSize);
         window.setTop(myGridRoot);
 
@@ -114,37 +108,14 @@ public class SceneBuilder extends Application {
         myCycle.set(myCycle.get() + 1);
         cycle.textProperty().bind(Bindings.createStringBinding(() -> (CYCLE_LABEL + myCycle.get())));
     }
-    private SquareCell makeCell(SquareCell myCell, int i, int j){
-        myCell.setX(i*this.cellSize);
-        myCell.setY(j*this.cellSize);
-        myCell.setWidth(this.cellSize);
-        myCell.setHeight(this.cellSize);
-        return myCell;
-    }
-    /**Construct the myGridSize x myGridSize grid for the cells to inhabit*/
-    private Group makeGrid (int cellSize){
-        Group newGroup = new Group();
-        //build grid
-        for (int r = 0; r < myGridSize; r++) {
-            for (int c = 0; c < myGridSize; c++) {
-                SquareCell newCell = ImageBuilder.getImage(this.myCells.get(r).get(c));
-//                newCell.setX(i*this.cellSize);
-//                newCell.setY(j*this.cellSize);
-//                newCell.setWidth(this.cellSize);
-//                newCell.setHeight(this.cellSize);
-                myGrid[r][c] = makeCell(newCell,r,c);
 
-                newGroup.getChildren().add(newCell);
-            }
-        }
-        return newGroup;
-    }
+    /**Construct the myGridSize x myGridSize grid for the cells to inhabit*/
 
     private void updateGrid(){
         this.myGridRoot.getChildren().removeAll();
         for (int r=0; r< myGridSize; r++){
             for (int c=0; c<myGridSize; c++){
-                    SquareCell newCell = ImageBuilder.getImage(this.myCells.get(r).get(c));
+                    SquareCell newCell = CellBuilder.getImage(this.myCells.get(r).get(c));
 //                    newCell.setX(i*this.cellSize);
 //                    newCell.setY(j*this.cellSize);
 //                    newCell.setWidth(this.cellSize);
@@ -155,55 +126,6 @@ public class SceneBuilder extends Application {
         }
     }
 
-    private void modelFromFile(){
-        this.myParser = new GeneralParse();
-        myParser.startParse(UPLOAD_FILE);
-        if(myParser.getTypeSimulation().equals("GameOfLife")){
-            this.setGOL();
-        }
-        else if(myParser.getTypeSimulation().equals("Percolation")){
-            this.setPercolation();
-        }
-        else if(myParser.getTypeSimulation().equals("Segregation")){
-            this.setSegregation();
-        }
-        else if(myParser.getTypeSimulation().equals("SpreadingFire")){
-            this.setFire();
-        }
-        else{
-            this.setWaTor();
-        }
-
-
-    }
-    private void setWaTor(){
-        WaTorGrid grid = new WaTorGrid(myParser.getRows(), myParser.getColumns(), myParser.getProbEmpty(),myParser.getProbFish(), myParser.getFishTime(), myParser.getSharkTime(), myParser.getStarveTime());
-        this.cellGrid = grid;
-        this.myCells = grid.getCellList();
-    }
-    private void setSegregation(){
-        SegregationGrid grid = new SegregationGrid(myParser.getRows(), myParser.getColumns(), myParser.getThresh(), myParser.getProbEmptSeg(), myParser.getProbRed());
-        this.cellGrid = grid;
-        this.myCells = grid.getCellList();
-    }
-
-    private void setFire(){
-        SpreadingOfFireGrid grid = new SpreadingOfFireGrid(myParser.getRows(), myParser.getColumns(), myParser.getFireProb(), myParser.getNumTree(), myParser.getNumBurn());
-        this.cellGrid = grid;
-        this.myCells = grid.getCellList();
-    }
-
-    private void setGOL(){
-        GameOfLifeGrid grid = new GameOfLifeGrid(myParser.getRows(), myParser.getColumns(), myParser.getGOFPercFireprob());
-        this.cellGrid = grid;
-        this.myCells = grid.getCellList();
-    }
-
-    private void setPercolation(){
-        PercolationGrid grid = new PercolationGrid(myParser.getRows(), myParser.getColumns(), myParser.getPercProb(), myParser.getNumPerc());
-        this.cellGrid = grid;
-        this.myCells = grid.getCellList();
-    }
 
 
 

@@ -14,7 +14,7 @@ import Visualization.WaTorWorld.SharkCell;
 import simulation.Cell;
 import simulation.CellState;
 
-public class ImageBuilder {
+public class CellBuilder {
 
    public static SquareCell getImage(Cell cell){
       if(cell.getCurrentState() == CellState.POPULATED){
@@ -54,4 +54,5 @@ public class ImageBuilder {
             return new EmptyCell();
          }
    }
+
 }
