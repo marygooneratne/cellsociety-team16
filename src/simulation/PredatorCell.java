@@ -14,6 +14,22 @@ public class PredatorCell extends Cell{
       super();
       this.setBreedTime(INITIAL_BREED_TIME);
       this.resetUntilBreed();
+   }
+
+   public PredatorCell(CellState initState){
+      super(initState);
+      this.moveCell = null;
+   }
+
+   public PredatorCell(CellState initState, int r, int c){
+      super(initState, r, c);
+      this.moveCell = null;
+   }
+
+   public PredatorCell(CellState initState, int r, int c, int initUntilBreed){
+      super(initState, r, c);
+      this.setBreedTime(initUntilBreed);
+      this.resetUntilBreed();
       this.moveCell = null;
    }
 
@@ -46,19 +62,16 @@ public class PredatorCell extends Cell{
       return this.moveCell;
    }
 
-   public PredatorCell setMoveCell(Cell newMoveCell){
+   public void setMoveCell(Cell newMoveCell){
       this.moveCell = newMoveCell;
-      return this;
    }
 
-   public PredatorCell setUntilBreed(int initUntilBreed){
+   public void setUntilBreed(int initUntilBreed){
       this.untilBreed = initUntilBreed;
-      return this;
    }
 
-   public PredatorCell setBreedTime(int initBreedTime){
+   public void setBreedTime(int initBreedTime){
       this.breedTime = initBreedTime;
-      return this;
    }
 
    public int getBreedTime(){
@@ -67,6 +80,10 @@ public class PredatorCell extends Cell{
 
    public void decreaseUntilBreed(){
       this.untilBreed--;
+   }
+
+   public void updateNextState() {
+      this.setNextState(this.getCurrentState());
    }
 
    public boolean canBreed(){
