@@ -13,36 +13,38 @@ public abstract class Cell {
       this.currentNeighbors = new ArrayList<Cell>();
    }
 
-   public void setInitialState(CellState initial){
-      this.currentState = initial;
+   public Cell(CellState initialState) {
+      this.currentNeighbors = new ArrayList<Cell>();
+      this.currentState = initialState;
    }
 
+   public Cell(CellState initialState, int r, int c){
+      this.currentNeighbors = new ArrayList<Cell>();
+      this.currentState = initialState;
+      this.row = r;
+      this.column = c;
+   }
    public void emptyNeighbors(){
       this.currentNeighbors.removeAll(this.currentNeighbors);
    }
-   public Cell setCurrentState(CellState newState) {
+   public void setCurrentState(CellState newState) {
       this.currentState = newState;
-      return this;
    }
 
-   public Cell setNextState(CellState newState) {
+   public void setNextState(CellState newState) {
       this.nextState = newState;
-      return this;
    }
 
-   public Cell setCurrentNeighbors(ArrayList<Cell> newNeighbors) {
+   public void setCurrentNeighbors(ArrayList<Cell> newNeighbors) {
       this.currentNeighbors = newNeighbors;
-      return this;
    }
 
-   public Cell setRow(int newRow) {
+   public void setRow(int newRow) {
       this.row = newRow;
-      return this;
    }
 
-   public Cell setColumn(int newColumn) {
+   public void setColumn(int newColumn) {
       this.column = newColumn;
-      return this;
    }
 
    public CellState getCurrentState() {

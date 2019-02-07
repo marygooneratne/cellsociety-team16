@@ -10,6 +10,18 @@ public class FishCell extends PredatorCell{
       super();
    }
 
+   public FishCell(CellState initState){
+      super(initState);
+   }
+
+   public FishCell(CellState initState, int r, int c){
+      super(initState, r, c);
+   }
+
+   public FishCell(CellState initState, int r, int c, int initUntilBreed){
+      super(initState, r, c, initUntilBreed);
+   }
+
    public void updateNextState(){
       this.decreaseUntilBreed();
       this.updateAvailableEmpty();
@@ -23,7 +35,9 @@ public class FishCell extends PredatorCell{
       int index = (int) (this.getAvailableEmpty().size() * Math.random());
       int row = this.getAvailableEmpty().get(index).getRow();
       int col = this.getAvailableEmpty().get(index).getColumn();
-      Cell movingFish = new FishCell().setBreedTime(this.getBreedTime()).setCurrentState(CellState.FISH).setRow(row).setColumn(col);
+      FishCell movingFish = new FishCell(CellState.FISH, row, col, this.getBreedTime());
+      movingFish.setUntilBreed(this.getUntilBreed());
+      movingFish.setNextState(CellState.FISH);
       this.setMoveCell(movingFish);
       this.die();
    }
