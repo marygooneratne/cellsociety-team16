@@ -67,26 +67,27 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-public class WatorWorldParser extends XMLparser{
+public class WatorWorldParser extends Parser{
     double probFish;
     double probEmpty;
     int fishTime;
     int sharkTime;
     int starveTime;
     public void parseWator(String filename,NodeList nlist) {
-        try{
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document document = builder.parse(new File(filename + ".xml"));
-            document.getDocumentElement().normalize();
-            NodeList myList=document.getElementsByTagName("probability");
+
+//            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+//            DocumentBuilder builder = factory.newDocumentBuilder();
+//            Document document = builder.parse(new File(filename + ".xml"));
+//            document.getDocumentElement().normalize();
+
+            NodeList myList=getDocument(filename).getElementsByTagName("probability");
             Node gameNode=myList.item(0);
             if(gameNode.getNodeType()==Node.ELEMENT_NODE) {
                 Element eElement = (Element) gameNode;
                 probFish =Double.parseDouble(eElement.getElementsByTagName("probFish").item(0).getTextContent());
                 probEmpty=Double.parseDouble(eElement.getElementsByTagName("probEmpty").item(0).getTextContent());
             }
-            NodeList myList1=document.getElementsByTagName("time");
+            NodeList myList1=getDocument(filename).getElementsByTagName("time");
             Node myNode=myList1.item(0);
             if(myNode.getNodeType()==Node.ELEMENT_NODE){
                 Element myElement = (Element) myNode;
@@ -94,17 +95,17 @@ public class WatorWorldParser extends XMLparser{
                 sharkTime=Integer.parseInt(myElement.getElementsByTagName("sharkTime").item(0).getTextContent());
                 starveTime=Integer.parseInt(myElement.getElementsByTagName("starveTime").item(0).getTextContent());
             }
-        }
-        catch(ParserConfigurationException e){
-            e.printStackTrace();
-        }
-        catch(SAXException e){
-            e.printStackTrace();
 
-        }
-        catch(IOException i){
-            i.printStackTrace();
-        }
+//        catch(ParserConfigurationException e){
+//            e.printStackTrace();
+//        }
+//        catch(SAXException e){
+//            e.printStackTrace();
+//
+//        }
+//        catch(IOException i){
+//            i.printStackTrace();
+//        }
 //        Node watorNode = nlist.item(1);
 //        if(watorNode.getNodeType()==Node.ELEMENT_NODE){
 //            Element myEl=(Element) watorNode;

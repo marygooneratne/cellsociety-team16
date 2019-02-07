@@ -55,18 +55,19 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-public class SegregationParser extends XMLparser{
+public class SegregationParser extends Parser{
     double probEmpty;
     double probRed;
     double thresh;
 
     public void segParse(String filename, NodeList nlist){
-        try{
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document document = builder.parse(new File(filename + ".xml"));
-            document.getDocumentElement().normalize();
-            NodeList myList=document.getElementsByTagName("probability");
+
+//            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+//            DocumentBuilder builder = factory.newDocumentBuilder();
+//            Document document = builder.parse(new File(filename + ".xml"));
+//            document.getDocumentElement().normalize();
+
+            NodeList myList=getDocument(filename).getElementsByTagName("probability");
             Node gameNode=myList.item(0);
             if(gameNode.getNodeType()==Node.ELEMENT_NODE) {
                 Element eElement = (Element) gameNode;
@@ -74,17 +75,17 @@ public class SegregationParser extends XMLparser{
                 probEmpty = Double.parseDouble(eElement.getElementsByTagName("probEmpty").item(0).getTextContent());
                 thresh=Double.parseDouble(eElement.getElementsByTagName("threshold").item(0).getTextContent());
             }
-        }
-        catch(ParserConfigurationException e){
-            e.printStackTrace();
-        }
-        catch(SAXException e){
-            e.printStackTrace();
 
-        }
-        catch(IOException i){
-            i.printStackTrace();
-        }
+//        catch(ParserConfigurationException e){
+//            e.printStackTrace();
+//        }
+//        catch(SAXException e){
+//            e.printStackTrace();
+//
+//        }
+//        catch(IOException i){
+//            i.printStackTrace();
+//        }
 //        Node segNode = nlist.item(1);
 //        if(segNode.getNodeType()==Node.ELEMENT_NODE){
 //            Element myEl= (Element) segNode;
