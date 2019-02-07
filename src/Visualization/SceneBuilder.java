@@ -33,7 +33,7 @@ import java.util.ArrayList;
 
 
 public class SceneBuilder extends Application {
-    private static String UPLOAD_FILE = "./resources/Segregation";
+    private static String UPLOAD_FILE = "./resources/WatorWorld";
 
     private static int WIDTH = 400;
     private static int HEIGHT = 600;
@@ -111,7 +111,13 @@ public class SceneBuilder extends Application {
         myCycle.set(myCycle.get() + 1);
         cycle.textProperty().bind(Bindings.createStringBinding(() -> (CYCLE_LABEL + myCycle.get())));
     }
-
+    private SquareCell makeCell(SquareCell myCell, int i, int j){
+        myCell.setX(i*this.cellSize);
+        myCell.setY(j*this.cellSize);
+        myCell.setWidth(this.cellSize);
+        myCell.setHeight(this.cellSize);
+        return myCell;
+    }
     /**Construct the myGridSize x myGridSize grid for the cells to inhabit*/
     private Group makeGrid (int cellSize){
         Group newGroup = new Group();
@@ -119,11 +125,12 @@ public class SceneBuilder extends Application {
         for (int i = 0; i < myGridSize; i++) {
             for (int j = 0; j < myGridSize; j++) {
                 SquareCell newCell = this.getCellShape(i,j);
-                newCell.setX(i*this.cellSize);
-                newCell.setY(j*this.cellSize);
-                newCell.setWidth(this.cellSize);
-                newCell.setHeight(this.cellSize);
-                myGrid[i][j] = newCell;
+//                newCell.setX(i*this.cellSize);
+//                newCell.setY(j*this.cellSize);
+//                newCell.setWidth(this.cellSize);
+//                newCell.setHeight(this.cellSize);
+                myGrid[i][j] = makeCell(newCell,i,j);
+
                 newGroup.getChildren().add(newCell);
             }
         }
@@ -135,11 +142,11 @@ public class SceneBuilder extends Application {
         for (int i=0; i< myGridSize; i++){
             for (int j=0; j<myGridSize; j++){
                     SquareCell newCell = this.getCellShape(i,j);
-                    newCell.setX(i*this.cellSize);
-                    newCell.setY(j*this.cellSize);
-                    newCell.setWidth(this.cellSize);
-                    newCell.setHeight(this.cellSize);
-                    myGrid[i][j] = newCell;
+//                    newCell.setX(i*this.cellSize);
+//                    newCell.setY(j*this.cellSize);
+//                    newCell.setWidth(this.cellSize);
+//                    newCell.setHeight(this.cellSize);
+                    myGrid[i][j] = makeCell(newCell,i,j);
                     this.myGridRoot.getChildren().add(newCell);
             }
         }
