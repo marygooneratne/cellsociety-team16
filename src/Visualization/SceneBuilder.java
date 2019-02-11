@@ -35,6 +35,11 @@ import java.util.ArrayList;
 public class SceneBuilder extends Application {
     private static String UPLOAD_FILE = "./resources/WatorWorld";
 
+    private static int WIDTH = 400;
+    private static int HEIGHT = 600;
+    private static int GRID_DIM = 400;
+    private static Paint BACKGROUND = Color.LIGHTSLATEGRAY;
+
     //things that will be read in
     private int myGridSize;
     private int myFramesPerS = 1; // --> as this increases, the sim runs faster
@@ -79,13 +84,10 @@ public class SceneBuilder extends Application {
     /** initial simulation with grid and buttons*/
     private Scene setupSim(int width, int height, Paint bg) {
         this.model = new ModelBuilder(UPLOAD_FILE);
-        // BorderPane Layout
+        this.myGridRoot = model.getRoot();
         BorderPane window = new BorderPane();
-        // create group for grid and add to window
-        myGridRoot = makeGrid(cellSize);
         window.setTop(myGridRoot);
 
-        // options region of the UI
         Group options = new BuildOptions(new Group(), myAnimation, myFramesPerS).getRoot();
 
         myCycleInfo = new Text();
@@ -101,33 +103,10 @@ public class SceneBuilder extends Application {
     }
 
     private void step (double elapsedTime, Text cycle){
-        // cross reference the grid positions
-        this.cellGrid.step();
-        this.myCells = this.cellGrid.getCellList();
-        this.updateGrid();
+        this.model.step();
         myCycle.set(myCycle.get() + 1);
         cycle.textProperty().bind(Bindings.createStringBinding(() -> (CYCLE_LABEL + myCycle.get())));
     }
-
-    /**Construct the myGridSize x myGridSize grid for the cells to inhabit*/
-
-    private void updateGrid(){
-        this.myGridRoot.getChildren().removeAll();
-        for (int r=0; r< myGridSize; r++){
-            for (int c=0; c<myGridSize; c++){
-                    SquareCell newCell = CellBuilder.getImage(this.myCells.get(r).get(c));
-//                    newCell.setX(i*this.cellSize);
-//                    newCell.setY(j*this.cellSize);
-//                    newCell.setWidth(this.cellSize);
-//                    newCell.setHeight(this.cellSize);
-                    myGrid[r][c] = makeCell(newCell,r,c);
-                    this.myGridRoot.getChildren().add(newCell);
-            }
-        }
-    }
-
-
-
 
     /**
      * Start the program

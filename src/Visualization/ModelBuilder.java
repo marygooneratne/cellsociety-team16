@@ -17,8 +17,7 @@ public class ModelBuilder {
    private String fileName;
    private GeneralParse myParser;
    private CellGrid cellGrid;
-   private ArrayList<ArrayList<Cell>> cellsAsList;
-   private Cell[][] cellsAsArray;
+   private ArrayList<ArrayList<Cell>> cellList;
    private SquareCell[][] nodeArray;
    private Group nodeGroup;
    private int myGridSize;
@@ -27,9 +26,12 @@ public class ModelBuilder {
    ModelBuilder(String fileName){
       this.fileName = fileName;
       this.parseFile();
-      this.cellsAsList = cellGrid.getCellList();
+      this.cellList = cellGrid.getCellList();
       this.myGridSize = this.cellGrid.getRows();
       this.cellSize = WIDTH/myGridSize;
+      this.nodeArray = new SquareCell[this.myGridSize][this.myGridSize];
+      this.nodeGroup = new Group();
+      this.updateNodes();
    }
 
    public void parseFile(){
@@ -77,24 +79,33 @@ public class ModelBuilder {
       this.cellGrid = grid;
    }
 
-   private Group makeGrid (){
-      Group newGroup = new Group();
+   public Group updateNodes(){
       for (int r = 0; r < myGridSize; r++) {
          for (int c = 0; c < myGridSize; c++) {
-            SquareCell newCell = CellBuilder.getImage(this.cellsAsList.get(r).get(c));
-            cellsAsArray[r][c] = positionCell(newCell,r,c);
-
-            newGroup.getChildren().add(newCell);
+            SquareCell newCell = CellBuilder.getImage(this.cellList.get(r).get(c));
+            this.nodeArray[r][c] = positionCell(newCell,r,c);
+            this.nodeGroup.getChildren().add(newCell);
          }
       }
-      return newGroup;
+      return this.nodeGroup;
    }
 
-   private Cell positionCell(SquareCell myCell, int r, int c){
+   private SquareCell positionCell(SquareCell myCell, int r, int c){
       myCell.setX(r*this.cellSize);
       myCell.setY(c*this.cellSize);
       myCell.setWidth(this.cellSize);
       myCell.setHeight(this.cellSize);
       return myCell;
    }
+
+   public void step(){
+      this.cellGrid.step();
+      this.cellList = this.cellGrid.getCellList();
+      this.updateNodes();
+   }
+
+   public Group getRoot(){
+      return this.nodeGroup;
+   }
+
 }
