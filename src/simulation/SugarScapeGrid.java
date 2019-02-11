@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class SugarScapeGrid extends CellGrid {
    private final static int INIT_AGENTS = 50;
    private final static int GROW_BACK_RATE = 4;
-   private final static int GROW_BACK_INTERVAL = 1;
+   private final static int GROW_BACK_INTERVAL = 2;
 
    private int growBackRate;
    private int growBackInterval;
@@ -16,6 +16,7 @@ public class SugarScapeGrid extends CellGrid {
       super(initRows, initCols);
       this.setGrowBackRate(GROW_BACK_RATE);
       this.setGrowBackInterval(GROW_BACK_INTERVAL);
+      this.setNumAgents(INIT_AGENTS);
       this.initialize();
    }
 
@@ -42,7 +43,7 @@ public class SugarScapeGrid extends CellGrid {
    public void initialize(){
       this.intervalTime = 0;
       for(int r = 0; r < this.getRows(); r++){
-         ArrayList<Cell> row = new ArrayList<Cell>();
+         ArrayList<Cell> row = new ArrayList<>();
          for(int c = 0; c < this.getColumns(); c++){
             SugarCell sugarCell = new SugarCell(CellState.SUGAR, r, c);
             row.add(sugarCell);
@@ -83,93 +84,44 @@ public class SugarScapeGrid extends CellGrid {
                   int col = moveCell.getColumn();
                   this.getCellList().get(row).set(col, moveCell);
                   c = new SugarCell(CellState.SUGAR, curRow, curCol);
-                  ((SugarCell)(c)).setNextState(CellState.SUGAR);
                   ((SugarCell)(c)).noSugar();
+                  c.setNextState(CellState.SUGAR);
+               }
+               else{
+                  c.setNextState(CellState.AGENT);
                }
             }
          }
       }
    }
-   /*
 
-
-
-   public void updateCellNextStates(){
+   public void updateCellNeighbors(){
       for(ArrayList<Cell> row: this.getCellList()){
-         for(Cell c: row){
-            if(c.getNextState() == null){
-               c.updateNextState();
-               if(((PredatorCell)(c)).hasMoveCell()){
-                  Cell moveCell =((PredatorCell)(c)).getMoveCell();
-                  int r = moveCell.getRow();
-                  int col = moveCell.getColumn();
-                  if(moveCell instanceof FishCell){
-                     FishCell newCell = new FishCell();
-                     newCell.setCurrentState(moveCell.getCurrentState());
-                     newCell.setNextState(moveCell.getNextState());
-                     newCell.setRow(r);
-                     newCell.setColumn(col);
-                     newCell.setBreedTime(this.fishTime);
-                     newCell.setUntilBreed(((FishCell)(moveCell)).getUntilBreed());
-                     this.getCellList().get(r).set(col, newCell);
+         for(Cell cell: row){
+            if(cell instanceof AgentCell){
+               ArrayList<Cell> neighbors = new ArrayList<>();
+               int r = cell.getRow();
+               int c = cell.getColumn();
+               for(int i = 1; i <= ((AgentCell)(cell)).getVision(); i++){
+                  if(this.isValidPos(r+i, c)){
+                     neighbors.add(this.getCellList().get(r+i).get(c));
                   }
-                  else if(moveCell instanceof SharkCell){
-                     SharkCell newCell = new SharkCell();
-                     newCell.setCurrentState(moveCell.getCurrentState());
-                     newCell.setNextState(moveCell.getNextState());
-                     newCell.setRow(r);
-                     newCell.setColumn(col);
-                     newCell.setBreedTime(this.sharkTime);
-                     newCell.setStarveTime(this.starveTime);
-                     newCell.setUntilBreed(((SharkCell)(moveCell)).getUntilBreed());
-                     newCell.setUntilStarve(((SharkCell)(moveCell)).getUntilStarve());
-                     this.getCellList().get(r).set(col, newCell);
+                  if(this.isValidPos(r-i, c)){
+                     neighbors.add(this.getCellList().get(r-i).get(c));
                   }
-                  this.getCellList().get(r).set(col, moveCell);
-                  ((PredatorCell)(c)).setMoveCell(null);
-               }
-
-            }
-         }
-      }
-      for(ArrayList<Cell> row: this.getCellList()){
-         for(Cell c: row){
-            if(c.getNextState() == null && c.getCurrentState() == CellState.EMPTY){
-               c.setNextState(CellState.EMPTY);
+                  if(this.isValidPos(r, c+i)){
+                     neighbors.add(this.getCellList().get(r).get(c+i));
+                  }
+                  if(this.isValidPos(r, c-i)){
+                     neighbors.add(this.getCellList().get(r+i).get(c-i));
+                  }
                }
             }
          }
       }
-   public void updateCellNeighbors() {
-      for (int r = 0; r < this.getCellList().size(); r++) {
-         ArrayList<Cell> row = this.getCellList().get(r);
-         for (int c = 0; c < row.size(); c++) {
-            Cell cell = this.getCellList().get(r).get(c);
-            cell.emptyNeighbors();
-            if (c > 0) {
-               cell.addNeighbor(row.get(c - 1));
-            }
-            else{
-               cell.addNeighbor(row.get(this.getColumns()-1));
-            }
-            if (c < row.size() - 1) {
-               cell.addNeighbor(row.get(c+1));
-            }
-            else{
-               cell.addNeighbor(row.get(0));
-            }
-            if (r > 0) {
-               cell.addNeighbor(this.getCellList().get(r - 1).get(c));
-            }
-            else{
-               cell.addNeighbor(this.getCellList().get(this.getRows()-1).get(c));
-            }
-            if (r < this.getCellList().size() - 1) {
-               cell.addNeighbor(this.getCellList().get(r + 1).get(c));
-            }
-            else{
-               cell.addNeighbor(this.getCellList().get(0).get(c));
-            }
-         }
-      }*/
+   }
+
+   private boolean isValidPos(int r, int c){
+      return r < this.getRows() && c < this.getColumns();
+   }
 }

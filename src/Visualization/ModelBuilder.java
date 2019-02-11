@@ -49,6 +49,9 @@ public class ModelBuilder {
       else if(myParser.getTypeSimulation().equals("SpreadingFire")){
          this.setFire();
       }
+      else if(myParser.getTypeSimulation().equals("SugarScape")){
+         this.setSugarScape();
+      }
       else{
          this.setWaTor();
       }
@@ -77,6 +80,10 @@ public class ModelBuilder {
    private void setPercolation(){
       PercolationGrid grid = new PercolationGrid(myParser.getRows(), myParser.getColumns(), myParser.getPercProb(), myParser.getNumPerc());
       this.cellGrid = grid;
+   }
+
+   private void setSugarScape(){
+      SugarScapeGrid grid = new SugarScapeGrid(myParser.getRows(), myParser.getColumns());
    }
 
    public Group updateNodes(){

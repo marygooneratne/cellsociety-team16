@@ -9,8 +9,11 @@ import Visualization.Segregation.RedCell;
 import Visualization.SpreadingFire.BurningCell;
 import Visualization.SpreadingFire.EmptyCell;
 import Visualization.SpreadingFire.TreeCell;
+import Visualization.SugarScape.AgentCell;
 import Visualization.WaTorWorld.FishCell;
 import Visualization.WaTorWorld.SharkCell;
+import Visualization.SugarScape.SugarSquareCell;
+import simulation.SugarCell;
 import simulation.Cell;
 import simulation.CellState;
 
@@ -50,6 +53,12 @@ public class CellBuilder {
          else if(cell.getCurrentState() == CellState.SHARK){
             return new SharkCell();
          }
+         else if(cell.getCurrentState() == CellState.SUGAR){
+            return new SugarSquareCell(((SugarCell)(cell)).getSugar());
+         }
+         else if(cell.getCurrentState() == CellState.AGENT){
+            return new AgentCell();
+      }
          else{
             return new EmptyCell();
          }

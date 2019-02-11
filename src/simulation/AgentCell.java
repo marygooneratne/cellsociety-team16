@@ -4,7 +4,7 @@ public class AgentCell extends Cell {
    private static int SUGAR_MIN = 5;
    private static int SUGAR_MAX = 25;
    private static int VISION_MIN = 1;
-   private static int VISION_MAX = 6;
+   private static int VISION_MAX = 10;
    private static int METAB_MIN = 1;
    private static int METAB_MAX = 4;
 
@@ -72,6 +72,10 @@ public class AgentCell extends Cell {
       if (sugar <= 0) {
          this.setNextState(CellState.EMPTY);
       }
+   }
+
+   public int getVision(){
+      return this.vision;
    }
 
    private AgentCell findMoveCell() {
