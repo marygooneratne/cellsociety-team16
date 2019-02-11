@@ -18,6 +18,7 @@ public class GeneralParse {
     private String typeSimulation;
     private int numPerc;
     private double percProb;
+    private int numAgents;
 
     public void startParse(String filename){
         XMLparser myParser = new XMLparser();
@@ -78,6 +79,11 @@ public class GeneralParse {
             probEmptSeg = segParse.getProbEmpty();
 
         }
+        else if(this.typeSimulation.equals("SugarScape")){
+            SugarParser sugarParse = new SugarParser();
+            sugarParse.parseSugar(filename);
+            numAgents=sugarParse.getNumAgents();
+        }
     }
     public int getRows(){
         return rows;
@@ -132,7 +138,10 @@ public class GeneralParse {
     public double getThresh(){
         return thresh;
     }
-
+    //for SugarScape
+    public int getNumAgents(){
+        return numAgents;
+    }
     public String getTypeSimulation(){
         return this.typeSimulation;
     }
