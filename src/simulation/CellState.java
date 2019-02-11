@@ -10,5 +10,7 @@ public enum CellState{
     //Segregation, also uses EMPTY
     RED, BLUE,
     //WaTor, also uses EMPTY
-    SHARK, FISH
+    SHARK, FISH,
+    //SugarScape
+    SUGAR, AGENT
 }
