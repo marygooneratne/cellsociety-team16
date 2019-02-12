@@ -1,0 +1,17 @@
+<?xml version= "1.0" encoding = "UTF-8"?>
+<config>
+    <Simulation>
+        <type>SugarScape</type>
+        <title>SugarScape</title>
+        <author>Hyunjae Lee</author>
+        <rows>50</rows>
+        <columns>50</columns>
+    </Simulation>
+
+
+    <probability>
+        <numAgents>25</numAgents>
+    </probability>
+
+
+</config>

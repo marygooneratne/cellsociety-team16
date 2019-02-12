@@ -78,6 +78,7 @@ public class ModelBuilder {
       else if(myParser.getTypeSimulation().equals("SugarScape")){
          this.setSugarScape();
       }
+
       else{
          this.setWaTor();
       }
@@ -125,7 +126,8 @@ public class ModelBuilder {
    }
 
    private void setSugarScape(){
-      SugarScapeGrid grid = new SugarScapeGrid(myParser.getRows(), myParser.getColumns());
+
+      SugarScapeGrid grid = new SugarScapeGrid(myParser.getRows(), myParser.getColumns(), myParser.getNumAgents());
    }
 
    public void updateNodes(){
