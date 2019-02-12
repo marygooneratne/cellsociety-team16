@@ -38,6 +38,7 @@ public class AgentCell extends Cell {
    public void updateNextState() {
       this.moveCell = this.findMoveCell();
       if (moveCell != null) {
+         System.out.println("null");
          this.moveCell.decreaseSugar();
          this.moveCell.die();
          this.setNextState(CellState.EMPTY);
@@ -83,11 +84,12 @@ public class AgentCell extends Cell {
       SugarCell eatCell = new SugarCell();
       for (Cell c : this.getCurrentNeighbors()) {
          if (c instanceof SugarCell && ((SugarCell) (c)).getSugar() > max) {
-            eatCell = (SugarCell) c;
+            eatCell = (SugarCell)(c);
          }
       }
       int r = eatCell.getRow();
       int c = eatCell.getRow();
+      System.out.println(r);
       AgentCell moveCell = new AgentCell(this.getCurrentState(), r, c);
       moveCell.setSugar(this.sugar);
       moveCell.setVision(this.vision);

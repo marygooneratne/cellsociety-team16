@@ -46,24 +46,15 @@ public class SceneBuilder extends Application {
     private static Paint BACKGROUND = Color.LIGHTSLATEGRAY;
 
 
-    private int myFramesPerS = 1; // --> as this increases, the sim runs faster
-    private int myDelayMS =  MILLI_TO_SEC_CONVERT/myFramesPerS ; // seconds --> *1000 for ms
-    private int myDelayS = 1/myFramesPerS;
+    private int myFramesPerS = 1;
+    private int myDelayMS =  MILLI_TO_SEC_CONVERT/myFramesPerS ;
     private static String TITLE = "Cellular Automata";
     private static final int CYCLE_SETX = 200;
     private static final int MILLI_TO_SEC_CONVERT=1000;
 
-    private Scene myScene;
-    private LongProperty myCycle = new SimpleLongProperty(0);
-    private static String CYCLE_LABEL = "CYCLE: ";
-    private Group myGridRoot;
-    private Text myCycleInfo;
-
-
 
     private ModelBuilder model;
     private Timeline myAnimation;
-    private String uploadFile;
 
 
 
@@ -74,33 +65,13 @@ public class SceneBuilder extends Application {
        stage.setTitle(TITLE);
        stage.show();
 
-        var frame = new KeyFrame(Duration.millis(myDelayMS), e -> step(myDelayS, myCycleInfo));
-        myAnimation.setCycleCount(Timeline.INDEFINITE);
-        myAnimation.getKeyFrames().add(frame);
-        myAnimation.play();
+       var frame = new KeyFrame(Duration.millis(myDelayMS), e -> step());
+       myAnimation.setCycleCount(Timeline.INDEFINITE);
+       myAnimation.getKeyFrames().add(frame);
+       myAnimation.play();
     }
 
-    /*private Scene setupSim(int width, int height, Paint bg, Stage stage) {
-        this.model = new ModelBuilder(stage);
-        this.myGridRoot = model.getRoot();
-        BorderPane window = new BorderPane();
-        window.setTop(myGridRoot);
-
-        Group options = new BuildOptions(new Group(), myAnimation, myFramesPerS).getRoot();
-
-        myCycleInfo = new Text();
-        myCycleInfo.textProperty().bind(Bindings.createStringBinding(() -> (CYCLE_LABEL + myCycle.get())));
-        myCycleInfo.setX(CYCLE_SETX);
-        myCycleInfo.setY(0);
-        options.getChildren().add(myCycleInfo);
-
-        window.setBottom(options);
-
-        Scene scn = new Scene(window, width, height, bg);
-        return scn;
-    }*/
-
-    private void step (double elapsedTime, Text cycle){
+    private void step(){
         this.model.step();
     }
 

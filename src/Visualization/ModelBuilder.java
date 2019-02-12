@@ -126,8 +126,8 @@ public class ModelBuilder {
    }
 
    private void setSugarScape(){
-
       SugarScapeGrid grid = new SugarScapeGrid(myParser.getRows(), myParser.getColumns(), myParser.getNumAgents());
+      this.cellGrid = grid;
    }
 
    public void updateNodes(){
