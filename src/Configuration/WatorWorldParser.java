@@ -73,7 +73,7 @@ public class WatorWorldParser extends Parser{
     int fishTime;
     int sharkTime;
     int starveTime;
-    public void parseWator(String filename,NodeList nlist) {
+    public void parseWator(String filename,NodeList nlist) throws BadFileInputException{
 
 //            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 //            DocumentBuilder builder = factory.newDocumentBuilder();

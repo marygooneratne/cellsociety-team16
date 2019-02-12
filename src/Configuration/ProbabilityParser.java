@@ -18,7 +18,7 @@ import javax.xml.transform.stream.StreamResult;
 
 public class ProbabilityParser extends Parser{
     private double probPop;
-    public void parseGame(String filename,NodeList nlist) {
+    public void parseGame(String filename,NodeList nlist) throws BadFileInputException{
 
 //            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 //            DocumentBuilder builder = factory.newDocumentBuilder();

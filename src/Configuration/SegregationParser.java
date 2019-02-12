@@ -60,7 +60,7 @@ public class SegregationParser extends Parser{
     double probRed;
     double thresh;
 
-    public void segParse(String filename, NodeList nlist){
+    public void segParse(String filename, NodeList nlist) throws BadFileInputException{
 
 //            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 //            DocumentBuilder builder = factory.newDocumentBuilder();

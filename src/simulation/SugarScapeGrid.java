@@ -113,7 +113,7 @@ public class SugarScapeGrid extends CellGrid {
                      neighbors.add(this.getCellList().get(r).get(c+i));
                   }
                   if(this.isValidPos(r, c-i)){
-                     neighbors.add(this.getCellList().get(r+i).get(c-i));
+                     neighbors.add(this.getCellList().get(r).get(c-i));
                   }
                }
             }

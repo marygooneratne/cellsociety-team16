@@ -15,7 +15,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-public class XMLparser {
+public class XMLparser extends Parser{
     private int gridWidth;
     private int gridHeight;
     private String type;
@@ -30,26 +30,25 @@ public class XMLparser {
     private NodeList list;
 
 
+    public void parse(String filename) throws BadFileInputException{
+//        try {
+//            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+//            DocumentBuilder builder = factory.newDocumentBuilder();
+//            try {
+//                Document document = builder.parse(new File(filename + ".xml"));
+//                document.getDocumentElement().normalize();
+//
+//                list = document.getDocumentElement().getElementsByTagName("Simulation");
+//            }
+//            catch(SAXException e){
+//                throw new BadFileInputException("Bad File");
+//
+//            }
+//            catch(IOException i){
+//                i.printStackTrace();
+//            }
 
-    public void parse(String filename) {
-        try {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            try {
-                Document document = builder.parse(new File(filename + ".xml"));
-                document.getDocumentElement().normalize();
-
-                list = document.getDocumentElement().getElementsByTagName("Simulation");
-            }
-            catch(SAXException e){
-                e.printStackTrace();
-
-            }
-            catch(IOException i){
-                i.printStackTrace();
-            }
-
-
+            NodeList list= getDocument(filename).getDocumentElement().getElementsByTagName("Simulation");
             Node gennode = list.item(0);
             if (gennode.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) gennode;
@@ -59,10 +58,10 @@ public class XMLparser {
                 rows = Integer.parseInt(eElement.getElementsByTagName("rows").item(0).getTextContent());
                 columns = Integer.parseInt(eElement.getElementsByTagName("columns").item(0).getTextContent());
             }
-        }
-        catch(ParserConfigurationException e){
-            e.printStackTrace();
-        }
+        //}
+//        catch(ParserConfigurationException e){
+//            e.printStackTrace();
+//        }
     }
     public int getRows(){
         return rows;

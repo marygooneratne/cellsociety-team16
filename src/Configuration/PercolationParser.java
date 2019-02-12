@@ -15,20 +15,25 @@ import java.io.IOException;
 public class PercolationParser extends Parser{
     double prob;
     int numPerc;
-    public void percParse(String filename) {
+    public void percParse(String filename) throws BadFileInputException{
 
 //            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 //            DocumentBuilder builder = factory.newDocumentBuilder();
 //            Document document = builder.parse(new File(filename + ".xml"));
 //            document.getDocumentElement().normalize();
 
-            NodeList myList=getDocument(filename).getElementsByTagName("probability");
-            Node gameNode=myList.item(0);
-            if(gameNode.getNodeType()==Node.ELEMENT_NODE) {
-                Element eElement = (Element) gameNode;
-                prob =Double.parseDouble(eElement.getElementsByTagName("prob").item(0).getTextContent());
-                numPerc=Integer.parseInt(eElement.getElementsByTagName("numPerc").item(0).getTextContent());
-            }
+                NodeList myList = getDocument(filename).getElementsByTagName("probability");
+                Node gameNode = myList.item(0);
+                if (gameNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) gameNode;
+                    prob = Double.parseDouble(eElement.getElementsByTagName("prob").item(0).getTextContent());
+                    numPerc = Integer.parseInt(eElement.getElementsByTagName("numPerc").item(0).getTextContent());
+                }
+
+//            catch(BadFileInputException b) {
+//                throw new BadFileInputException("Bad");
+//            }
+
 
 //        catch(ParserConfigurationException e){
 //            e.printStackTrace();

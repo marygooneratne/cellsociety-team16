@@ -13,7 +13,7 @@ import java.io.File;
 import java.io.IOException;
 
 public abstract class Parser {
-    public Document getDocument(String filename){
+    public Document getDocument(String filename) throws BadFileInputException{
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -22,15 +22,16 @@ public abstract class Parser {
             return document;
         }
         catch(ParserConfigurationException e){
-            e.printStackTrace();
+            throw new BadFileInputException("Corrupted File");
         }
         catch(SAXException e){
-            e.printStackTrace();
+            throw new BadFileInputException("Corrupted File");
 
         }
         catch(IOException i){
-            i.printStackTrace();
+            throw new BadFileInputException("Corrupted File");
+
         }
-        return null;
+        //return null;
     }
 }
