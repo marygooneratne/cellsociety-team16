@@ -38,10 +38,12 @@ public class AgentCell extends Cell {
    public void updateNextState() {
       this.moveCell = this.findMoveCell();
       if (moveCell != null) {
-         System.out.println("null");
          this.moveCell.decreaseSugar();
          this.moveCell.die();
-         this.setNextState(CellState.EMPTY);
+         this.moveCell.setNextState(CellState.AGENT);
+      }
+      else{
+         this.setNextState(CellState.AGENT);
       }
    }
 
@@ -81,16 +83,17 @@ public class AgentCell extends Cell {
 
    private AgentCell findMoveCell() {
       int max = 0;
-      SugarCell eatCell = new SugarCell();
+      int row = 0;
+      int col = 0;
       for (Cell c : this.getCurrentNeighbors()) {
          if (c instanceof SugarCell && ((SugarCell) (c)).getSugar() > max) {
-            eatCell = (SugarCell)(c);
+            row = c.getRow();
+            col = c.getColumn();
+            max = ((SugarCell)(c)).getSugar();
          }
       }
-      int r = eatCell.getRow();
-      int c = eatCell.getRow();
-      System.out.println(r);
-      AgentCell moveCell = new AgentCell(this.getCurrentState(), r, c);
+      System.out.println("max" + max);
+      AgentCell moveCell = new AgentCell(this.getCurrentState(), row, col);
       moveCell.setSugar(this.sugar);
       moveCell.setVision(this.vision);
       moveCell.setSugarMetabolism(this.sugarMetabolism);

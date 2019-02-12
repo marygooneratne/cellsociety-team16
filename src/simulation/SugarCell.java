@@ -2,7 +2,6 @@ package simulation;
 
 public class SugarCell extends Cell {
    private static final int CAPACITY = 4;
-   private static final int GROW_RATE = 4;
 
    private int sugar;
    private int cap;
@@ -29,7 +28,7 @@ public class SugarCell extends Cell {
    }
 
    private void setSugar(){
-      this.sugar = this.cap;
+      this.sugar = (int)(Math.random()*4);
    }
 
    public void noSugar(){
@@ -49,6 +48,10 @@ public class SugarCell extends Cell {
       else {
          this.setSugar();
       }
+   }
+
+   public void updateNextState(){
+      this.setNextState(CellState.SUGAR);
    }
 
    public int getSugar(){
