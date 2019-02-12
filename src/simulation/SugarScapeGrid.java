@@ -122,6 +122,6 @@ public class SugarScapeGrid extends CellGrid {
    }
 
    private boolean isValidPos(int r, int c){
-      return r < this.getRows() && c < this.getColumns();
+      return (r > 0 && c > 0 && r < this.getRows() && c < this.getColumns());
    }
 }

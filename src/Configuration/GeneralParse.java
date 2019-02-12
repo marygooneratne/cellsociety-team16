@@ -20,7 +20,7 @@ public class GeneralParse {
     private double percProb;
     private int numAgents;
 
-    public void startParse(String filename){
+    public void startParse(String filename) throws BadFileInputException{
         XMLparser myParser = new XMLparser();
         myParser.parse(filename);
         rows=myParser.getRows();

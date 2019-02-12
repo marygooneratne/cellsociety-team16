@@ -46,17 +46,6 @@ public class BuildOptions {
             }
         });
 
-        //make slider with label
-        Slider speed = new Slider(MIN_FRAMES, MAX_FRAMES, framesPerS);
-        speed.setMajorTickUnit(TICK_MARKS);
-        speed.setShowTickMarks(true);
-        speed.setShowTickLabels(true);
-        Label sliderLabel = new Label(SPEED_LABEL);
-        sliderLabel.setLayoutX(SLIDER_SETX);
-        sliderLabel.setLayoutY(SLIDER_SETY);
-        myRoot.getChildren().add(sliderLabel);
-        sliderLabel.setLabelFor(speed);
-
 //        //something for slider
 //        speed.setBlockIncrement(1);
 //        speed.valueProperty().addListener((Observable, oldValue, newValue) ->{
@@ -68,15 +57,12 @@ public class BuildOptions {
         //add to optionsRoot to get to window
         myRoot.getChildren().add(pause);
         myRoot.getChildren().add(play);
-        myRoot.getChildren().add(speed);
 
         //define layout
         pause.setLayoutX(0);
         pause.setLayoutY(0);
         play.setLayoutX(0);
         play.setLayoutY(100);
-        speed.setLayoutX(200);
-        speed.setLayoutY(100);
     }
 
     public Group getRoot(){

@@ -3,10 +3,10 @@ package simulation;
 import Configuration.GeneralParse;
 
 public class GameOfLifeTester {
-   public static void main(String[] args){
+   public static void main(String[] args) {
 
       GeneralParse myParse = new GeneralParse();
-      myParse.startParse("GameOfLife");
+      //myParse.startParse("GameOfLife");
 
       GameOfLifeGrid testGrid = new GameOfLifeGrid(myParse.getRows(), myParse.getColumns(), myParse.getGOFPercFireprob());
 

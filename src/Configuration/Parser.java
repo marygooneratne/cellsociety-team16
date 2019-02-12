@@ -17,21 +17,21 @@ public abstract class Parser {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            Document document = builder.parse(new File(filename + ".xml"));
+            Document document = builder.parse(new File(filename));
             document.getDocumentElement().normalize();
             return document;
         }
         catch(ParserConfigurationException e){
-            throw new BadFileInputException("Corrupted File");
+            //throw new BadFileInputException("Corrupted File");
         }
         catch(SAXException e){
-            throw new BadFileInputException("Corrupted File");
+            //throw new BadFileInputException("Corrupted File");
 
         }
         catch(IOException i){
-            throw new BadFileInputException("Corrupted File");
+            //throw new BadFileInputException("Corrupted File");
 
         }
-        //return null;
+        return null;
     }
 }

@@ -16,7 +16,7 @@ public class FireParser extends Parser{
     private double prob;
     private int numTree;
     private int numBurn;
-    public void fireParse(String filename) {
+    public void fireParse(String filename) throws BadFileInputException{
 
 //            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 //            DocumentBuilder builder = factory.newDocumentBuilder();

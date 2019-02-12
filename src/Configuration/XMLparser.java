@@ -48,7 +48,29 @@ public class XMLparser extends Parser{
 //                i.printStackTrace();
 //            }
 
+
             NodeList list= getDocument(filename).getDocumentElement().getElementsByTagName("Simulation");
+
+    //public void parse(String filename) {
+//        try {
+//            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+//            DocumentBuilder builder = factory.newDocumentBuilder();
+//            try {
+//                Document document = builder.parse(new File(filename));
+//                document.getDocumentElement().normalize();
+//
+//                list = document.getDocumentElement().getElementsByTagName("Simulation");
+//            }
+//            catch(SAXException e){
+//                e.printStackTrace();
+//
+//            }
+//            catch(IOException i){
+//                i.printStackTrace();
+//            }
+//
+//
+//>>>>>>> ffc6131b824598190019ef09dfbbfebb09a9046d
             Node gennode = list.item(0);
             if (gennode.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) gennode;
