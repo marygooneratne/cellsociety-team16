@@ -68,9 +68,14 @@ public class XMLparser extends Parser{
 //            catch(IOException i){
 //                i.printStackTrace();
 //            }
-//
-//
+ //
 //>>>>>>> ffc6131b824598190019ef09dfbbfebb09a9046d
+        System.out.println(filename);
+        //if(!filename.substring(filename.indexOf("Percolation.xml")).equals("Percolation.xml")||!filename.substring(filename.indexOf("resources")).equals("SugarScape")||!filename.substring(filename.indexOf("resources")).equals("SpreadingFire")||!filename.substring(filename.indexOf("resources")).equals("WatorWorld")||!filename.substring(filename.indexOf("resources")).equals("Segregation")||!filename.substring(filename.indexOf("resources")).equals("GameOfLife")){
+        if(!(filename.substring(filename.length()-4).equals(".xml"))){
+
+            throw new BadFileInputException("Incorrect File input!!!");
+        }
             Node gennode = list.item(0);
             if (gennode.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) gennode;
@@ -80,6 +85,7 @@ public class XMLparser extends Parser{
                 rows = Integer.parseInt(eElement.getElementsByTagName("rows").item(0).getTextContent());
                 columns = Integer.parseInt(eElement.getElementsByTagName("columns").item(0).getTextContent());
             }
+
         //}
 //        catch(ParserConfigurationException e){
 //            e.printStackTrace();

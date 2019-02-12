@@ -24,10 +24,12 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import simulation.*;
+import javafx.scene.control.Alert;
 
 public class ModelBuilder {
    private static int WIDTH = 530;
-   private static int HEIGHT = 816;
+   private static int HEIGHT = 700;
+   //816
    private static int GRID_DIM = 400;
    private static Paint BACKGROUND = Color.LIGHTSLATEGRAY;
    private static String BUTTON_LABEL = "Select a configuration file";
@@ -60,28 +62,27 @@ public class ModelBuilder {
    }
 
    public void parseFile() throws BadFileInputException {
-      this.myParser = new GeneralParse();
+      try {
+         this.myParser = new GeneralParse();
 
-      System.out.println(this.fileName);
-      myParser.startParse(this.fileName);
-      if(myParser.getTypeSimulation().equals("GameOfLife")){
-         this.setGOL();
+         System.out.println(this.fileName);
+         myParser.startParse(this.fileName);
+         if (myParser.getTypeSimulation().equals("GameOfLife")) {
+            this.setGOL();
+         } else if (myParser.getTypeSimulation().equals("Percolation")) {
+            this.setPercolation();
+         } else if (myParser.getTypeSimulation().equals("Segregation")) {
+            this.setSegregation();
+         } else if (myParser.getTypeSimulation().equals("SpreadingFire")) {
+            this.setFire();
+         } else if (myParser.getTypeSimulation().equals("SugarScape")) {
+            this.setSugarScape();
+         } else {
+            this.setWaTor();
+         }
       }
-      else if(myParser.getTypeSimulation().equals("Percolation")){
-         this.setPercolation();
-      }
-      else if(myParser.getTypeSimulation().equals("Segregation")){
-         this.setSegregation();
-      }
-      else if(myParser.getTypeSimulation().equals("SpreadingFire")){
-         this.setFire();
-      }
-      else if(myParser.getTypeSimulation().equals("SugarScape")){
-         this.setSugarScape();
-      }
-
-      else{
-         this.setWaTor();
+      catch(BadFileInputException b){
+         makeAnAlert("Error!", "Bad File!", b.getExceptionMsg());
       }
    }
 
@@ -98,7 +99,7 @@ public class ModelBuilder {
                      uploadFile(file);
                   }
                   catch(BadFileInputException b){
-
+                     makeAnAlert("Error", "Incorrect File Type!!!", b.getExceptionMsg());
                   }
                }
             }
@@ -185,10 +186,29 @@ public class ModelBuilder {
 
 
    private void uploadFile(File file) throws BadFileInputException{
-      this.fileName = file.getPath();
-      this.fileName = this.fileName.substring(this.fileName.indexOf("resources"));
-      this.resetModel(WIDTH, HEIGHT);
 
+         this.fileName = file.getPath();
+         //System.out.println(fileName.substring(this.fileName.indexOf("Percolation.xml")));
+      if(!(fileName.substring(fileName.length()-4).equals(".xml"))){
+
+         throw new BadFileInputException("Select Another File and Press Play to Continue");
+      }
+         this.fileName = this.fileName.substring(this.fileName.indexOf("resources"));
+         this.resetModel(WIDTH, HEIGHT);
+
+
+      //catch(BadFileInputException b){
+        // makeAnAlert("Error!","File Error", b.getExceptionMsg());
+
+
+   }
+   private void makeAnAlert(String title, String header, String content){
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+      alert.setTitle(title);
+      alert.setHeaderText(header);
+      alert.setContentText(content);
+      alert.show();
+      myAnimation.pause();
    }
 
    private void resetGrid() throws BadFileInputException{

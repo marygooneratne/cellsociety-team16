@@ -4,8 +4,8 @@
         <type>WatorWorld</type>
         <title>WatorWorld</title>
         <author>Hyunjae Lee</author>
-        <rows>30</rows>
-        <columns>30</columns>
+        <rows>50</rows>
+        <columns>50</columns>
     </Simulation>
 
 
