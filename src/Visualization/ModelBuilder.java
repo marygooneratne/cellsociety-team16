@@ -139,7 +139,7 @@ public class ModelBuilder {
       }
       for (int r = 0; r < myGridSize; r++) {
          for (int c = 0; c < myGridSize; c++) {
-            SquareCell newCell = CellBuilder.getImage(this.cellList.get(r).get(c));
+            SquareCell newCell = CellBuilder.getImage(this .cellList.get(r).get(c));
             this.nodeArray[r][c] = positionCell(newCell,r,c);
             this.nodeGroup.getChildren().add(newCell);
          }

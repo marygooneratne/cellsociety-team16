@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class SugarScapeGrid extends CellGrid {
    private final static int INIT_AGENTS = 50;
-   private final static int GROW_BACK_RATE = 4;
+   private final static int GROW_BACK_RATE = 2;
    private final static int GROW_BACK_INTERVAL = 2;
 
    private int growBackRate;
@@ -18,6 +18,7 @@ public class SugarScapeGrid extends CellGrid {
       this.setGrowBackInterval(GROW_BACK_INTERVAL);
       this.setNumAgents(INIT_AGENTS);
       this.initialize();
+      this.updateCellNeighbors();
    }
 
    public SugarScapeGrid(int initRows, int initCols, int agents){
@@ -26,6 +27,7 @@ public class SugarScapeGrid extends CellGrid {
       this.setGrowBackInterval(GROW_BACK_INTERVAL);
       this.setNumAgents(agents);
       this.initialize();
+      this.updateCellNeighbors();
    }
 
    private void setNumAgents(int amount){
@@ -60,60 +62,60 @@ public class SugarScapeGrid extends CellGrid {
          AgentCell agent = new AgentCell(CellState.AGENT, r, c);
          this.getCellList().get(r).set(c, agent);
       }
-
    }
 
    public void updateCellNextStates(){
       this.intervalTime++;
       for(ArrayList<Cell> r: this.getCellList()){
          for(Cell c: r){
-            if(c.getNextState() == null){
-               if(c instanceof SugarCell){
-                  if(this.intervalTime % this.growBackInterval == 0){
-                     ((SugarCell)(c)).increaseSugar(this.growBackRate);
-                  }
-                  c.setNextState(CellState.SUGAR);
+               if(c.getNextState() == null) {
+                  c.updateNextState();
                }
-            }
-            else{
-               if(((AgentCell)(c)).hasMoveCell()){
+               if(c instanceof AgentCell && ((AgentCell)(c)).hasMoveCell()){
                   int curRow = c.getRow();
                   int curCol = c.getColumn();
                   AgentCell moveCell = ((AgentCell)(c)).getMoveCell();
                   int row = moveCell.getRow();
                   int col = moveCell.getColumn();
                   this.getCellList().get(row).set(col, moveCell);
-                  c = new SugarCell(CellState.SUGAR, curRow, curCol);
-                  ((SugarCell)(c)).noSugar();
-                  c.setNextState(CellState.SUGAR);
+                  SugarCell newCell = new SugarCell(CellState.SUGAR, curRow, curCol);
+                  newCell.noSugar();
+                  newCell.setNextState(CellState.SUGAR);
+                  this.getCellList().get(curRow).set(curCol, newCell);
                }
-               else{
-                  c.setNextState(CellState.AGENT);
+            }
+         }
+      for(ArrayList<Cell> r: this.getCellList()) {
+         for (Cell c : r) {
+            if(c instanceof SugarCell){
+               if(intervalTime % growBackInterval == 0){
+                  ((SugarCell)(c)).increaseSugar(this.growBackRate);
                }
             }
          }
       }
+
    }
 
    public void updateCellNeighbors(){
       for(ArrayList<Cell> row: this.getCellList()){
          for(Cell cell: row){
             if(cell instanceof AgentCell){
-               ArrayList<Cell> neighbors = new ArrayList<>();
+               cell.emptyNeighbors();
                int r = cell.getRow();
                int c = cell.getColumn();
                for(int i = 1; i <= ((AgentCell)(cell)).getVision(); i++){
-                  if(this.isValidPos(r+i, c)){
-                     neighbors.add(this.getCellList().get(r+i).get(c));
+                  if(this.isValidPos(r+i, c) && this.getCellList().get(r+i).get(c).getNextState() == null){
+                     cell.addNeighbor(this.getCellList().get(r+i).get(c));
                   }
-                  if(this.isValidPos(r-i, c)){
-                     neighbors.add(this.getCellList().get(r-i).get(c));
+                  if(this.isValidPos(r-i, c)&& this.getCellList().get(r-i).get(c).getNextState() == null){
+                     cell.addNeighbor((this.getCellList().get(r-i).get(c)));
                   }
-                  if(this.isValidPos(r, c+i)){
-                     neighbors.add(this.getCellList().get(r).get(c+i));
+                  if(this.isValidPos(r, c+i) && this.getCellList().get(r).get(c+i).getNextState() == null){
+                     cell.addNeighbor(this.getCellList().get(r).get(c+i));
                   }
-                  if(this.isValidPos(r, c-i)){
-                     neighbors.add(this.getCellList().get(r+i).get(c-i));
+                  if(this.isValidPos(r, c-i) && this.getCellList().get(r).get(c-i).getNextState() == null){
+                     cell.addNeighbor(this.getCellList().get(r+i).get(c-i));
                   }
                }
             }
