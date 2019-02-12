@@ -36,7 +36,7 @@ public class XMLparser {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             try {
-                Document document = builder.parse(new File(filename + ".xml"));
+                Document document = builder.parse(new File(filename));
                 document.getDocumentElement().normalize();
 
                 list = document.getDocumentElement().getElementsByTagName("Simulation");
