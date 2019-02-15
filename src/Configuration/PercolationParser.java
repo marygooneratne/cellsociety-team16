@@ -11,10 +11,17 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-
+/*
+@author-Hyunjae Lee
+Parser for Percolation
+ */
 public class PercolationParser extends Parser{
     double prob;
     int numPerc;
+    /*
+    @param-filename
+    Method to parse xml document for percolation
+     */
     public void percParse(String filename) throws BadFileInputException{
 
 //            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -46,10 +53,15 @@ public class PercolationParser extends Parser{
 //            i.printStackTrace();
 //        }
     }
-
+/*
+Returns number of percolated cells
+ */
     public int getNumPerc(){
         return numPerc;
     }
+    /*
+    Returns probability to be filled
+     */
     public double getProb(){
         return prob;
     }

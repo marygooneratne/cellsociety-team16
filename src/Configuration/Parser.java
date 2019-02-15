@@ -11,8 +11,15 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-
+/*
+@author-Hyunjae Lee
+This is an abstract class for a general parser that takes filename, and initializes the document objects needed to parse any xml file.
+ */
 public abstract class Parser {
+    /*
+    @param-filename
+    This method gets the document that is initialized for parsing xml files
+     */
     public Document getDocument(String filename) throws BadFileInputException{
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

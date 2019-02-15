@@ -54,12 +54,19 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
+/*
+@author-Hyunjae Lee
+Parser for Segregation simulation
+ */
 public class SegregationParser extends Parser{
     double probEmpty;
     double probRed;
     double thresh;
-
+    /*
+    @param-filename
+    @param-nlist
+    Method that parses xml file for segregation
+     */
     public void segParse(String filename, NodeList nlist) throws BadFileInputException{
 
 //            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -95,12 +102,21 @@ public class SegregationParser extends Parser{
 //        }
 
     }
+    /*
+    Returns probability cell is empty
+     */
     public double getProbEmpty(){
         return probEmpty;
     }
+    /*
+    Returns probability that cell is red
+     */
     public double getProbRed(){
         return probRed;
     }
+    /*
+    Returns threshold for segregation
+     */
     public double getThresh(){
         return thresh;
     }
