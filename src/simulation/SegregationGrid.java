@@ -1,3 +1,8 @@
+/**
+ * Mary Gooneratne
+ * Grid class for Segregation model
+ * Child of CellGrid
+ */
 package simulation;
 
 import java.util.ArrayList;
@@ -24,7 +29,9 @@ public class SegregationGrid extends CellGrid{
       this.setUp();
    }
 
-   public void setParams(double threshold, double probRed, double probEmpty){
+
+
+   private void setParams(double threshold, double probRed, double probEmpty){
       this.threshold = threshold;
       this.probRed = probRed;
       this.probEmpty = probEmpty;
@@ -32,7 +39,7 @@ public class SegregationGrid extends CellGrid{
 
 
 
-   public void setUp(){
+   private void setUp(){
       this.emptyCells = new ArrayList<>();
       this.changeThresholds();
       this.addRed();
@@ -41,6 +48,9 @@ public class SegregationGrid extends CellGrid{
       this.updateCellNeighbors();
    }
 
+   /** Sets up cells in grid to initially be empty
+    *
+    */
    public void initialize(){
       for (int r = 0; r < this.getRows(); r++){
          ArrayList<Cell> row = new ArrayList<Cell>();
@@ -54,7 +64,7 @@ public class SegregationGrid extends CellGrid{
       }
    }
 
-   public void addRed(){
+   private void addRed(){
       int cellsLeft = (int)((1-probEmpty)*(this.getColumns()*this.getRows()));
       int numRed = (int)(cellsLeft*this.probRed);
       for(int i = 0; i < numRed; i++){
@@ -62,7 +72,7 @@ public class SegregationGrid extends CellGrid{
       }
    }
 
-   public void addBlue(){
+   private void addBlue(){
       int cellsLeft = (int)((1-probEmpty)*(this.getColumns()*this.getRows()));
       int numBlue = (int)(cellsLeft*(1-this.probRed));
       for(int i = 0; i < numBlue; i++){
@@ -70,12 +80,18 @@ public class SegregationGrid extends CellGrid{
       }
    }
 
+   /**
+    * Steps all of cells to updae next state and then current state and then checks for empty states
+    */
    public void step(){
       this.updateCellNextStates();
       this.updateCellStates();
       this.updateEmptyStates();
    }
 
+   /**
+    * Updates cell next states based on thresholds and needing to move
+    */
    public void updateCellNextStates(){
       for(ArrayList<Cell> row: this.getCellList()){
          for(Cell c: row){
@@ -97,7 +113,7 @@ public class SegregationGrid extends CellGrid{
       }
    }
 
-   public void updateEmptyStates(){
+   private void updateEmptyStates(){
       this.emptyCells.removeAll(this.emptyCells);
       for(ArrayList<Cell> row: this.getCellList()){
          for(Cell c: row){
@@ -108,7 +124,7 @@ public class SegregationGrid extends CellGrid{
       }
    }
 
-   public void changeThresholds(){
+   private void changeThresholds(){
       for(ArrayList<Cell> row: this.getCellList()){
          for(Cell c: row){
             ((SegregationCell)(c)).setThreshold(this.threshold);
@@ -116,7 +132,7 @@ public class SegregationGrid extends CellGrid{
       }
    }
 
-   public int getRandEmpty(){
+   private int getRandEmpty(){
       return (int)(this.emptyCells.size() * Math.random());
    }
 

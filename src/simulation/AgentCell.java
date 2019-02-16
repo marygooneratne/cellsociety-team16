@@ -1,3 +1,7 @@
+/** Mary Gooneratne
+ * AgentCell of SugarScape
+ */
+
 package simulation;
 
 public class AgentCell extends Cell {
@@ -14,6 +18,9 @@ public class AgentCell extends Cell {
 
    private AgentCell moveCell;
 
+   /** Constructors for AgentCell for SugarScape
+    *
+    */
    public AgentCell() {
       super();
       this.initializeProps();
@@ -35,6 +42,9 @@ public class AgentCell extends Cell {
       this.sugarMetabolism = this.getRandom(METAB_MIN, METAB_MAX);
    }
 
+   /** Common to all cell classes, updates next state based on SugarScape rules
+    *
+    */
    public void updateNextState() {
       this.moveCell = this.findMoveCell();
       if (moveCell != null) {
@@ -47,6 +57,10 @@ public class AgentCell extends Cell {
       }
    }
 
+   /** Checks whether cell has new MoveCell in next state
+    *
+    * @return true if yes
+    */
    public boolean hasMoveCell() {
       return this.moveCell != null;
    }
@@ -71,14 +85,18 @@ public class AgentCell extends Cell {
       this.sugar -= this.sugarMetabolism;
    }
 
+   /** Getter method for vision
+    * 
+    * @return
+    */
+   public int getVision(){
+      return this.vision;
+   }
+
    private void die() {
       if (sugar <= 0) {
          this.setNextState(CellState.EMPTY);
       }
-   }
-
-   public int getVision(){
-      return this.vision;
    }
 
    private AgentCell findMoveCell() {
@@ -100,6 +118,10 @@ public class AgentCell extends Cell {
       return moveCell;
    }
 
+   /** Returns a new Cell for where it has to move to
+    *
+    * @return AgentCell belonging in new location
+    */
    public AgentCell getMoveCell(){
       return this.moveCell;
    }

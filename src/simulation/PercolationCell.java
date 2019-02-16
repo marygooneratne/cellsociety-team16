@@ -1,3 +1,8 @@
+/**
+ * Mary Gooneratne
+ * Child of abstract Cell class
+ * Cell class used for Percolation model with PercolationGrid
+ */
 package simulation;
 
 public class PercolationCell extends Cell {
@@ -15,9 +20,18 @@ public class PercolationCell extends Cell {
       super(initialState, r, c);
    }
 
+   /** Sets the probability of a place being blocked
+    *
+    * @param newProb
+    */
+
    public void setProbBlocked(double newProb){
       this.probBlocked = newProb;
    }
+
+   /** Updates next state of cell based on percolation CellState of neighbors
+    *
+    */
 
    public void updateNextState(){
       int percolated = 0;

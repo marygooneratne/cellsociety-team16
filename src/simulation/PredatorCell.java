@@ -1,3 +1,9 @@
+/**
+ * Mary Gooneratne
+ * Child of cell class
+ * Parent of shark and fish cell classes
+ * Used as predator cells in WaTorWorld simulation
+ */
 package simulation;
 
 import java.util.ArrayList;
@@ -33,22 +39,33 @@ public class PredatorCell extends Cell{
       this.moveCell = null;
    }
 
-   public void setAvailableEmpty(ArrayList<Cell> availableEmpty) {
-      this.availableEmpty = availableEmpty;
-   }
-
+   /**
+    * Gets list of cells neighboring that are empty
+    * @return the arraylist of cells
+    */
    public ArrayList<Cell> getAvailableEmpty(){
       return this.availableEmpty;
    }
 
+   /**
+    * Resets the breed time of the cells
+    */
    public void resetUntilBreed() {
       this.untilBreed = breedTime;
    }
 
+   /**
+    * Getter method for how long until breeding
+    * @return
+    */
    public int getUntilBreed(){
       return this.untilBreed;
    }
 
+   /** Checking if cell has a moveCell
+    *
+    * @return true if it does
+    */
    public boolean hasMoveCell(){
       if(this.moveCell == null){
          return false;
@@ -58,33 +75,66 @@ public class PredatorCell extends Cell{
       }
    }
 
+   /** Returns move cell
+    *
+    * @return move cell
+    */
+
    public Cell getMoveCell(){
       return this.moveCell;
    }
 
+   /**
+    * Changes moveCell to specified value
+    * @param newMoveCell
+    */
    public void setMoveCell(Cell newMoveCell){
       this.moveCell = newMoveCell;
    }
 
+   /**
+    * Changes until breed parameter
+    * @param initUntilBreed
+    */
    public void setUntilBreed(int initUntilBreed){
       this.untilBreed = initUntilBreed;
    }
 
+   /** changes breed time parameter
+    *
+    * @param initBreedTime
+    */
    public void setBreedTime(int initBreedTime){
       this.breedTime = initBreedTime;
    }
 
+   /** Getter method for breed time
+    *
+    * @return
+    */
    public int getBreedTime(){
       return this.breedTime;
    }
+
+   /**Decrements breed time by one
+    *
+    */
 
    public void decreaseUntilBreed(){
       this.untilBreed--;
    }
 
+   /** Sets next state to current state
+    *
+    */
    public void updateNextState() {
       this.setNextState(this.getCurrentState());
    }
+
+   /** Checks if enough time has passed until breeding is possible
+    *
+    * @return
+    */
 
    public boolean canBreed(){
       if(this.untilBreed == 0){
@@ -95,6 +145,9 @@ public class PredatorCell extends Cell{
       }
    }
 
+   /** Updates the available empty neighbors variable
+    *
+    */
    public void updateAvailableEmpty(){
       ArrayList<Cell> empty = new ArrayList<Cell>();
       for(Cell c: this.getCurrentNeighbors()){
@@ -106,6 +159,11 @@ public class PredatorCell extends Cell{
 
    }
 
+   /**
+    * Checks if the cell has an empty neighbor to move to and moves and returns true or changes nextState to current state
+    *
+    * @return whether or not current cell moved
+    */
    public boolean move(){
       if(this.getAvailableEmpty().size() == 0){
          this.setNextState(this.getCurrentState());
@@ -117,10 +175,16 @@ public class PredatorCell extends Cell{
       }
    }
 
+   /** kills cell by setting next state to empty
+    *
+    */
    public void die(){
       this.setNextState(CellState.EMPTY);
    }
 
+   /** Implemented in children to move to random cell
+    *
+    */
    public void moveRandom(){};
 
 }

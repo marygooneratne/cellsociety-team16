@@ -1,11 +1,11 @@
+/** Mary Gooneratne
+ * Child of abstract class Cell
+ * Main class used as cell in Spreading of fire model along with SpreadingOFFiregrid
+ */
 package simulation;
 
 public class SpreadingOfFireCell extends Cell{
    private double probCatch;
-
-   public SpreadingOfFireCell() {
-      super();
-   }
 
    public SpreadingOfFireCell(CellState initialState) {
       super(initialState);
@@ -15,9 +15,18 @@ public class SpreadingOfFireCell extends Cell{
       super(initialState, r, c);
    }
 
+   /**
+    * Setter method for the probability to catch on fire
+    * @param newProb
+    */
    public void setProbCatch(double newProb){
       this.probCatch = newProb;
    }
+
+   /**
+    * Updates next state based on values of neighbors
+    *
+    */
 
    public void updateNextState() {
       int onFire = 0;
@@ -42,7 +51,7 @@ public class SpreadingOfFireCell extends Cell{
       }
    }
 
-   public boolean getBurning(){
+   private boolean getBurning(){
       double random = Math.random();
       boolean ifBurn = false;
       if(random< probCatch){

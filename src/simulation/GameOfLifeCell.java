@@ -1,3 +1,6 @@
+/** Mary Gooneratne
+ * Child class of Cell and part of the Game of Life model, can be POPULATED or UNPOPULATED
+ */
 package simulation;
 
 
@@ -18,6 +21,9 @@ public class GameOfLifeCell extends Cell {
       super(initialState, r, c);
    }
 
+   /** This method updates the next state of the cell based on the threshold and current values of neighbors
+    *
+    */
 
    public void updateNextState() {
       int populated = 0;

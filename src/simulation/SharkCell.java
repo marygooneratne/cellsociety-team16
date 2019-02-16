@@ -1,3 +1,6 @@
+/** Mary Gooneratne
+ * SharkCell inherits from Cell and predator cell and is one of the main cells of WaTorWorld model
+ */
 package simulation;
 
 import java.util.ArrayList;
@@ -16,36 +19,27 @@ public class SharkCell extends PredatorCell{
       this.resetUntilStarve();
    }
 
-   public SharkCell(CellState initState){
-      super(initState);
-      this.setStarveTime(INIT_STARVE_TIME);
-      this.resetUntilStarve();
-   }
-
-   public SharkCell(CellState initState, int r, int c){
-      super(initState, r, c);
-      this.setStarveTime(INIT_STARVE_TIME);
-      this.resetUntilStarve();
-   }
-
-   public SharkCell(CellState initState, int r, int c, int initUntilBreed){
-      super(initState, r, c, initUntilBreed);
-   }
-
    public SharkCell(CellState initState, int r, int c, int initUntilBreed, int initStarveTime){
       super(initState, r, c, initUntilBreed);
       this.setStarveTime(initStarveTime);
       this.resetUntilStarve();
    }
 
-   public int getStarveTime(){
+   private int getStarveTime(){
       return this.starveTime;
    }
 
+   /**
+    * Setter method for starve time
+    * @param initUntilStarve
+    */
    public void setUntilStarve(int initUntilStarve){
       this.untilStarve = initUntilStarve;
    }
 
+   /**
+    * Updates next state of each cell based on whether it eats, moves, or breeds
+    */
    public void updateNextState(){
       boolean isDead = false;
       this.decreaseUntilBreed();
@@ -65,27 +59,35 @@ public class SharkCell extends PredatorCell{
       }
    }
 
+   /**
+    * Setter method for stave time
+    * @param initStarveTime
+    */
    public void setStarveTime(int initStarveTime){
       this.starveTime = initStarveTime;
    }
 
-   public void resetUntilStarve(){
+   private void resetUntilStarve(){
       this.untilStarve = starveTime;
    }
 
+   /**
+    * Getter method for get until starve
+    * @return
+    */
    public int getUntilStarve(){
       return this.untilStarve;
    }
 
-   public void decreaseUntilStarveTime(){
+   private void decreaseUntilStarveTime(){
       this.untilStarve--;
    }
 
-   public ArrayList<Cell> getAvailableFish(){
+   private ArrayList<Cell> getAvailableFish(){
       return this.availableFish;
    }
 
-   public boolean starve(){
+   private boolean starve(){
       if(this.untilStarve == 0){
          return true;
       }
@@ -94,7 +96,7 @@ public class SharkCell extends PredatorCell{
       }
    }
 
-   public boolean eatFish(){
+   private boolean eatFish(){
       if(this.getAvailableFish().size() == 0){
          this.decreaseUntilStarveTime();
          return false;
@@ -107,7 +109,7 @@ public class SharkCell extends PredatorCell{
       }
    }
 
-   public void updateAvailableFish(){
+   private void updateAvailableFish(){
       ArrayList<Cell> fish = new ArrayList<Cell>();
       for(Cell c: this.getCurrentNeighbors()){
          if(c.getCurrentState() == CellState.FISH && c.getNextState() == null){
@@ -117,11 +119,15 @@ public class SharkCell extends PredatorCell{
       this.availableFish = fish;
    }
 
-   public void eatRandomFish(){
+   private void eatRandomFish(){
       int index = (int)(this.availableFish.size() * Math.random());
       this.availableFish.get(index).setNextState(CellState.EMPTY);
    }
 
+   /**
+    * If cell is going to move randomly, it finds a location to move and creates a new Move cell for that location and kills this current cell
+    *
+    */
    public void moveRandom() {
       int index = (int) (this.getAvailableEmpty().size() * Math.random());
       int row = this.getAvailableEmpty().get(index).getRow();
@@ -134,7 +140,7 @@ public class SharkCell extends PredatorCell{
       this.die();
    }
 
-   public void breed(){
+   private void breed(){
       if(this.getNextState() == CellState.EMPTY){
          this.breedCurrentLoc();
       }
@@ -143,13 +149,13 @@ public class SharkCell extends PredatorCell{
       }
    }
 
-   public void breedCurrentLoc(){
+   private void breedCurrentLoc(){
       this.setNextState(CellState.SHARK);
       this.resetUntilStarve();
       this.resetUntilBreed();
    }
 
-   public void breedDeadFish(){
+   private void breedDeadFish(){
       this.setMoveCell(new SharkCell(CellState.SHARK, this.deadFish.getRow(), this.deadFish.getColumn(), this.getBreedTime(), this.getStarveTime()));
    }
 

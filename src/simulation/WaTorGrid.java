@@ -26,13 +26,6 @@ public class WaTorGrid extends CellGrid {
       this.addPredators();
    }
 
-   public WaTorGrid(int initRows, int initCols, double probEmpty, double probFish){
-      super(initRows, initCols);
-      this.setInitProbs(probEmpty, probFish, 1-probFish);
-      this.setInitTimes(5, 5, 3);
-      this.addPredators();
-   }
-
    public WaTorGrid(int initRows, int initCols, double probEmpty, double probFish, int fish, int shark, int starve){
       super(initRows, initCols);
       this.setInitProbs(probEmpty, probFish, 1-probFish);
@@ -42,50 +35,28 @@ public class WaTorGrid extends CellGrid {
    }
 
 
-   public void addPredators(){
+   private void addPredators(){
       this.addFish();
       this.addSharks();
       this.updateCellNeighbors();
    }
 
-   public void setProbEmpty(double probEmpty){
-      this.probEmpty = probEmpty;
-   }
 
-   public void setProbFish(double probFish){
-      this.probFish = probFish;
-      this.probShark = 1-probFish;
-   }
-
-   public void setProbShark(double probShark){
-      this.probShark = probShark;
-      this.probFish = 1-probShark;
-   }
-
-   public void setFishTime(int fish){
-      this.fishTime = fish;
-   }
-
-   public void setSharkTime(int shark){
-      this.sharkTime = shark;
-   }
-
-   public void setStarveTime(int starve){
-      this.starveTime = starve;
-   }
-
-   public void setInitProbs(double empty, double fish, double shark){
+   private void setInitProbs(double empty, double fish, double shark){
       this.probEmpty = empty;
       this.probFish = fish;
       this.probShark = shark;
    }
 
-   public void setInitTimes(int fish, int shark, int starve){
+   private void setInitTimes(int fish, int shark, int starve){
       this.fishTime = fish;
       this.sharkTime = shark;
       this.starveTime = starve;
    }
 
+   /** Initializes cells in the grid to be appropriate state
+    *
+    */
    public void initialize(){
       for (int r = 0; r < this.getRows(); r++){
          ArrayList<Cell> row = new ArrayList<Cell>();
@@ -99,7 +70,7 @@ public class WaTorGrid extends CellGrid {
       }
    }
 
-   public void addFish(){
+   private void addFish(){
       int cellsLeft = (int)((1-this.probEmpty)*(this.getColumns()*this.getRows()));
       int numFish = (int)(cellsLeft*this.probFish);
       for(int i = 0; i < numFish; i++){
@@ -110,7 +81,7 @@ public class WaTorGrid extends CellGrid {
       }
    }
 
-   public void addSharks(){
+   private void addSharks(){
       int cellsLeft = (int)((1-this.probEmpty)*(this.getColumns()*this.getRows()));
       int numShark = (int)(cellsLeft*this.probShark);
       for(int i = 0; i < numShark; i++){
@@ -121,6 +92,9 @@ public class WaTorGrid extends CellGrid {
       }
    }
 
+   /** Updates cell next states based on whether each cell is breeding, killing and moving and changes cellList
+    *
+    */
    public void updateCellNextStates(){
       for(ArrayList<Cell> row: this.getCellList()){
          for(Cell c: row){
@@ -167,6 +141,10 @@ public class WaTorGrid extends CellGrid {
             }
          }
       }
+
+   /** Updates cell neighbors to new list in toroidal fashion
+    *
+    */
    public void updateCellNeighbors() {
       for (int r = 0; r < this.getCellList().size(); r++) {
          ArrayList<Cell> row = this.getCellList().get(r);

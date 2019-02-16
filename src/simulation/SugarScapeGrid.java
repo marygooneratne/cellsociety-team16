@@ -1,3 +1,8 @@
+/**
+ * Mary Gooneratne
+ * Grid for SugarScape model
+ * Child of CellGrid class
+ */
 package simulation;
 
 import java.util.ArrayList;
@@ -42,6 +47,9 @@ public class SugarScapeGrid extends CellGrid {
       this.growBackInterval = amount;
    }
 
+   /** Sets initial states of cells and adds all the new cells to the grid
+    *
+    */
    public void initialize(){
       this.intervalTime = 0;
       for(int r = 0; r < this.getRows(); r++){
@@ -55,7 +63,7 @@ public class SugarScapeGrid extends CellGrid {
       this.addAgents();
    }
 
-   public void addAgents(){
+   private void addAgents(){
       for(int i = 0; i < agents; i++){
          int r = this.randRowIndex();
          int c = this.randColIndex();
@@ -64,6 +72,9 @@ public class SugarScapeGrid extends CellGrid {
       }
    }
 
+   /**
+    * Updates next states of cells based on parameters and neighbors
+    */
    public void updateCellNextStates(){
       this.intervalTime++;
       for(ArrayList<Cell> r: this.getCellList()){
@@ -96,6 +107,11 @@ public class SugarScapeGrid extends CellGrid {
       }
 
    }
+
+   /**
+    * Updates cell neighbors for each cell and updates corresponding variable
+    *
+    */
 
    public void updateCellNeighbors(){
       for(ArrayList<Cell> row: this.getCellList()){

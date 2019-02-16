@@ -1,3 +1,8 @@
+/**
+ * Mary Gooneratne
+ * Child of cell class
+ * Main cell agent in the Segregation model and SegregatioGrid
+ */
 package simulation;
 
 public class SegregationCell extends Cell{
@@ -15,10 +20,18 @@ public class SegregationCell extends Cell{
       super(initialState, r, c);
    }
 
+   /** Setter method for neighbor similarity threshold
+    *
+    * @param newThreshold
+    */
    public void setThreshold(double newThreshold){
       this.threshold = newThreshold;
    }
 
+   /**
+    * Checks if cell wants to move based on threshold
+    * @return true if cell wants to move
+    */
    public boolean toMove(){
       if(this.getCurrentState() == CellState.EMPTY){
          return false;

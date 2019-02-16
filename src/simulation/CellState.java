@@ -1,3 +1,6 @@
+/** Mary Gooneratne
+ * enum class that encapsulates all the different types of CellStates
+ */
 package simulation;
 
 public enum CellState{

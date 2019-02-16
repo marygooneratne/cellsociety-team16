@@ -1,3 +1,6 @@
+/** Mary Gooneratne
+ * The main class to run the Game of Life simulation, extends the CellGrid
+ */
 package simulation;
 
 import java.util.ArrayList;
@@ -19,9 +22,17 @@ public class GameOfLifeGrid extends CellGrid {
       this.addPopulated();
    }
 
+   /** Setter method for the probability that a location is populated
+    *
+    * @param probPopulated
+    */
    public void setProbPopulated(double probPopulated){
       this.probPopulated = probPopulated;
    }
+
+   /** Initializes the grid to have cells that have the state based on probability parameters
+    *
+    */
    public void initialize() {
       for (int r = 0; r < this.getRows(); r++){
          ArrayList<Cell> row = new ArrayList<Cell>();
@@ -35,6 +46,9 @@ public class GameOfLifeGrid extends CellGrid {
       }
    }
 
+   /**
+    * Adds populated cells in random locations based on probability parameters
+    */
    public void addPopulated(){
       double cellsLeft = this.getColumns()*this.getRows();
       int numPop= (int)(cellsLeft*this.probPopulated);

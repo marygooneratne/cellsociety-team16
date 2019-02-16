@@ -1,3 +1,8 @@
+/**
+ * Mary Gooneratne
+ * Child of abstract CellGrid class
+ * Utilizes Percolation cell to create and step simulation of Percolation
+ */
 package simulation;
 
 import java.util.ArrayList;
@@ -21,14 +26,18 @@ public class PercolationGrid extends CellGrid{
       this.addType(CellState.PERCOLATED, numPercolated);
    }
 
+   /** Sets the probability of a block being blocked
+    *
+    * @param probBlocked
+    */
    public void setProbBlocked(double probBlocked){
       this.probBlocked = probBlocked;
    }
 
-   public double getProbBlocked(){
-      return this.probBlocked;
-   }
-
+   /** Adds new cells to arraylist based on cell rows, columns, and cell state
+    *
+    * @param newCells
+    */
    public void addCells(ArrayList<Cell> newCells){
       for(Cell c: newCells){
          ((PercolationCell)c).setProbBlocked(this.probBlocked);
@@ -36,6 +45,12 @@ public class PercolationGrid extends CellGrid{
       }
       this.updateCellNeighbors();
    }
+
+   /** Adds certain number of cells to random locations based on number and  state specified
+    *
+    * @param state
+    * @param num
+    */
    public void addType(CellState state, int num){
       ArrayList<Cell> addCells = new ArrayList<>();
       for(int i = 0; i < num; i++){
@@ -47,6 +62,9 @@ public class PercolationGrid extends CellGrid{
       this.addCells(addCells);
    }
 
+   /** Initializes state of current cells at beginning of simulation
+    *
+    */
    public void initialize() {
       for (int r = 0; r < this.getRows(); r++){
          ArrayList<Cell> row = new ArrayList<Cell>();
@@ -60,6 +78,9 @@ public class PercolationGrid extends CellGrid{
       }
    }
 
+   /** Adds blocked cells to initial grid
+    *
+    */
    public void setBlocked() {
       for(ArrayList<Cell> row: this.getCellList()){
          for(Cell c: row){
@@ -71,13 +92,26 @@ public class PercolationGrid extends CellGrid{
       }
    }
 
+   /** Gets random row for indexing
+    *
+    * @return row
+    */
    public int getRow(){
       return (int)(this.getRows() * Math.random());
    }
 
+   /** Gets random column for indexing
+    *
+    * @return col
+    */
    public int getCol(){
       return (int)(this.getColumns() * Math.random());
    }
+
+   /** determine whether block is blocked based on a random probability
+    *
+    * @return
+    */
 
    public boolean getIfBlocked(){
       double prob = Math.random();

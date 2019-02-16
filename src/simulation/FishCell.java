@@ -1,3 +1,6 @@
+/** Mary Gooneratne
+ * FishCell inherits from Cell and predator cell and is one of the main cells of WaTorWorld model
+ */
 package simulation;
 
 import java.util.ArrayList;
@@ -22,6 +25,10 @@ public class FishCell extends PredatorCell{
       super(initState, r, c, initUntilBreed);
    }
 
+   /** Implementation of update next state and updates cell parameters, moves, and breeds if possible
+    *
+    */
+
    public void updateNextState(){
       this.decreaseUntilBreed();
       this.updateAvailableEmpty();
@@ -30,6 +37,10 @@ public class FishCell extends PredatorCell{
          this.breed();
       }
    }
+
+   /**
+    * This class finds a cell for the fish to move if possible and updates the moveCell and kills the currentCell
+    */
 
    public void moveRandom() {
       int index = (int) (this.getAvailableEmpty().size() * Math.random());
@@ -42,11 +53,18 @@ public class FishCell extends PredatorCell{
       this.die();
    }
 
+   /**
+    * If this cell has moved, breeds here
+    */
    public void breed() {
       if (this.getNextState() == CellState.EMPTY) {
          this.breedCurrentLoc();
       }
    }
+
+   /**
+    * This breeds the current cell to create a new fish and resets the breeding time
+    */
 
    public void breedCurrentLoc(){
       this.setNextState(CellState.FISH);

@@ -1,3 +1,7 @@
+/** Mary Gooneratne
+ * Child of abstract cell class
+ * One of two cells used in SugarScape model
+ */
 package simulation;
 
 public class SugarCell extends Cell {
@@ -16,11 +20,10 @@ public class SugarCell extends Cell {
       this.setSugar();
    }
 
-   public SugarCell(CellState initialState, int r, int c){
+   public SugarCell(CellState initialState, int r, int c) {
       super(initialState, r, c);
       this.setCap(CAPACITY);
       this.setSugar();
-
    }
 
    private void setCap(int cap){
@@ -31,15 +34,10 @@ public class SugarCell extends Cell {
       this.sugar = (int)(Math.random()*4);
    }
 
-   public void noSugar(){
-      this.sugar = 0;
-   }
-
-   public void decreaseSugar(int amount){
-      if(sugar >= amount) {
-         this.sugar -= amount;
-      }
-   }
+   /**
+    * Increases amount of sugar by specified amount
+    * @param amount
+    */
 
    public void increaseSugar(int amount){
       if(this.sugar + amount <= this.cap){
@@ -50,15 +48,26 @@ public class SugarCell extends Cell {
       }
    }
 
+   /** Empties sugar supply
+    *
+    */
+   public void noSugar(){
+      this.sugar = 0;
+   }
+
+   /** Updates cell state to be sugar at next interval
+    *
+    */
+
    public void updateNextState(){
       this.setNextState(CellState.SUGAR);
    }
 
+   /**Getter method for amount of sugar left
+    *
+    * @return
+    */
    public int getSugar(){
       return this.sugar;
-   }
-
-   public int getCap(){
-      return this.cap;
    }
 }

@@ -10,9 +10,9 @@
 
 
     <probability>
-        <prob>0.8</prob>
-        <numTree>2000</numTree>
-        <numBurn>500</numBurn>
+        <prob>0.6</prob>
+        <numTree>2500</numTree>
+        <numBurn>100</numBurn>
     </probability>
 
 
