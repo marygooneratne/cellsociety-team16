@@ -15,9 +15,15 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
+/*
+@author-Hyunjae Lee
+Parser for Game Of Life
+ */
 public class ProbabilityParser extends Parser{
     private double probPop;
+    /*
+    Method that parses game of life xml file
+     */
     public void parseGame(String filename,NodeList nlist) throws BadFileInputException{
 
 //            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -54,6 +60,9 @@ public class ProbabilityParser extends Parser{
 //
 //        }
     }
+    /*
+    Gets probability that cell is populated
+     */
     public double getProbPop(){
         return probPop;
     }

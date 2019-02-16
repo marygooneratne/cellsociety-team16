@@ -11,11 +11,18 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-
+/*
+@author - Hyunjae Lee
+This class is a parser for parsing the parameters of the spreading fire simulation
+ */
 public class FireParser extends Parser{
     private double prob;
     private int numTree;
     private int numBurn;
+    /*
+    @param - filename
+    Method that parses and sets instance variable params for spreading fire.
+     */
     public void fireParse(String filename) throws BadFileInputException{
 
 //            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -43,12 +50,21 @@ public class FireParser extends Parser{
 //            i.printStackTrace();
 //        }
     }
+    /*
+    Gets probability of burning
+     */
     public double getProb(){
         return prob;
     }
+    /*
+    Gets number of trees
+     */
     public int getNumTree(){
         return numTree;
     }
+    /*
+    Gets number of burning cells
+     */
     public int getNumBurn(){
         return numBurn;
     }

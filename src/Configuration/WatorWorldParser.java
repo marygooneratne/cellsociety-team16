@@ -67,12 +67,19 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+/*
+@author - Hyunjae Lee
+Class for parser for WatorWorld Simulation
+ */
 public class WatorWorldParser extends Parser{
     double probFish;
     double probEmpty;
     int fishTime;
     int sharkTime;
     int starveTime;
+    /*
+    Method for parsing xml file for watorworld simulation
+     */
     public void parseWator(String filename,NodeList nlist) throws BadFileInputException{
 
 //            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -122,18 +129,33 @@ public class WatorWorldParser extends Parser{
 //        }
 
     }
+    /*
+    Returns probability that cell is fish
+     */
     public double getProbFish(){
         return probFish;
     }
+    /*
+    Returns probability cell is empty
+     */
     public double getProbEmpty(){
         return probEmpty;
     }
+    /*
+    Returns time for fish cycle
+     */
     public int getFishTime(){
         return fishTime;
     }
+    /*
+    Returns time for shark cycle
+     */
     public int getSharkTime(){
         return sharkTime;
     }
+    /*
+    Returns time for starvation
+     */
     public int getStarveTime(){
         return starveTime;
     }

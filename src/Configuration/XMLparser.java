@@ -14,7 +14,10 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
+/*
+@author-Hyunjae Lee
+Class for parser that parses common elements for all xml documents like author, rows, columns, simulation type.
+ */
 public class XMLparser extends Parser{
     private int gridWidth;
     private int gridHeight;
@@ -29,7 +32,10 @@ public class XMLparser extends Parser{
     private int numAlive;
     private NodeList list;
 
-
+    /*
+    @param-filename
+    Method that parses any xml document for the rows, columns, author, simulation type.
+     */
     public void parse(String filename) throws BadFileInputException{
 //        try {
 //            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -91,21 +97,40 @@ public class XMLparser extends Parser{
 //            e.printStackTrace();
 //        }
     }
+    /*
+    Gets rows of simulation
+     */
     public int getRows(){
         return rows;
     }
+    /*
+    Gets columns of simulation
+     */
     public int getCols() {
         return columns;
     }
+    /*
+    Gets author of xml file
+     */
     public String getAuthor(){
         return author;
     }
+    /*
+
+    Gets type of simulation
+     */
     public String getType(){
         return type;
     }
+    /*
+    Gets title of simulation
+     */
     public String getTitle() {
         return title;
     }
+    /*
+    Gets node list of xml elements
+     */
     public NodeList getList(){
         return list;
     }
